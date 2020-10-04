@@ -1,9 +1,8 @@
 #include <iostream>
-#include "config.h"
+#include "cli.hpp"
 
 int main(int argc, char** argv) {
-    std::cout << "Crawler ..." << std::endl;
-    std::cout << "Version :  " << VERSION_MAJOR << "." << VERSION_MINOR << std::endl;
+    initCli(argc, argv);
 
     return EXIT_SUCCESS;
 }
