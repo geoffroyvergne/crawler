@@ -1,5 +1,5 @@
 set(BINARY ${CMAKE_PROJECT_NAME}_src_bin)
-set(LIB ${CMAKE_PROJECT_NAME}_src_lib)
+#set(LIB ${CMAKE_PROJECT_NAME}_src_lib)
 
 # Set source
 file(GLOB_RECURSE SOURCES LIST_DIRECTORIES true *.hpp *.cpp *.h)
@@ -13,7 +13,7 @@ include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
 add_executable(${BINARY} ${SOURCES})
-add_library(${LIB} STATIC ${SOURCES})
+#add_library(${LIB} STATIC ${SOURCES})
 target_link_libraries(${BINARY} ${CONAN_LIBS})
 
 #target_include_directories(${CMAKE_PROJECT_NAME}/src PUBLIC "${PROJECT_BINARY_DIR}")

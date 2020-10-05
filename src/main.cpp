@@ -18,6 +18,11 @@ int main(int argc, char** argv) {
         free(ini);
     }
 
+    if (vm.count("url")) {
+        std::string url = vm["url"].as<std::string>();
+        std::cout << "url : " << url << std::endl;
+    }
+
     free(cli);
     
     return EXIT_SUCCESS;

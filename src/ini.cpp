@@ -9,7 +9,6 @@ Ini::Ini(std::string configFile) {
         boost::property_tree::ini_parser::read_ini(configFile, propertyTree);
         
         this->propertyTree = propertyTree;
-
     } catch(std::exception& e) {
         std::cerr << "error: " << e.what() << std::endl;
     } catch(...) {
@@ -23,6 +22,9 @@ boost::property_tree::ptree Ini::getPtree() {
 
 void Ini::getIniValues() {
     boost::property_tree::ptree propertyTree = this->getPtree();
-    std::cout << "Test.testValue1 : " << propertyTree.get<std::string>("Test.testValue1") << std::endl;
-    std::cout << "Test.testValue2 : " << propertyTree.get<std::string>("Test.testValue2") << std::endl;
+
+    if(!this->propertyTree.empty()) {
+        std::cout << "Test.testValue1 : " << propertyTree.get<std::string>("Test.testValue1") << std::endl;
+        std::cout << "Test.testValue2 : " << propertyTree.get<std::string>("Test.testValue2") << std::endl;
+    }
 }

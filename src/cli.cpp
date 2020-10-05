@@ -13,6 +13,7 @@ Cli::Cli(int argc, char** argv) {
             ("help,h", "produce help message ")
             ("version,v", "get version")    
             ("configuration,c", boost::program_options::value<std::string>(), "Configuration fine name")
+            ("url,u", boost::program_options::value<std::string>(), "URL to parse")
         ;
 
         boost::program_options::store(boost::program_options::parse_command_line(argc, argv, optionsDescription), variableMap);
