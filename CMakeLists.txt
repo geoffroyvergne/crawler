@@ -12,6 +12,6 @@ include_directories("${PROJECT_BINARY_DIR}/include")
 # Configure a header file to pass some of the CMake settings
 configure_file(include/config.h.in include/config.h)
 
-include_directories(src)
+include_directories(include)
 add_subdirectory(src)
 add_subdirectory(test)

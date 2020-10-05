@@ -1,0 +1,13 @@
+#include <boost/program_options.hpp>
+
+class Cli {
+    public:
+        Cli();
+        Cli(int argc, char** argv);
+        boost::program_options::variables_map getVariableMap();
+        
+    private:
+        boost::program_options::variables_map variableMap;
+        void getVersion();
+        void getHelp(boost::program_options::options_description *optionsDescription);
+};

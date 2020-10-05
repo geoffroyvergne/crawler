@@ -1,49 +1,53 @@
 #include <iostream>
 #include <boost/program_options.hpp>
-#include "config.h"
-#include "cli.hpp"
 
-namespace po = boost::program_options;
+#include <config.h>
+#include <cli.hpp>
 
-void getVersion() {
-    std::cout << "Crawler Version :  " << VERSION_MAJOR << "." << VERSION_MINOR << std::endl;
-}
-
-void getHelp(po::options_description *desc) {
-    std::cout << *desc << std::endl;
-}
-
-void initCli(int argc, char** argv) {
-    po::variables_map vm;
+Cli::Cli(int argc, char** argv) {
+    boost::program_options::variables_map variableMap;
 
     try {
-        po::options_description desc("Allowed options");
-        desc.add_options()
+        boost::program_options::options_description optionsDescription("Allowed options");
+        optionsDescription.add_options()
             ("help,h", "produce help message ")
-            ("version,v", "get version")           
+            ("version,v", "get version")    
+            ("configuration,c", boost::program_options::value<std::string>(), "Configuration fine name")
         ;
 
-        po::store(po::parse_command_line(argc, argv, desc), vm);
-        po::notify(vm);
+        boost::program_options::store(boost::program_options::parse_command_line(argc, argv, optionsDescription), variableMap);
+        boost::program_options::notify(variableMap);
 
-        if (vm.count("help")) {
-            getVersion();
-            getHelp(&desc);
+        if (variableMap.count("help")) {
+            this->getVersion();
+            this->getHelp(&optionsDescription);
 
             exit(EXIT_SUCCESS);
         }
 
-        if (vm.count("version")) {
-            getVersion();
+        if (variableMap.count("version")) {
+            this->getVersion();
+            
             exit(EXIT_SUCCESS);
         }
 
     } catch(std::exception& e) {
         std::cerr << "error: " << e.what() << std::endl;
-        return ;
     } catch(...) {
         std::cerr << "Exception of unknown type!" << std::endl;
     }
 
-    //return vm;
+    this->variableMap = variableMap;
+}
+
+void Cli::getVersion() {
+    std::cout << "Crawler Version :  " << VERSION_MAJOR << "." << VERSION_MINOR << std::endl;
+}
+
+void Cli::getHelp(boost::program_options::options_description *optionsDescription) {
+    std::cout << *optionsDescription << std::endl;
+}
+
+boost::program_options::variables_map Cli::getVariableMap() {
+    return this->variableMap;;
 }
