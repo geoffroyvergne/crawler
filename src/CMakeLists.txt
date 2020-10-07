@@ -2,8 +2,8 @@ set(BINARY ${CMAKE_PROJECT_NAME}_src_bin)
 #set(LIB ${CMAKE_PROJECT_NAME}_src_lib)
 
 # Set source
-file(GLOB_RECURSE SOURCES LIST_DIRECTORIES true *.hpp *.cpp *.h)
-set(SOURCES ${SOURCES})
+#file(GLOB_RECURSE SOURCES LIST_DIRECTORIES true ./*.hpp ./*.cpp ./*.h ../include/*.hpp ../include/*.h)
+#set(SOURCES ${SOURCES})
 
 # Add specific compilation options
 add_compile_options(-fvisibility=hidden -fvisibility-inlines-hidden)
@@ -12,7 +12,7 @@ add_compile_options(-fvisibility=hidden -fvisibility-inlines-hidden)
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
-add_executable(${BINARY} ${SOURCES})
+add_executable(${BINARY} ${SOURCES_SRC})
 #add_library(${LIB} STATIC ${SOURCES})
 target_link_libraries(${BINARY} ${CONAN_LIBS})
 
