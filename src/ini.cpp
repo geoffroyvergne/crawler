@@ -1,5 +1,6 @@
 #include <iostream>
 #include <boost/program_options.hpp>
+#include <boost/log/trivial.hpp>
 
 #include <ini.hpp>
 
@@ -10,9 +11,11 @@ Ini::Ini(std::string configFile) {
         
         this->propertyTree = propertyTree;
     } catch(std::exception& e) {
-        std::cerr << "error: " << e.what() << std::endl;
+        //std::cerr << "error: " << e.what() << std::endl;
+        BOOST_LOG_TRIVIAL(error) << "error: " << e.what();
     } catch(...) {
-        std::cerr << "Exception of unknown type!" << std::endl;
+        //std::cerr << "Exception of unknown type!" << std::endl;
+        BOOST_LOG_TRIVIAL(error) << "Exception of unknown type!";
     }
 }
 

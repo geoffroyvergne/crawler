@@ -1,6 +1,9 @@
 [requires]
 boost/1.74.0
 gtest/1.10.0
+restinio/0.6.10
+jsoncpp/1.9.4
+
 
 [generators]
 cmake

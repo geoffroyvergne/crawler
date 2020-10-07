@@ -36,3 +36,13 @@ Allowed options:
   -c [ --configuration ] arg Configuration fine name
   -u [ --url ] arg           URL to parse
 ```
+
+### Server mode
+
+```
+./build/bin/crawler_src_bin -d
+
+curl localhost:3000/index
+
+{"code":200,"value":"Response OK"}
+```
