@@ -4,10 +4,10 @@
 
 #include <ini.hpp>
 
-Ini::Ini(std::string configFile) {
+Ini::Ini(std::string file) {
     try {
         boost::property_tree::ptree propertyTree;
-        boost::property_tree::ini_parser::read_ini(configFile, propertyTree);
+        boost::property_tree::ini_parser::read_ini(file, propertyTree);
         
         this->propertyTree = propertyTree;
     } catch(std::exception& e) {

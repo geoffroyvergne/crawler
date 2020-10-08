@@ -29,12 +29,15 @@ cmake --build build/
 
 ```
 ./build/bin/crawler_src_bin --help
-Crawler Version :  1.0
+crawler version :  1.0
 Allowed options:
-  -h [ --help ]              produce help message 
-  -v [ --version ]           get version
-  -c [ --configuration ] arg Configuration fine name
-  -u [ --url ] arg           URL to parse
+  --help                       Produce help message
+  -v [ --version ]             Get version
+  -d [ --daemon ]              Daemon mode
+  -h [ --host ] arg (=0.0.0.0) Host to listen
+  -p [ --port ] arg (=3000)    Port to listen
+  -c [ --config ] arg          Configuration file name
+  -u [ --url ] arg             URL to parse
 ```
 
 ### Server mode
@@ -43,6 +46,8 @@ Allowed options:
 ./build/bin/crawler_src_bin -d
 
 curl localhost:3000/index
-
 {"code":200,"value":"Response OK"}
+
+curl localhost:3000/version
+{"code":200,"version":"1.0"}
 ```

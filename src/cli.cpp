@@ -2,8 +2,9 @@
 #include <boost/program_options.hpp>
 #include <boost/log/trivial.hpp>
 
-#include <config.h>
+#include <app.h>
 #include <cli.hpp>
+#include <config.hpp>
 
 Cli::Cli(int argc, char** argv) {
     boost::program_options::variables_map variableMap;
@@ -11,10 +12,12 @@ Cli::Cli(int argc, char** argv) {
     try {
         boost::program_options::options_description optionsDescription("Allowed options");
         optionsDescription.add_options()
-            ("help,h", "Produce help message ")
+            ("help", "Produce help message")
             ("version,v", "Get version") 
-            ("daemon,d", "Daemon mode")    
-            ("configuration,c", boost::program_options::value<std::string>(), "Configuration fine name")
+            ("daemon,d", "Daemon mode")
+            ("host,h", boost::program_options::value<std::string>()->default_value("0.0.0.0"), "Host to listen")
+            ("port,p", boost::program_options::value<int>()->default_value(3000), "Port to listen")
+            ("config,c", boost::program_options::value<std::string>(), "Configuration file name")
             ("url,u", boost::program_options::value<std::string>(), "URL to parse")
         ;
 
@@ -35,10 +38,8 @@ Cli::Cli(int argc, char** argv) {
         }
 
     } catch(std::exception& e) {
-        //std::cerr << "error: " << e.what() << std::endl;
         BOOST_LOG_TRIVIAL(error) << "error: " << e.what();
     } catch(...) {
-        //std::cerr << "Exception of unknown type!" << std::endl;
         BOOST_LOG_TRIVIAL(error) << "Exception of unknown type!";
     }
 
@@ -46,8 +47,7 @@ Cli::Cli(int argc, char** argv) {
 }
 
 void Cli::getVersion() {
-    BOOST_LOG_TRIVIAL(info) << "Crawler Version :  " << VERSION_MAJOR << "." << VERSION_MINOR;
-    //std::cout << "Crawler Version :  " << VERSION_MAJOR << "." << VERSION_MINOR << std::endl;
+    BOOST_LOG_TRIVIAL(info) << APP_NAME << " version :  " << VERSION_MAJOR << "." << VERSION_MINOR;
 }
 
 void Cli::getHelp(boost::program_options::options_description *optionsDescription) {

@@ -1,9 +1,11 @@
 #include <iostream>
+
 #include <restinio/all.hpp>
 #include <json/json.h>
 #include <boost/log/trivial.hpp>
 
 #include <rest.hpp>
+#include <app.h>
 
 Json::StreamWriterBuilder Rest::getBuilder() {
     Json::StreamWriterBuilder builder;
@@ -26,12 +28,27 @@ restinio::request_handling_status_t Rest::handleIndex(restinio::request_handle_t
         .done();
 }
 
+restinio::request_handling_status_t Rest::handleVersion(restinio::request_handle_t& req, restinio::router::route_params_t& params) {
+    Json::Value data;    
+    data["app"] = APP_NAME;    
+    data["version"] = std::to_string(VERSION_MAJOR) + "." + std::to_string(VERSION_MINOR);    
+
+    return req->create_response(restinio::status_ok())
+        .set_body(Json::writeString(Rest::getBuilder(), data))
+        .append_header(restinio::http_field::content_type, "application/json")
+        .done();
+}
+
 int Rest::connect(std::string address, int port) {
     try {
         std::unique_ptr<restinio::router::express_router_t<>> router = std::make_unique<restinio::router::express_router_t<>>();
 
         router->http_get(R"(/index)", [](auto req, auto params) {
             return Rest::handleIndex(req, params);            
+        });
+
+        router->http_get(R"(/version)", [](auto req, auto params) {
+            return Rest::handleVersion(req, params);            
         });
 
         router->non_matched_request_handler([](auto req){

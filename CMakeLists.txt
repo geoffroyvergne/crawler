@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(crawler VERSION 1.0)
 
+set(APP_NAME crawler)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
@@ -14,11 +16,11 @@ set(SOURCES_TEST ${SOURCES_TEST})
 
 # Add include config.h
 #target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC "${BINARY}")
-configure_file ("${PROJECT_SOURCE_DIR}/include/config.h.in" "${PROJECT_BINARY_DIR}/include/config.h")
+configure_file ("${PROJECT_SOURCE_DIR}/include/app.h.in" "${PROJECT_BINARY_DIR}/include/app.h")
 include_directories("${PROJECT_BINARY_DIR}/include")
 
 # Configure a header file to pass some of the CMake settings
-configure_file(include/config.h.in include/config.h)
+configure_file(include/app.h.in include/app.h)
 
 include_directories(include)
 add_subdirectory(src)
