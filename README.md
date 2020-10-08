@@ -44,6 +44,7 @@ Allowed options:
 
 ```
 ./build/bin/crawler_src_bin -d
+./build/bin/crawler -d -c etc/test.ini
 
 curl localhost:3000/index
 {"code":200,"value":"Response OK"}

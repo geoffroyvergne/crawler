@@ -1,4 +1,4 @@
-set(BINARY ${CMAKE_PROJECT_NAME}_test_bin)
+set(BINARY ${CMAKE_PROJECT_NAME}_test)
 #set(LIB ${CMAKE_PROJECT_NAME}_test_lib)
 
 # Set source

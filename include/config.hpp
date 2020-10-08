@@ -2,7 +2,7 @@
 
 class Config {
     public:
-        static std::string file;
-        static std::string host;
-        static int port;
+        std::string file;
+        std::string host;
+        int port;
 };

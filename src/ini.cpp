@@ -8,14 +8,14 @@ Ini::Ini(std::string file) {
     try {
         boost::property_tree::ptree propertyTree;
         boost::property_tree::ini_parser::read_ini(file, propertyTree);
-        
+    
         this->propertyTree = propertyTree;
     } catch(std::exception& e) {
-        //std::cerr << "error: " << e.what() << std::endl;
         BOOST_LOG_TRIVIAL(error) << "error: " << e.what();
+        exit(EXIT_FAILURE);
     } catch(...) {
-        //std::cerr << "Exception of unknown type!" << std::endl;
         BOOST_LOG_TRIVIAL(error) << "Exception of unknown type!";
+        exit(EXIT_FAILURE);
     }
 }
 
@@ -27,7 +27,7 @@ void Ini::getIniValues() {
     boost::property_tree::ptree propertyTree = this->getPtree();
 
     if(!this->propertyTree.empty()) {
-        std::cout << "Test.testValue1 : " << propertyTree.get<std::string>("Test.testValue1") << std::endl;
-        std::cout << "Test.testValue2 : " << propertyTree.get<std::string>("Test.testValue2") << std::endl;
+        //std::cout << "Test.testValue1 : " << propertyTree.get<std::string>("Test.testValue1") << std::endl;
+        //std::cout << "Test.testValue2 : " << propertyTree.get<std::string>("Test.testValue2") << std::endl;
     }
 }

@@ -39,8 +39,10 @@ Cli::Cli(int argc, char** argv) {
 
     } catch(std::exception& e) {
         BOOST_LOG_TRIVIAL(error) << "error: " << e.what();
+        exit(EXIT_FAILURE);
     } catch(...) {
         BOOST_LOG_TRIVIAL(error) << "Exception of unknown type!";
+        exit(EXIT_FAILURE);
     }
 
     this->variableMap = variableMap;
