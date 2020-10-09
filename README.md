@@ -12,11 +12,31 @@ conan
 
 ## Build
 
+### Local
+
 ```
 mkdir build
 conan install . -if build/
 cmake . -B build/
 cmake --build build/
+```
+
+### Docker
+
+```
+docker build . -t crawler
+docker build -f Dockerfile -t crawler .
+docker run --rm --name crawler
+
+run -ti --rm crawler sh
+docker run -ti --rm conanio/clang9-x86 bash
+```
+
+### Docker server mode
+
+```
+docker run -p 3000:3000 --name crawler -ti --rm crawler -d
+curl localhost:3000/version
 ```
 
 ## Test

@@ -6,6 +6,9 @@ set(APP_NAME crawler)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+#-Wc++11-narrowing
+#add_definitions("-Wc++11-narrowing")
+
 # group src file list to compile
 file(GLOB_RECURSE SOURCES_SRC LIST_DIRECTORIES true src/*.hpp src/*.cpp src/*.h include/*.hpp include/*.h)
 set(SOURCES_SRC ${SOURCES_SRC})
