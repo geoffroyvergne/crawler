@@ -15,6 +15,10 @@ conan
 ### Local
 
 ```
+
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang++
+
 mkdir build
 conan install . -if build/
 cmake . -B build/
@@ -26,7 +30,7 @@ cmake --build build/
 ```
 docker build . -t crawler
 docker build -f Dockerfile -t crawler .
-docker run --rm --name crawler
+docker run --rm --name crawler hrawler --help
 
 run -ti --rm crawler sh
 docker run -ti --rm conanio/clang9-x86 bash
@@ -42,7 +46,7 @@ curl localhost:3000/version
 ## Test
 
 ```
-./build/bin/crawler_test_bin
+./build/bin/crawler_test
 ```
 
 ## Run
@@ -63,7 +67,7 @@ Allowed options:
 ### Server mode
 
 ```
-./build/bin/crawler_src_bin -d
+./build/bin/crawler -d
 ./build/bin/crawler -d -c etc/test.ini
 
 curl localhost:3000/index
