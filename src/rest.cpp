@@ -64,7 +64,8 @@ int Rest::connect(std::string address, int port) {
         };
 
         restinio::run(            
-            restinio::on_thread_pool<server_traits>(std::thread::hardware_concurrency())
+            //restinio::on_thread_pool<server_traits>(std::thread::hardware_concurrency())
+            restinio::on_this_thread<server_traits>()
             .port(port)
             .address(address)
             .request_handler(std::move(router)));
