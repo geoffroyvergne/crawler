@@ -25,6 +25,10 @@ include_directories("${PROJECT_BINARY_DIR}/include")
 # Configure a header file to pass some of the CMake settings
 configure_file(include/app.h.in include/app.h)
 
+# Add conan dependencies
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
+
 include_directories(include)
 add_subdirectory(src)
 add_subdirectory(test)

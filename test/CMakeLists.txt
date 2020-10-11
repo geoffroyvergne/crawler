@@ -7,8 +7,8 @@ set(BINARY ${CMAKE_PROJECT_NAME}_test)
 #set(SOURCES ${SOURCES})
 
 # Add conan dependencies
-include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-conan_basic_setup()
+#include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+#conan_basic_setup()
 
 add_executable(${BINARY} ${SOURCES_TEST})
 #add_library(${LIB} STATIC ${SOURCES})

@@ -2,6 +2,24 @@
 
 C++ web crawler
 
+## Dependencies lib
+
+## conan
+boost/1.74.0
+gtest/1.10.0
+restinio/0.6.10
+jsoncpp/1.9.4
+
+gumbo-parser/0.10.1
+libcurl/7.72.0
+
+### FetchContent
+gumbo-parser
+
+### find_package( CURL )
+libcurl
+
+
 ## Dependencies build
 
 ```
