@@ -20,9 +20,11 @@ target_link_libraries(${BINARY} ${CONAN_LIBS})
 #find_package( CURL )
 #target_link_libraries(${BINARY} ${CONAN_LIBS} CURL)
 
-find_package( CURL )
-include_directories(${CURL_INCLUDE_DIR})
-target_link_libraries(${BINARY} ${CONAN_LIBS} ${CURL_LIBRARIES})
+#find_package( CURL )
+#include_directories(${CURL_INCLUDE_DIR})
+#target_link_libraries(${BINARY} ${CONAN_LIBS} ${CURL_LIBRARIES})
+
+#include_directories(${Boost_INCLUDE_DIRS})
 
 #target_include_directories(${CMAKE_PROJECT_NAME}/src PUBLIC "${PROJECT_BINARY_DIR}")
 
