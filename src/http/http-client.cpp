@@ -2,7 +2,7 @@
 #include <curl/curl.h>
 #include <string>
 #include <http/http-client.hpp>
-#include <curl/curl.h>
+//#include <curl/curl.h>
 
 HttpClient::HttpClient(std::string url) {
     this->url = url;

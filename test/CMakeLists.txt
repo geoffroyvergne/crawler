@@ -12,10 +12,15 @@ set(BINARY ${CMAKE_PROJECT_NAME}_test)
 
 add_executable(${BINARY} ${SOURCES_TEST})
 #add_library(${LIB} STATIC ${SOURCES})
+
 #target_link_libraries(${BINARY} ${CONAN_LIBS})
 
+#find_package( CURL )
+#target_link_libraries(${BINARY} ${CONAN_LIBS} CURL)
+
 find_package( CURL )
-target_link_libraries(${BINARY} ${CONAN_LIBS} CURL)
+include_directories(${CURL_INCLUDE_DIR})
+target_link_libraries(${BINARY} ${CONAN_LIBS} ${CURL_LIBRARIES})
 
 # Copy binary to build/test
 add_custom_command(TARGET ${BINARY} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${BINARY}> ../bin/${BINARY})

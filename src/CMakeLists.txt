@@ -14,10 +14,15 @@ add_compile_options(-fvisibility=hidden -fvisibility-inlines-hidden)
 
 add_executable(${BINARY} ${SOURCES_SRC})
 #add_library(${LIB} STATIC ${SOURCES})
-#target_link_libraries(${BINARY} ${CONAN_LIBS})
+
+target_link_libraries(${BINARY} ${CONAN_LIBS})
+
+#find_package( CURL )
+#target_link_libraries(${BINARY} ${CONAN_LIBS} CURL)
 
 find_package( CURL )
-target_link_libraries(${BINARY} ${CONAN_LIBS} CURL)
+include_directories(${CURL_INCLUDE_DIR})
+target_link_libraries(${BINARY} ${CONAN_LIBS} ${CURL_LIBRARIES})
 
 #target_include_directories(${CMAKE_PROJECT_NAME}/src PUBLIC "${PROJECT_BINARY_DIR}")
 
