@@ -9,6 +9,7 @@
 #include <config-manager.hpp>
 
 #include <http/http-client.hpp>
+#include <html/parser.hpp>
 
 int main(int argc, char** argv) {
     BOOST_LOG_TRIVIAL(info) << "Starting " << APP_NAME;
@@ -37,7 +38,15 @@ int main(int argc, char** argv) {
         std::string url = vm["url"].as<std::string>();
 
         HttpClient *httpClient = new HttpClient(url);
-        httpClient->getResults();
+        //httpClient->getResults();
+
+        std::string htmlContent = httpClient->getHtmlContent();
+        HtmlParser *htmlParser = new HtmlParser(htmlContent);
+        std::vector<HtmlTag*> tagList = htmlParser->getTagList();
+
+        for (HtmlTag* tag: tagList){
+            std::cout << tag->toString() << std::endl;
+        }
         
         free(httpClient);
     }

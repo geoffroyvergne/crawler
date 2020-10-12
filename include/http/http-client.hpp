@@ -8,11 +8,16 @@ class HttpClient {
         //HttpClient();
         HttpClient(std::string url);
         //std::string toString();
-        void getResults();
+        std::string getHtmlContent();
+        WebUrl* getWebUrl();
+        WebPage* getWebPage();
     private:
+        void getResults();
         std::string url;
         static void fail(CURLU *curlu);
         static size_t writefunc(void *ptr, size_t size, size_t nmemb, std::string *s);
         WebUrl* parseUrl();
         WebPage* httpGet();
+        WebUrl* webUrl;
+        WebPage* webPage;
 };

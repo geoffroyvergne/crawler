@@ -4,19 +4,32 @@
 #include <http/http-client.hpp>
 //#include <curl/curl.h>
 
+WebUrl* HttpClient::getWebUrl() {
+    return this->webUrl;
+}
+
+WebPage* HttpClient::getWebPage() {
+    return this->webPage;
+}
+
+std::string HttpClient::getHtmlContent() {
+    return this->webPage->content;
+}
+
 HttpClient::HttpClient(std::string url) {
     this->url = url;
+    this->getResults();
 }
 
 void HttpClient::getResults() {
-    WebUrl *webUrl = this->parseUrl();
-    WebPage *webPage = this->httpGet();
+    this->webUrl = this->parseUrl();
+    this->webPage = this->httpGet();
 
-    std::cout << webUrl->toString() << std::endl;
-    std::cout << webPage->toString() << std::endl;
+    //std::cout << webUrl->toString() << std::endl;
+    //std::cout << webPage->toString() << std::endl;
 
-    free(webPage);
-    free(webUrl);
+    //free(webPage);
+    //free(webUrl);
 }
 
 WebUrl* HttpClient::parseUrl() {
