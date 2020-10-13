@@ -14,7 +14,7 @@ file(GLOB_RECURSE SOURCES_SRC LIST_DIRECTORIES true src/*.hpp src/*.cpp src/*.h 
 set(SOURCES_SRC ${SOURCES_SRC})
 
 # group test file list to compile
-file(GLOB_RECURSE SOURCES_TEST LIST_DIRECTORIES true test/*.hpp test/*.cpp test/*.h include/*.hpp include/*.h)
+file(GLOB_RECURSE SOURCES_TEST LIST_DIRECTORIES true test/*.cpp test/*.h include/*.hpp include/*.h)
 set(SOURCES_TEST ${SOURCES_TEST})
 
 # Add include config.h

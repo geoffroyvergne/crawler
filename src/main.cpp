@@ -14,6 +14,8 @@
 int main(int argc, char** argv) {
     BOOST_LOG_TRIVIAL(info) << "Starting " << APP_NAME;
 
+    std::cout << "argc : " << argc << " argv : " << argv << std::endl;
+
     // Get command line arguments
     Cli *cli = new Cli(argc, argv);
     boost::program_options::variables_map vm = cli->getVariableMap();

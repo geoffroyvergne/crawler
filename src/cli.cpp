@@ -6,6 +6,8 @@
 #include <cli.hpp>
 #include <config.hpp>
 
+//Cli::Cli() {}
+
 Cli::Cli(int argc, char** argv) {
     boost::program_options::variables_map variableMap;
 
@@ -32,7 +34,8 @@ Cli::Cli(int argc, char** argv) {
         }
 
         if (variableMap.count("version")) {
-            this->getVersion();
+            //this->getVersion();
+            BOOST_LOG_TRIVIAL(info) << this->getVersion();
             
             exit(EXIT_SUCCESS);
         }
@@ -48,8 +51,18 @@ Cli::Cli(int argc, char** argv) {
     this->variableMap = variableMap;
 }
 
-void Cli::getVersion() {
-    BOOST_LOG_TRIVIAL(info) << APP_NAME << " version :  " << VERSION_MAJOR << "." << VERSION_MINOR;
+std::string Cli::getVersion() {
+    //BOOST_LOG_TRIVIAL(info) << APP_NAME << " version :  " << VERSION_MAJOR << "." << VERSION_MINOR;
+    std::string version;
+
+    version.append(APP_NAME);
+    version.append(" : ");
+    version.append(std::to_string(VERSION_MAJOR));
+    version.append(".");
+    version.append(std::to_string(VERSION_MINOR));
+
+    //std::string version = APP_NAME + "." + VERSION_MAJOR + "." + VERSION_MINOR;
+    return version;
 }
 
 void Cli::getHelp(boost::program_options::options_description *optionsDescription) {
