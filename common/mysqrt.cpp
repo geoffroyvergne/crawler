@@ -1,9 +1,8 @@
 #include <iostream>
 
 // a hack square root calculation using simple operations
-double mysqrt(double x)
-{
-    std::cout << "Use MyMath" << std::endl;
+double mysqrt(double x) {
+  //std::cout << "Use MyMath" << std::endl;
   if (x <= 0) {
     return 0;
   }
@@ -17,7 +16,7 @@ double mysqrt(double x)
     }
     double delta = x - (result * result);
     result = result + 0.5 * delta / result;
-    std::cout << "Computing sqrt of " << x << " to be " << result << std::endl;
+    //std::cout << "Computing sqrt of " << x << " to be " << result << std::endl;
   }
   return result;
 }

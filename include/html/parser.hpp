@@ -10,6 +10,7 @@ class HtmlParser {
         std::string getHtmlFromFile(std::string fileName);
         std::string getHtmlFromString(std::string html);
         std::vector<HtmlTag*> getTagList();
+        static int tempTest();
     
     private:
         std::vector<HtmlTag*> tagList;

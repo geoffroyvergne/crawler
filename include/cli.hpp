@@ -2,7 +2,7 @@
 
 class Cli {
     public:
-        Cli();
+        //Cli();
         Cli(int argc, char** argv);
         boost::program_options::variables_map getVariableMap();
         std::string getVersion();

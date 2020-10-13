@@ -1,5 +1,6 @@
 set(BINARY ${CMAKE_PROJECT_NAME}_test)
 #set(LIB ${CMAKE_PROJECT_NAME}_test_lib)
+#set(COMMON ${CMAKE_PROJECT_NAME}_test_lib)
 
 # Set source
 #file(GLOB_RECURSE SOURCES LIST_DIRECTORIES true *.hpp *.cpp)
@@ -13,7 +14,7 @@ set(BINARY ${CMAKE_PROJECT_NAME}_test)
 add_executable(${BINARY} ${SOURCES_TEST})
 #add_library(${LIB} STATIC ${SOURCES})
 
-target_link_libraries(${BINARY} ${CONAN_LIBS} mysqrt)
+target_link_libraries(${BINARY} ${CONAN_LIBS} common)
 
 
 #find_package( CURL )

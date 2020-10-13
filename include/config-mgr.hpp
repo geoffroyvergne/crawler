@@ -2,9 +2,9 @@
 #include <boost/program_options.hpp>
 #include <config.hpp>
 
-class ConfigManager {
+class ConfigMgr {
     public:
-        ConfigManager(boost::program_options::variables_map vm);
+        ConfigMgr(boost::program_options::variables_map vm);
         Config *getConfig();
     private:
         Config *config;

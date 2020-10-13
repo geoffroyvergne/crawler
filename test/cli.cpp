@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include <iostream>
 //#include <app.h>
-#include <cli.hpp>
+//#include <cli.hpp>
 
 TEST(cli, base) {
     //std::cout << "module_name1 test_name1" << std::endl;

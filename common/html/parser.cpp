@@ -7,6 +7,10 @@
 #include <html/parser.hpp>
 #include <boost/algorithm/string.hpp>
 
+int HtmlParser::tempTest() {
+    return 1+1;
+}
+
 HtmlParser::HtmlParser(std::string htmlContent) {
     GumboOutput* output = gumbo_parse_with_options(&kGumboDefaultOptions, htmlContent.data(), htmlContent.length());
     parse(output->root);

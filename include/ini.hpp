@@ -2,7 +2,7 @@
 
 class Ini {
     public:
-        Ini();
+        //Ini();
         Ini(std::string configFile);
         boost::property_tree::ptree getPtree();
         void getIniValues();

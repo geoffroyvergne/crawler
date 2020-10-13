@@ -6,7 +6,7 @@
 #include <app.h>
 #include <cli.hpp>
 #include <rest.hpp>
-#include <config-manager.hpp>
+#include <config-mgr.hpp>
 
 #include <http/http-client.hpp>
 #include <html/parser.hpp>
@@ -21,8 +21,8 @@ int main(int argc, char** argv) {
     boost::program_options::variables_map vm = cli->getVariableMap();
 
     // Generate config object
-    ConfigManager *configManager = new ConfigManager(vm);
-    Config *config = configManager->getConfig();
+    ConfigMgr *configMgr = new ConfigMgr(vm);
+    Config *config = configMgr->getConfig();
 
     // Detect daemon mode (Http Rest API)
     if (vm.count("daemon")) {        
@@ -49,6 +49,9 @@ int main(int argc, char** argv) {
         for (HtmlTag* tag: tagList){
             std::cout << tag->toString() << std::endl;
         }
+
+        //WebUrl* webUrl = httpClient->parseUrl();
+        //std::cout << webUrl->toString() << std::endl;
         
         free(httpClient);
     }

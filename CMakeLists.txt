@@ -10,11 +10,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 #add_definitions("-Wc++11-narrowing")
 
 # group src file list to compile
-file(GLOB_RECURSE SOURCES_SRC LIST_DIRECTORIES true src/*.hpp src/*.cpp src/*.h include/*.hpp include/*.h)
+file(GLOB_RECURSE SOURCES_SRC LIST_DIRECTORIES true src/*.hpp src/*.cpp src/*.h include/*.h common/*.h)
 set(SOURCES_SRC ${SOURCES_SRC})
 
 # group test file list to compile
-file(GLOB_RECURSE SOURCES_TEST LIST_DIRECTORIES true test/*.cpp test/*.h include/*.hpp include/*.h)
+file(GLOB_RECURSE SOURCES_TEST LIST_DIRECTORIES true test/*.cpp test/*.h include/*.h common/*.h)
 set(SOURCES_TEST ${SOURCES_TEST})
 
 # Add include config.h
@@ -22,17 +22,16 @@ set(SOURCES_TEST ${SOURCES_TEST})
 configure_file ("${PROJECT_SOURCE_DIR}/include/app.h.in" "${PROJECT_BINARY_DIR}/include/app.h")
 include_directories("${PROJECT_BINARY_DIR}/include")
 
-add_subdirectory(mysqrt)
-#list(APPEND EXTRA_LIBS mysqrt)
-#list(APPEND EXTRA_INCLUDES "${PROJECT_SOURCE_DIR}/mysqrt")
-list(APPEND EXTRA_LIBS mysqrt)
-
 # Configure a header file to pass some of the CMake settings
 configure_file(include/app.h.in include/app.h)
 
 # Add conan dependencies
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
+
+# add common folder as lib
+add_subdirectory(common)
+list(APPEND EXTRA_LIBS common)
 
 include_directories(include)
 add_subdirectory(src)

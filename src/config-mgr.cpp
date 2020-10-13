@@ -1,8 +1,8 @@
-#include <config-manager.hpp>
+#include <config-mgr.hpp>
 #include <boost/program_options.hpp>
 #include <ini.hpp>
 
-ConfigManager::ConfigManager(boost::program_options::variables_map vm) {
+ConfigMgr::ConfigMgr(boost::program_options::variables_map vm) {
     this->config = new Config();
 
     // Cli config
@@ -28,6 +28,6 @@ ConfigManager::ConfigManager(boost::program_options::variables_map vm) {
     // TODO Env variables
 }
 
-Config *ConfigManager::getConfig() {
+Config *ConfigMgr::getConfig() {
     return this->config;
 }
