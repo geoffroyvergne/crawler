@@ -5,9 +5,10 @@ class Cli {
         Cli();
         Cli(int argc, char** argv);
         boost::program_options::variables_map getVariableMap();
+        std::string getVersion();
         
     private:
         boost::program_options::variables_map variableMap;
-        void getVersion();
+        
         void getHelp(boost::program_options::options_description *optionsDescription);
 };
