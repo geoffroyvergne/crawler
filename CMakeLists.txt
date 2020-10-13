@@ -22,6 +22,11 @@ set(SOURCES_TEST ${SOURCES_TEST})
 configure_file ("${PROJECT_SOURCE_DIR}/include/app.h.in" "${PROJECT_BINARY_DIR}/include/app.h")
 include_directories("${PROJECT_BINARY_DIR}/include")
 
+add_subdirectory(mysqrt)
+#list(APPEND EXTRA_LIBS mysqrt)
+#list(APPEND EXTRA_INCLUDES "${PROJECT_SOURCE_DIR}/mysqrt")
+list(APPEND EXTRA_LIBS mysqrt)
+
 # Configure a header file to pass some of the CMake settings
 configure_file(include/app.h.in include/app.h)
 

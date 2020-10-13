@@ -13,11 +13,10 @@ HtmlParser::HtmlParser(std::string htmlContent) {
 }
 
 std::string HtmlParser::cleanString(std::string* value) {
-    //boost::algorithm::replace_all(value, "\r", " ");
-    //boost::algorithm::replace_all(value, "\n", " ");
-
-    //std::regex newlines_re("n+");
-    //std::regex_replace(value, newlines_re, " ");
+    //boost::algorithm::replace_all(*value, " ", "");
+    boost::algorithm::replace_all(*value, "\r\n", " ");
+    boost::algorithm::replace_all(*value, "\r", " ");
+    boost::algorithm::replace_all(*value, "\n", " ");
 
     return *value;
 }

@@ -13,7 +13,8 @@ set(BINARY ${CMAKE_PROJECT_NAME}_test)
 add_executable(${BINARY} ${SOURCES_TEST})
 #add_library(${LIB} STATIC ${SOURCES})
 
-target_link_libraries(${BINARY} ${CONAN_LIBS})
+target_link_libraries(${BINARY} ${CONAN_LIBS} mysqrt)
+
 
 #find_package( CURL )
 #target_link_libraries(${BINARY} ${CONAN_LIBS} CURL)
