@@ -1,5 +1,9 @@
 #include <iostream>
 
+#ifndef WEB_PAGE
+#define WEB_PAGE
+
+//#pragma once
 class WebPage {
     public:
         //WebPage();
@@ -13,3 +17,5 @@ class WebPage {
         double elapsed;
         std::string toString();
 };
+
+#endif 

@@ -1,5 +1,9 @@
 #include <boost/property_tree/ini_parser.hpp>
 
+#ifndef INI
+#define INI
+
+//#pragma once
 class Ini {
     public:
         //Ini();
@@ -9,3 +13,5 @@ class Ini {
     private:
         boost::property_tree::ptree propertyTree;
 };
+
+#endif

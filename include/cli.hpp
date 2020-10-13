@@ -1,5 +1,9 @@
 #include <boost/program_options.hpp>
 
+#ifndef CLI
+#define CLI
+
+//#pragma once
 class Cli {
     public:
         //Cli();
@@ -12,3 +16,5 @@ class Cli {
         
         void getHelp(boost::program_options::options_description *optionsDescription);
 };
+
+#endif

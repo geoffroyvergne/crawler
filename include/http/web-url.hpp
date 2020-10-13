@@ -1,5 +1,9 @@
 #include <iostream>
 
+#ifndef WEB_URL
+#define WEB_URL
+
+//pragma once
 class WebUrl {
     public:
         //WebUrl();        
@@ -12,3 +16,5 @@ class WebUrl {
         std::string fragment;
         std::string toString();
 };
+
+#endif

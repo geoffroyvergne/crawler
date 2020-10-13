@@ -1,5 +1,10 @@
 #include <iostream>
 
+#ifndef TAG
+#define TAG
+
+//#pragma once
+
 class HtmlTag {
     public:
         //Tag(std::string name, std::string text, std::string src);
@@ -10,3 +15,5 @@ class HtmlTag {
         std::string href;
         std::string toString();
 };
+
+#endif 

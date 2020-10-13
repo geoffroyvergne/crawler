@@ -1,20 +1,32 @@
 #include <iostream>
-#include <boost/property_tree/ini_parser.hpp>
 #include <boost/log/trivial.hpp>
 #include <boost/program_options.hpp>
 
 #include <app.h>
+
 #include <cli.hpp>
 #include <rest.hpp>
 #include <config-mgr.hpp>
 
 #include <http/http-client.hpp>
 #include <html/parser.hpp>
+#include <web-response.hpp>
+
+WebResponse* getWebResponse(std::string url) {
+    HttpClient *httpClient = new HttpClient(url);
+    HtmlParser *htmlParser = new HtmlParser(httpClient->getWebPage()->content);
+
+    WebResponse *webResponse = new WebResponse(
+            httpClient->getWebUrl(),
+            httpClient->getWebPage(),
+            htmlParser->getTagList()
+        );
+
+    return webResponse;
+}
 
 int main(int argc, char** argv) {
     BOOST_LOG_TRIVIAL(info) << "Starting " << APP_NAME;
-
-    std::cout << "argc : " << argc << " argv : " << argv << std::endl;
 
     // Get command line arguments
     Cli *cli = new Cli(argc, argv);
@@ -37,25 +49,17 @@ int main(int argc, char** argv) {
 
     // Detect Cli Mode
     else if (vm.count("url")) {
+        BOOST_LOG_TRIVIAL(info) << APP_NAME << " run in CLI mode";
+
+        // Request URL
         std::string url = vm["url"].as<std::string>();
+        WebResponse *webResponse = getWebResponse(url);
+        webResponse->toString();
 
-        HttpClient *httpClient = new HttpClient(url);
-        //httpClient->getResults();
-
-        std::string htmlContent = httpClient->getHtmlContent();
-        HtmlParser *htmlParser = new HtmlParser(htmlContent);
-        std::vector<HtmlTag*> tagList = htmlParser->getTagList();
-
-        for (HtmlTag* tag: tagList){
-            std::cout << tag->toString() << std::endl;
-        }
-
-        //WebUrl* webUrl = httpClient->parseUrl();
-        //std::cout << webUrl->toString() << std::endl;
-        
-        free(httpClient);
+        free(webResponse);
     }
 
+    free(configMgr);
     free(config);
     free(cli);
     

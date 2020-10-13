@@ -18,12 +18,13 @@ std::string HttpClient::getHtmlContent() {
 
 HttpClient::HttpClient(std::string url) {
     this->url = url;
-    this->getResults();
+
+    this->webUrl = this->parseUrl();
+    this->webPage = this->httpGet();
 }
 
 void HttpClient::getResults() {
-    this->webUrl = this->parseUrl();
-    this->webPage = this->httpGet();
+    
 
     //std::cout << webUrl->toString() << std::endl;
     //std::cout << webPage->toString() << std::endl;

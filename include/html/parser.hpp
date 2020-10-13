@@ -3,6 +3,10 @@
 #include <gumbo.h>
 #include <html/tag.hpp>
 
+#ifndef HTML_PARSER
+#define HTML_PARSER
+
+//#pragma once
 class HtmlParser {
     public:
         HtmlParser(std::string htmlContent);
@@ -16,3 +20,5 @@ class HtmlParser {
         std::vector<HtmlTag*> tagList;
         std::string cleanString(std::string* value);
 };
+
+#endif 

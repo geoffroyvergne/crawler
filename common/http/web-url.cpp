@@ -4,10 +4,9 @@
 std::string WebUrl::toString() {
     std::string result = "WebUrl => ";
 
-    result.append("url : " + WebUrl::url + "\n");
-    result.append("host : " + WebUrl::host + "\n");
-    result.append("path : " + WebUrl::path + "\n");
-
+    result.append("url : " + WebUrl::url + " => ");
+    result.append("host : " + WebUrl::host + " => ");
+    result.append("path : " + WebUrl::path);
 
     return result;
 }
