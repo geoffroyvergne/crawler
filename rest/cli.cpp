@@ -15,12 +15,10 @@ Cli::Cli(int argc, char** argv) {
         boost::program_options::options_description optionsDescription("Allowed options");
         optionsDescription.add_options()
             ("help", "Produce help message")
-            ("version,v", "Get version") 
-            ("daemon,d", "Daemon mode")
+            ("version,v", "Get version")             
             ("host,h", boost::program_options::value<std::string>()->default_value("0.0.0.0"), "Host to listen")
             ("port,p", boost::program_options::value<int>()->default_value(3000), "Port to listen")
-            ("config,c", boost::program_options::value<std::string>(), "Configuration file name")
-            ("url,u", boost::program_options::value<std::string>(), "URL to parse")
+            ("config,c", boost::program_options::value<std::string>(), "Configuration file name")            
         ;
 
         boost::program_options::store(boost::program_options::parse_command_line(argc, argv, optionsDescription), variableMap);
@@ -52,7 +50,6 @@ Cli::Cli(int argc, char** argv) {
 }
 
 std::string Cli::getVersion() {
-    //BOOST_LOG_TRIVIAL(info) << APP_NAME << " version :  " << VERSION_MAJOR << "." << VERSION_MINOR;
     std::string version;
 
     version.append(APP_NAME);
@@ -61,7 +58,6 @@ std::string Cli::getVersion() {
     version.append(".");
     version.append(std::to_string(VERSION_MINOR));
 
-    //std::string version = APP_NAME + "." + VERSION_MAJOR + "." + VERSION_MINOR;
     return version;
 }
 

@@ -16,7 +16,9 @@ class WebResponse {
         WebUrl* webUrl;
         WebPage* webPage;
         std::vector<HtmlTag*> tagList;
-        void toString();
+        void printString();
+        std::string toString();
+        std::string toJson();
 };
 
 #endif

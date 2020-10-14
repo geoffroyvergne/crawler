@@ -94,3 +94,14 @@ curl localhost:3000/index
 curl localhost:3000/version
 {"code":200,"version":"1.0"}
 ```
+## Web server test
+
+```
+cd var
+build . -t web-server-test
+docker run -d  --rm -p 80:80 --name web-server-test web-server-test
+
+./build/bin/crawler -u http://localhost/test.html
+./build/bin/crawler -u http://localhost/simple-test.html
+```
+

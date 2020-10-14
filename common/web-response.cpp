@@ -11,12 +11,24 @@ WebResponse::WebResponse(WebUrl* webUrl, WebPage* webPage, std::vector<HtmlTag*>
     this->tagList = tagList;
 }
 
-void WebResponse::toString() {
-    std::cout << this->webUrl->toString() << std::endl;
-    std::cout << this->webPage->toString() << std::endl;
-
-    std::cout << "Tags" << std::endl;
-    for (HtmlTag* tag: this->tagList){
-        std::cout << tag->toString() << std::endl;
+std::string WebResponse::toString() {
+    std::string result;
+    result.append(this->webUrl->toString());
+    result.append("\n");
+    result.append(this->webPage->toString());
+    result.append("\n");
+    
+    result.append("Tags\n");
+    for (HtmlTag* tag: this->tagList){        
+        result.append(tag->toString());
+        result.append("\n");
     }
+
+    return result;
+}
+
+std::string WebResponse::toJson() {
+    std::string result;
+
+    return result;
 }
