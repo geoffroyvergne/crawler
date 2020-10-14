@@ -10,19 +10,19 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 #add_definitions("-Wc++11-narrowing")
 
 # group common lib file list to compile
-file(GLOB_RECURSE SOURCES_COMMON LIST_DIRECTORIES true common/*.cpp)
+file(GLOB_RECURSE SOURCES_COMMON LIST_DIRECTORIES true src/common/*.cpp)
 set(SOURCES_COMMON ${SOURCES_COMMON})
 
 # group cli file list to compile
-file(GLOB_RECURSE SOURCES_CLI LIST_DIRECTORIES true cli/*.cpp)
+file(GLOB_RECURSE SOURCES_CLI LIST_DIRECTORIES true src/cli/*.cpp)
 set(SOURCES_SRC ${SOURCES_CLI})
 
 # group rest file list to compile
-file(GLOB_RECURSE SOURCES_REST LIST_DIRECTORIES true rest/*.cpp)
+file(GLOB_RECURSE SOURCES_REST LIST_DIRECTORIES true src/rest/*.cpp)
 set(SOURCES_SRC ${SOURCES_REST})
 
 # group test file list to compile
-file(GLOB_RECURSE SOURCES_TEST LIST_DIRECTORIES true test/*.cpp)
+file(GLOB_RECURSE SOURCES_TEST LIST_DIRECTORIES true src/test/*.cpp)
 set(SOURCES_TEST ${SOURCES_TEST})
 
 # Add include config.h
@@ -40,9 +40,9 @@ conan_basic_setup()
 include_directories(include)
 
 # add common folder as lib
-add_subdirectory(common)
-list(APPEND EXTRA_LIBS common)
+add_subdirectory(src/common)
+list(APPEND EXTRA_LIBS src/common)
 
-add_subdirectory(cli)
-add_subdirectory(rest)
-add_subdirectory(test)
+add_subdirectory(src/cli)
+add_subdirectory(src/rest)
+add_subdirectory(src/test)

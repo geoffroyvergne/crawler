@@ -3,16 +3,12 @@
 #include <boost/program_options.hpp>
 
 #include <app.h>
-
 #include <cli.hpp>
-#include <rest.hpp>
-#include <config-mgr.hpp>
-
 #include <http/http-client.hpp>
 #include <html/parser.hpp>
 #include <web-response.hpp>
 
-/*WebResponse* getWebResponse(std::string url) {
+WebResponse* getWebResponse(std::string url) {
     HttpClient *httpClient = new HttpClient(url);
     HtmlParser *htmlParser = new HtmlParser(httpClient->getWebPage()->content);
 
@@ -23,28 +19,24 @@
         );
 
     return webResponse;
-}*/
+}
 
 int main(int argc, char** argv) {
-    BOOST_LOG_TRIVIAL(info) << "Starting " << APP_NAME;
+    std::cout << APP_NAME << " Cli mode" << std::endl;
 
     // Get command line arguments
     Cli *cli = new Cli(argc, argv);
     boost::program_options::variables_map vm = cli->getVariableMap();
 
-    // Generate config object
-    ConfigMgr *configMgr = new ConfigMgr(vm);
-    Config *config = configMgr->getConfig();
+    if (vm.count("url")) {
+        // Request URL
+        std::string url = vm["url"].as<std::string>();
+        WebResponse *webResponse = getWebResponse(url);
+        std::cout << webResponse->toString(); 
 
-    BOOST_LOG_TRIVIAL(info) << APP_NAME << " run in Daemon mode";
-    BOOST_LOG_TRIVIAL(info) << "host : " << config->host << " port : " << config->port;
+        free(webResponse);
+    }
 
-    Rest *rest = new Rest();
-    return rest->connect(config->host, config->port);
-
-    free(rest);
-    free(configMgr);
-    free(config);
     free(cli);
     
     return EXIT_SUCCESS;

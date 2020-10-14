@@ -6,43 +6,39 @@
 #include <cli.hpp>
 #include <config.hpp>
 
-//Cli::Cli() {}
-
 Cli::Cli(int argc, char** argv) {
     boost::program_options::variables_map variableMap;
+    boost::program_options::options_description optionsDescription("Allowed options");
 
     try {
-        boost::program_options::options_description optionsDescription("Allowed options");
         optionsDescription.add_options()
             ("help", "Produce help message")
             ("version,v", "Get version")             
-            ("host,h", boost::program_options::value<std::string>()->default_value("0.0.0.0"), "Host to listen")
-            ("port,p", boost::program_options::value<int>()->default_value(3000), "Port to listen")
-            ("config,c", boost::program_options::value<std::string>(), "Configuration file name")            
+            ("url,u", boost::program_options::value<std::string>()->required(), "URL to parse")
         ;
 
         boost::program_options::store(boost::program_options::parse_command_line(argc, argv, optionsDescription), variableMap);
         boost::program_options::notify(variableMap);
 
+    } catch (const boost::program_options::required_option & e) {
         if (variableMap.count("help")) {
-            this->getVersion();
+            std::cout << this->getVersion() << std::endl;
             this->getHelp(&optionsDescription);
 
             exit(EXIT_SUCCESS);
-        }
+        } else if (variableMap.count("version")) {
+            std::cout << this->getVersion() << std::endl;
 
-        if (variableMap.count("version")) {
-            //this->getVersion();
-            BOOST_LOG_TRIVIAL(info) << this->getVersion();
-            
             exit(EXIT_SUCCESS);
+        } else {
+            std::cerr << "error: " << e.what() << std::endl;
+            exit(EXIT_FAILURE);
         }
-
     } catch(std::exception& e) {
-        BOOST_LOG_TRIVIAL(error) << "error: " << e.what();
+        std::cerr << "error: " << e.what() << std::endl;
         exit(EXIT_FAILURE);
     } catch(...) {
-        BOOST_LOG_TRIVIAL(error) << "Exception of unknown type!";
+        std::cerr << "Exception of unknown type!";
         exit(EXIT_FAILURE);
     }
 

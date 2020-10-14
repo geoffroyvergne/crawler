@@ -6,37 +6,37 @@
 #include <cli.hpp>
 #include <config.hpp>
 
-//Cli::Cli() {}
-
 Cli::Cli(int argc, char** argv) {
     boost::program_options::variables_map variableMap;
-    boost::program_options::options_description optionsDescription("Allowed options");
 
     try {
+        boost::program_options::options_description optionsDescription("Allowed options");
         optionsDescription.add_options()
             ("help", "Produce help message")
             ("version,v", "Get version")             
-            ("url,u", boost::program_options::value<std::string>()->required(), "URL to parse")
+            ("host,h", boost::program_options::value<std::string>()->default_value("0.0.0.0"), "Host to listen")
+            ("port,p", boost::program_options::value<int>()->default_value(3000), "Port to listen")
+            ("config,c", boost::program_options::value<std::string>(), "Configuration file name")            
         ;
 
         boost::program_options::store(boost::program_options::parse_command_line(argc, argv, optionsDescription), variableMap);
         boost::program_options::notify(variableMap);
 
-    } catch (const boost::program_options::required_option & e) {
         if (variableMap.count("help")) {
-            BOOST_LOG_TRIVIAL(info) << this->getVersion();
+            this->getVersion();
             this->getHelp(&optionsDescription);
 
-            exit(EXIT_FAILURE);
-        } else if (variableMap.count("version")) {
-            BOOST_LOG_TRIVIAL(info) << this->getVersion();
-
             exit(EXIT_SUCCESS);
-        } else {
-            BOOST_LOG_TRIVIAL(error) << "error: " << e.what();
         }
+
+        if (variableMap.count("version")) {
+            BOOST_LOG_TRIVIAL(info) << this->getVersion();
+            
+            exit(EXIT_SUCCESS);
+        }
+
     } catch(std::exception& e) {
-        BOOST_LOG_TRIVIAL(error) << "error: " << e.what();
+        std::cerr << "error: " << e.what() << std::endl;
         exit(EXIT_FAILURE);
     } catch(...) {
         BOOST_LOG_TRIVIAL(error) << "Exception of unknown type!";

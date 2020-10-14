@@ -22,7 +22,7 @@ restinio::request_handling_status_t Rest::handleIndex(restinio::request_handle_t
     data["code"] = 200;
     data["value"] = "Response OK";
 
-    BOOST_LOG_TRIVIAL(info) << "Index";
+    BOOST_LOG_TRIVIAL(info) << "/index";
 
     return req->create_response(restinio::status_ok())
         .set_body(Json::writeString(Rest::getBuilder(), data))
@@ -35,7 +35,7 @@ restinio::request_handling_status_t Rest::handleVersion(restinio::request_handle
     data["app"] = APP_NAME;    
     data["version"] = std::to_string(VERSION_MAJOR) + "." + std::to_string(VERSION_MINOR);    
 
-    BOOST_LOG_TRIVIAL(info) << "Version : " << std::to_string(VERSION_MAJOR) << "." << std::to_string(VERSION_MINOR);
+    BOOST_LOG_TRIVIAL(info) << "/version " << std::to_string(VERSION_MAJOR) << "." << std::to_string(VERSION_MINOR);
 
     return req->create_response(restinio::status_ok())
         .set_body(Json::writeString(Rest::getBuilder(), data))
