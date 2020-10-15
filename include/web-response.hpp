@@ -4,6 +4,7 @@
 #include <http/web-page.hpp>
 #include <http/web-url.hpp>
 #include <html/tag.hpp>
+#include <json/json.h>
 
 #ifndef WEB_RESPONSE
 #define WEB_RESPONSE
@@ -18,7 +19,7 @@ class WebResponse {
         std::vector<HtmlTag*> tagList;
         void printString();
         std::string toString();
-        std::string toJson();
+        Json::Value toJson();
 };
 
 #endif

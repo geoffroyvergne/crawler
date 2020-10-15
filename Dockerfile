@@ -11,13 +11,16 @@ RUN mkdir build
 #RUN conan install --build=missing . -if build/
 RUN conan install . -if build/
 
+#RUN sudo apt-get update -y && sudo apt-get install -y libcurl4
+
 COPY . .
 
 # Compile with cmake
 # -Wno-c++11-narrowing to avoid error with restinio
 # -static to be used with minimalist docker image
-#RUN cmake -DCMAKE_CXX_FLAGS="-Wno-c++11-narrowing -static" . -B build/
-RUN cmake -DCMAKE_CXX_FLAGS="-static" . -B build/
+RUN cmake -DCMAKE_CXX_FLAGS="-pthread -Wno-c++11-narrowing -static" . -B build/
+#RUN cmake -DCMAKE_CXX_FLAGS="-static" . -B build/
+#RUN cmake . -B build/
 RUN cmake --build build/
 
 

@@ -11,3 +11,14 @@ std::string WebPage::toString() {
 
     return result;
 }
+
+Json::Value WebPage::toJson() {
+    Json::Value result;
+
+    result["content"] = std::to_string(WebPage::content.length());
+    result["header"] = std::to_string(WebPage::header.length());
+    result["httpCode"] = WebPage::httpCode;
+    result["contentType"] = WebPage::contentType;
+
+    return result;
+}

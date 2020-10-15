@@ -27,8 +27,14 @@ std::string WebResponse::toString() {
     return result;
 }
 
-std::string WebResponse::toJson() {
-    std::string result;
+Json::Value WebResponse::toJson() {
+    Json::Value result;
+    
+    result["weburl"] = this->webUrl->toJson();
+    result["webpage"] = this->webPage->toJson();
+    for (HtmlTag* tag: this->tagList){        
+        result["tags"].append(tag->toJson());
+    }
 
     return result;
 }

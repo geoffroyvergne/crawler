@@ -11,3 +11,14 @@ std::string HtmlTag::toString() {
 
     return result;
 }
+
+Json::Value HtmlTag::toJson() {
+    Json::Value result;
+
+    if(!HtmlTag::name.empty()) result["name"] = HtmlTag::name;
+    if(!HtmlTag::content.empty()) result["content"] = HtmlTag::content;
+    if(!HtmlTag::src.empty()) result["src"] = HtmlTag::src;
+    if(!HtmlTag::href.empty()) result["href"] = HtmlTag::href;
+
+    return result;
+}

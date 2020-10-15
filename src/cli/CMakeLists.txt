@@ -4,6 +4,10 @@ set(LIB_COMMON common)
 # Add specific compilation options
 add_compile_options(-fvisibility=hidden -fvisibility-inlines-hidden)
 
+# Add conan dependencies
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
+
 add_executable(${BINARY} ${SOURCES_CLI})
 #add_library(${LIB} STATIC ${SOURCES_CLI})
 

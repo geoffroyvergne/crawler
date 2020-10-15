@@ -1,4 +1,5 @@
 #include <iostream>
+#include <json/json.h>
 
 #ifndef TAG
 #define TAG
@@ -14,6 +15,7 @@ class HtmlTag {
         std::string src;
         std::string href;
         std::string toString();
+        Json::Value toJson();
 };
 
 #endif 

@@ -10,3 +10,13 @@ std::string WebUrl::toString() {
 
     return result;
 }
+
+Json::Value WebUrl::toJson() {
+    Json::Value result;
+
+    result["url"] = WebUrl::url;
+    result["host"] = WebUrl::host;
+    result["path"] = WebUrl::path;
+
+    return result;
+}

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <json/json.h>
 
 #ifndef WEB_PAGE
 #define WEB_PAGE
@@ -16,6 +17,7 @@ class WebPage {
         int httpCode;
         double elapsed;
         std::string toString();
+        Json::Value toJson();
 };
 
 #endif 

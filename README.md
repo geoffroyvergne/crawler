@@ -43,7 +43,7 @@ cmake . -B build/
 cmake --build build/
 ```
 
-### Docker
+### Docker build
 
 ```
 docker build . -t crawler
@@ -57,11 +57,11 @@ docker run -ti --rm conanio/clang9-x86 bash
 ### Docker server mode
 
 ```
-docker run -p 3000:3000 --name crawler -ti --rm crawler -d
+docker run -p 3000:3000 --name crawler -ti --rm crawler_rest
 curl localhost:3000/version
 ```
 
-## Test
+## Unit Tests
 
 ```
 ./build/bin/crawler_test
@@ -70,38 +70,51 @@ curl localhost:3000/version
 ## Run
 
 ```
-./build/bin/crawler_src_bin --help
-crawler version :  1.0
+./build/bin/crawler_cli --help
+crawler Cli mode
+crawler : 1.0
 Allowed options:
-  --help                       Produce help message
-  -v [ --version ]             Get version
-  -d [ --daemon ]              Daemon mode
-  -h [ --host ] arg (=0.0.0.0) Host to listen
-  -p [ --port ] arg (=3000)    Port to listen
-  -c [ --config ] arg          Configuration file name
-  -u [ --url ] arg             URL to parse
+  --help                Produce help message
+  -v [ --version ]      Get version
+  -u [ --url ] arg      URL to parse
 ```
 
 ### Server mode
 
 ```
-./build/bin/crawler -d
-./build/bin/crawler -d -c etc/test.ini
+./build/bin/crawler_rest
+./build/bin/crawler_rest -c etc/test.ini
 
 curl localhost:3000/index
 {"code":200,"value":"Response OK"}
 
 curl localhost:3000/version
 {"code":200,"version":"1.0"}
+
+curl -X POST \
+-H 'Content-Type: application/json' \
+-d '{"url":"http://localhost/simple-test.html"}' \
+localhost:3000/api/url
+
 ```
 ## Web server test
 
 ```
 cd var
-build . -t web-server-test
+docker build . -t web-server-test
 docker run -d  --rm -p 80:80 --name web-server-test web-server-test
 
 ./build/bin/crawler -u http://localhost/test.html
 ./build/bin/crawler -u http://localhost/simple-test.html
 ```
 
+## TODO
+
+- [ ] Escape json content
+- [ ] Test ini conf file
+- [ ] Add option for json pretty print
+- [ ] Add more unit tests
+- [ ] Filter html fields to parse
+- [ ] Add tag filter in cli and ini
+- [ ] Add Variable env in config
+- [ ] 

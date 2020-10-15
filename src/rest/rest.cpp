@@ -7,12 +7,32 @@
 #include <rest.hpp>
 #include <app.h>
 
+#include <http/http-client.hpp>
+#include <html/parser.hpp>
+#include <web-response.hpp>
+
 Json::StreamWriterBuilder Rest::getBuilder() {
     Json::StreamWriterBuilder builder;
     builder["commentStyle"] = "None";
     builder["indentation"] = "";
 
     return builder;
+}
+
+Json::Value parseBody(std::string body) {
+    const auto bodyLength = static_cast<int>(body.length());
+
+    JSONCPP_STRING err;
+    Json::Value root;
+
+    Json::CharReaderBuilder builder;
+    const std::unique_ptr<Json::CharReader> reader(builder.newCharReader());
+
+    if (!reader->parse(body.c_str(), body.c_str() + bodyLength, &root, &err)) {        
+        BOOST_LOG_TRIVIAL(error) << "error json body parsing : " << err;
+    }
+
+    return root;
 }
 
 restinio::request_handling_status_t Rest::handleIndex(restinio::request_handle_t& req, restinio::router::route_params_t& params) {
@@ -43,6 +63,42 @@ restinio::request_handling_status_t Rest::handleVersion(restinio::request_handle
         .done();
 }
 
+restinio::request_handling_status_t Rest::handleUrl(restinio::request_handle_t& req, restinio::router::route_params_t& params) {
+
+    std::string body = req->body();
+    Json::Value root = parseBody(body);
+
+    if(root.empty() || root["url"].empty()) {
+        return req->create_response(restinio::status_bad_request()).done();
+    }
+
+    const std::string url = root["url"].asString();
+
+    BOOST_LOG_TRIVIAL(info) << "/url " << url;
+
+    // HTTP GET on url
+    HttpClient *httpClient = new HttpClient(url);
+
+    //Parse HTML content
+    HtmlParser *htmlParser = new HtmlParser(httpClient->getWebPage()->content);
+
+    WebResponse *webResponse = new WebResponse(
+        httpClient->getWebUrl(),
+        httpClient->getWebPage(),
+        htmlParser->getTagList()
+    );
+
+    std::cout << webResponse->toString();
+
+    // Transform result to JSON
+    Json::Value data = webResponse->toJson();
+
+    return req->create_response(restinio::status_ok())
+    .set_body(Json::writeString(Rest::getBuilder(), data))
+    .append_header(restinio::http_field::content_type, "application/json")
+    .done();
+}
+
 int Rest::connect(std::string address, int port) {
     try {
         std::unique_ptr<restinio::router::express_router_t<>> router = std::make_unique<restinio::router::express_router_t<>>();
@@ -53,6 +109,10 @@ int Rest::connect(std::string address, int port) {
 
         router->http_get(R"(/version)", [](auto req, auto params) {
             return Rest::handleVersion(req, params);            
+        });
+
+        router->http_post(R"(/url)", [](auto req, auto params) {
+            return Rest::handleUrl(req, params);            
         });
 
         router->non_matched_request_handler([](auto req){

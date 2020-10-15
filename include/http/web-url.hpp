@@ -1,4 +1,5 @@
 #include <iostream>
+#include <json/json.h>
 
 #ifndef WEB_URL
 #define WEB_URL
@@ -15,6 +16,7 @@ class WebUrl {
         std::string sheme;
         std::string fragment;
         std::string toString();
+        Json::Value toJson();
 };
 
 #endif
