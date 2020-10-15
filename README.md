@@ -5,6 +5,8 @@ C++ web crawler
 ## Dependencies lib
 
 ## conan
+
+```
 boost/1.74.0
 gtest/1.10.0
 restinio/0.6.10
@@ -12,6 +14,7 @@ jsoncpp/1.9.4
 
 gumbo-parser/0.10.1
 libcurl/7.72.0
+```
 
 ### FetchContent
 gumbo-parser
@@ -48,7 +51,7 @@ cmake --build build/
 ```
 docker build . -t crawler
 docker build -f Dockerfile -t crawler .
-docker run --rm --name crawler hrawler --help
+docker run --rm --name crawler crawler --help
 
 run -ti --rm crawler sh
 docker run -ti --rm conanio/clang9-x86 bash
@@ -57,7 +60,7 @@ docker run -ti --rm conanio/clang9-x86 bash
 ### Docker server mode
 
 ```
-docker run -p 3000:3000 --name crawler -ti --rm crawler_rest
+docker run -p 3000:3000 --name crawler -ti --rm crawler
 curl localhost:3000/version
 ```
 
@@ -117,4 +120,6 @@ docker run -d  --rm -p 80:80 --name web-server-test web-server-test
 - [ ] Filter html fields to parse
 - [ ] Add tag filter in cli and ini
 - [ ] Add Variable env in config
+- [ ] Add host before relative uri
+- [ ] Add A title rel and IMG width height il post body url endpoint
 - [ ] 
