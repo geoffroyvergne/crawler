@@ -25,11 +25,13 @@ RUN cmake -DCMAKE_CXX_FLAGS="-pthread -Wno-c++11-narrowing" . -B build/
 RUN cmake --build build/
 
 
-FROM ubuntu
-#FROM alpine
+#FROM ubuntu
+FROM alpine
 #FROM scratch
 
-COPY --from=build /home/conan/build/src/bin/crawler_rest ./
-COPY --from=build /home/conan/build/src/bin/crawler_cli ./
+RUN apk update && apk add --no-cache musl-dev
+
+COPY --from=build /home/conan/build/src/bin/crawler_rest /usr/local/bin
+COPY --from=build /home/conan/build/src/bin/crawler_cli /usr/local/bin
 
 #ENTRYPOINT ["./crawler_rest"]

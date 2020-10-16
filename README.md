@@ -51,7 +51,7 @@ cmake --build build/
 ```
 docker build . -t crawler
 docker build -f Dockerfile -t crawler .
-docker run --rm --name crawler crawler --help
+docker run crawler_cli --help
 
 run -ti --rm crawler sh
 docker run -ti --rm conanio/clang9-x86 bash
@@ -60,8 +60,14 @@ docker run -ti --rm conanio/clang9-x86 bash
 ### Docker server mode
 
 ```
-docker run -p 3000:3000 --name crawler -ti --rm crawler
+docker run -p 3000:3000 --name crawler --rm crawler crawler_rest
 curl localhost:3000/version
+```
+
+### Docker cli mode
+
+```
+rawler % docker run -ti --rm crawler crawler_cli --help
 ```
 
 ## Unit Tests
@@ -122,4 +128,5 @@ docker run -d  --rm -p 80:80 --name web-server-test web-server-test
 - [ ] Add Variable env in config
 - [ ] Add host before relative uri
 - [ ] Add A title rel and IMG width height il post body url endpoint
+- [ ] Use with docker minimal image (static build)
 - [ ] 
