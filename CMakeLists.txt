@@ -10,6 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 #-Wc++11-narrowing
 #add_definitions("-Wc++11-narrowing")
+add_definitions("-std=c++11")
 
 # group common lib file list to compile
 file(GLOB_RECURSE SOURCES_COMMON LIST_DIRECTORIES true src/common/*.cpp)

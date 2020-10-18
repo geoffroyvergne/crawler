@@ -4,6 +4,7 @@
 #include <boost/regex.hpp>
 //#include <boost/asio.hpp>
 #include <boost/algorithm/string.hpp>
+#include <boost/log/trivial.hpp>
 
 std::string HttpClient::make_string(boost::asio::streambuf& streambuf) {
     return {
@@ -61,6 +62,8 @@ WebUrl* HttpClient::parseUrl() {
         webUrl->path        = std::string(what[4].first, what[4].second);
         webUrl->query       = std::string(what[5].first, what[5].second);
         webUrl->fragment    = std::string(what[6].first, what[6].second);
+
+        if(webUrl->path.empty()) webUrl->path = "/";
     }    
 
     return webUrl;
@@ -105,7 +108,10 @@ WebPage* HttpClient::httpGet() {
         boost::asio::streambuf request;
         std::ostream request_stream(&request);
         request_stream << "GET " << this->webUrl->path << " HTTP/1.0\r\n";
-        request_stream << "Host: " << this->webUrl->host << "\r\n";
+        
+        //request_stream << "Host: " << this->webUrl->host << "\r\n";
+        request_stream << "Host: " + this->webUrl->host + "\r\n\r\n";
+
         request_stream << "Accept: */*\r\n";
         request_stream << "Connection: close\r\n\r\n";
 
@@ -131,8 +137,8 @@ WebPage* HttpClient::httpGet() {
         std::getline(response_stream, status_message);
 
         if (!response_stream || httpVersion.substr(0, 5) != "HTTP/") {
-            std::cout << "Invalid response\n";
-            exit(EXIT_FAILURE);
+            BOOST_LOG_TRIVIAL(error) << "Invalid response";
+            return webPage;
         }     
 
         // Read the response headers, which are terminated by a blank line.
@@ -171,8 +177,9 @@ WebPage* HttpClient::httpGet() {
 
         webPage->content = content;
 
-    } catch (std::exception& e) {
-        std::cout << "Exception: " << e.what() << "\n";
+    } catch (std::exception& e) {        
+        BOOST_LOG_TRIVIAL(error) << "Exception: " << e.what();
+        return webPage;
     }
 
     return webPage;

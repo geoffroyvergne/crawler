@@ -4,8 +4,8 @@
 #export CC=/usr/bin/clang-9
 #export CXX=/usr/bin/clang++-9
 
-#export CC=/usr/local/bin/clang10
-#export CXX=/usr/local/bin/clang++10
+#export CC=/usr/local/bin/clang90
+#export CXX=/usr/local/bin/clang++90
 
 rm -Rf build/
 

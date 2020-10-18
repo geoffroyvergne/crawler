@@ -12,13 +12,13 @@ std::string HtmlTag::toString() {
     return result;
 }
 
-Json::Value HtmlTag::toJson() {
-    Json::Value result;
+boost::property_tree::ptree HtmlTag::toJson() {    
+    boost::property_tree::ptree result;
 
-    if(!HtmlTag::name.empty()) result["name"] = HtmlTag::name;
-    if(!HtmlTag::content.empty()) result["content"] = HtmlTag::content;
-    if(!HtmlTag::src.empty()) result["src"] = HtmlTag::src;
-    if(!HtmlTag::href.empty()) result["href"] = HtmlTag::href;
+    if(!HtmlTag::name.empty()) result.put("name", HtmlTag::name);
+    if(!HtmlTag::content.empty()) result.put("content", HtmlTag::content);
+    if(!HtmlTag::src.empty()) result.put("src", HtmlTag::src);
+    if(!HtmlTag::href.empty()) result.put("href", HtmlTag::href);
 
     return result;
 }

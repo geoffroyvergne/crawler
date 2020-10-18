@@ -1,8 +1,5 @@
 #include <iostream>
 #include <boost/asio.hpp>
-//#include <boost/algorithm/string.hpp>
-//#include <curl/curl.h>
-//#include <map>
 
 #include <http/web-page.hpp>
 #include <http/web-url.hpp>

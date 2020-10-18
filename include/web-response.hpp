@@ -4,7 +4,9 @@
 #include <http/web-page.hpp>
 #include <http/web-url.hpp>
 #include <html/tag.hpp>
-#include <json/json.h>
+
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
 
 #ifndef WEB_RESPONSE
 #define WEB_RESPONSE
@@ -19,7 +21,7 @@ class WebResponse {
         std::vector<HtmlTag*> tagList;
         void printString();
         std::string toString();
-        Json::Value toJson();
+        boost::property_tree::ptree toJson();
 };
 
 #endif

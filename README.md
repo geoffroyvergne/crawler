@@ -51,7 +51,7 @@ cmake --build build/
 ```
 docker build . -t crawler
 docker build -f Dockerfile -t crawler .
-docker run crawler_cli --help
+docker run crawler crawler_cli --help
 
 run -ti --rm crawler sh
 docker run -ti --rm conanio/clang9-x86 bash
@@ -103,7 +103,7 @@ curl localhost:3000/version
 curl -X POST \
 -H 'Content-Type: application/json' \
 -d '{"url":"http://localhost/simple-test.html"}' \
-localhost:3000/api/url
+localhost:3000/url
 
 ```
 ## Web server test
@@ -129,4 +129,5 @@ docker run -d  --rm -p 80:80 --name web-server-test web-server-test
 - [ ] Add host before relative uri
 - [ ] Add A title rel and IMG width height il post body url endpoint
 - [ ] Use with docker minimal image (static build)
+- [ ] Add end slash on url if path is empty
 - [ ] 

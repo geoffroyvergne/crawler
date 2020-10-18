@@ -1,5 +1,7 @@
 #include <iostream>
-#include <json/json.h>
+
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
 
 #ifndef WEB_URL
 #define WEB_URL
@@ -16,7 +18,7 @@ class WebUrl {
         std::string sheme;
         std::string fragment;
         std::string toString();
-        Json::Value toJson();
+        boost::property_tree::ptree toJson();
 };
 
 #endif

@@ -8,23 +8,6 @@
 #include <rest.hpp>
 #include <config-mgr.hpp>
 
-//#include <http/http-client.hpp>
-//#include <html/parser.hpp>
-//#include <web-response.hpp>
-
-/*WebResponse* getWebResponse(std::string url) {
-    HttpClient *httpClient = new HttpClient(url);
-    HtmlParser *htmlParser = new HtmlParser(httpClient->getWebPage()->content);
-
-    WebResponse *webResponse = new WebResponse(
-            httpClient->getWebUrl(),
-            httpClient->getWebPage(),
-            htmlParser->getTagList()
-        );
-
-    return webResponse;
-}*/
-
 int main(int argc, char** argv) {
     BOOST_LOG_TRIVIAL(info) << "Starting " << APP_NAME;
 

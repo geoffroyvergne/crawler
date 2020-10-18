@@ -27,14 +27,18 @@ std::string WebResponse::toString() {
     return result;
 }
 
-Json::Value WebResponse::toJson() {
-    Json::Value result;
+boost::property_tree::ptree WebResponse::toJson() {
+    boost::property_tree::ptree result;
     
-    result["weburl"] = this->webUrl->toJson();
-    result["webpage"] = this->webPage->toJson();
-    for (HtmlTag* tag: this->tagList){        
-        result["tags"].append(tag->toJson());
+    result.add_child("weburl", this->webUrl->toJson());
+    result.add_child("webpage", this->webPage->toJson());
+
+    boost::property_tree::ptree jsonTagList;
+    for (HtmlTag* tag: this->tagList){         
+        jsonTagList.push_back(std::make_pair("", tag->toJson()));
     }
+
+    result.add_child("tags", jsonTagList);
 
     return result;
 }

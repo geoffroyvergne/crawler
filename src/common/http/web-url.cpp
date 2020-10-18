@@ -11,12 +11,12 @@ std::string WebUrl::toString() {
     return result;
 }
 
-Json::Value WebUrl::toJson() {
-    Json::Value result;
+boost::property_tree::ptree WebUrl::toJson() {    
+    boost::property_tree::ptree result;
 
-    result["url"] = WebUrl::url;
-    result["host"] = WebUrl::host;
-    result["path"] = WebUrl::path;
+    result.put("url", WebUrl::url);
+    result.put("host", WebUrl::host);
+    result.put("path", WebUrl::path);
 
     return result;
 }

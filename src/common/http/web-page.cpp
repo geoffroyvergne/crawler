@@ -12,13 +12,13 @@ std::string WebPage::toString() {
     return result;
 }
 
-Json::Value WebPage::toJson() {
-    Json::Value result;
+boost::property_tree::ptree WebPage::toJson() {
+    boost::property_tree::ptree result;
 
-    result["content"] = std::to_string(WebPage::content.length());
-    result["header"] = std::to_string(WebPage::header.length());
-    result["httpCode"] = WebPage::httpCode;
-    result["contentType"] = WebPage::contentType;
+    result.put("content", std::to_string(WebPage::content.length()));
+    result.put("header", std::to_string(WebPage::header.length()));
+    result.put("httpCode", WebPage::httpCode);
+    result.put("contentType", WebPage::contentType);
 
     return result;
 }
