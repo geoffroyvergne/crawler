@@ -1,22 +1,22 @@
-#include "gtest/gtest.h"
 #include <iostream>
+#include <boost/test/unit_test.hpp>
 
 #include <http/http-client.hpp>
 
-TEST(http, base) {
-    //std::cout << "module_name2 test_name2" << std::endl;
-    // Google Test will also provide macros for assertions.
+BOOST_AUTO_TEST_SUITE( http )
 
-    ASSERT_EQ(1+1, 2);
+BOOST_AUTO_TEST_CASE(base) {
+    BOOST_CHECK(2+2 == 4);
 }
 
-TEST(http, webUrl) {    
-    HttpClient *httpClient = new HttpClient("https://www.google.fr");
+BOOST_AUTO_TEST_CASE(webUrl) {
+    HttpClient *httpClient = new HttpClient("https://www.google.fr/");
     WebUrl* webUrl = httpClient->parseUrl();
 
-    //std::cout << webUrl->toString() << std::endl;
-
-    ASSERT_EQ(webUrl->url, "https://www.google.fr");
-    ASSERT_EQ(webUrl->host, "www.google.fr");
-    ASSERT_EQ(webUrl->path, "/");
+    BOOST_CHECK(webUrl->sheme == "https");
+    BOOST_CHECK(webUrl->url == "https://www.google.fr/");
+    BOOST_CHECK(webUrl->host == "www.google.fr");
+    BOOST_CHECK(webUrl->path == "/");
 }
+
+BOOST_AUTO_TEST_SUITE_END()

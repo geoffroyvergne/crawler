@@ -1,8 +1,4 @@
-#include "gtest/gtest.h"
-#include <iostream>
-
-int main(int argc, char **argv) {
-  //std::cout << "Google Test" << std::endl;
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
-}
+#define BOOST_TEST_DYN_LINK
+#define BOOST_TEST_MODULE Main Test Suite
+//#include <boost/test/unit_test.hpp>
+#include <boost/test/included/unit_test.hpp>

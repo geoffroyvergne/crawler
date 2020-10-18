@@ -1,3 +1,6 @@
+
+add_compile_options(-fvisibility=hidden -fvisibility-inlines-hidden)
+
 # [STATIC | SHARED | MODULE]
 add_library(common STATIC ${SOURCES_COMMON})
 

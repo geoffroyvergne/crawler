@@ -1,46 +1,44 @@
 #include <iostream>
 #include <vector>
-#include "gtest/gtest.h"
+#include <boost/test/unit_test.hpp>
 #include <html/parser.hpp>
 #include <html/tag.hpp>
 
-TEST(html, base) {
-    //std::cout << "module_name2 test_name2" << std::endl;
-    // Google Test will also provide macros for assertions.
+BOOST_AUTO_TEST_SUITE( html )
 
-    ASSERT_EQ(1+1, 2);
+BOOST_AUTO_TEST_CASE(base) {
+    BOOST_CHECK(2+2 == 4);
 }
 
-TEST(html, tempTest) {
-    //std::cout << "module_name3 test_name3" << std::endl;
-    // Google Test will also provide macros for assertions.
-
-    ASSERT_EQ(HtmlParser::tempTest(), 2);
+BOOST_AUTO_TEST_CASE(tempTest) {
+    BOOST_CHECK(HtmlParser::tempTest() == 2);
 }
 
-TEST(html, html_title_test) {    
+BOOST_AUTO_TEST_CASE(html_title_test) {
     std::string content = "<title>test</title>";
     HtmlParser *htmlParser = new HtmlParser(content);
 
     std::vector<HtmlTag*> tagList = htmlParser->getTagList();
     HtmlTag* tag = *(tagList.begin());
 
-    ASSERT_EQ(tag->name, "title");
-    ASSERT_EQ(tag->content, "test");
+    BOOST_CHECK(tag->name == "title");
+    BOOST_CHECK(tag->content == "test");
 
     free(htmlParser);
 }
 
-TEST(html, html_a_href_test) {  
+BOOST_AUTO_TEST_CASE(html_a_href_test) {
     std::string content = "<a href=\"test\">test</a>";
     HtmlParser *htmlParser = new HtmlParser(content);
 
     std::vector<HtmlTag*> tagList = htmlParser->getTagList();
     HtmlTag* tag = *(tagList.begin());
 
-    ASSERT_EQ(tag->name, "a");
-    ASSERT_EQ(tag->content, "test");
-    ASSERT_EQ(tag->href, "test");
+    BOOST_CHECK(tag->name == "a");
+    BOOST_CHECK(tag->content == "test");
+    BOOST_CHECK(tag->href == "test");
 
     free(htmlParser);
 }
+
+BOOST_AUTO_TEST_SUITE_END()

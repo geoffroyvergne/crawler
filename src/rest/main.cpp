@@ -8,9 +8,9 @@
 #include <rest.hpp>
 #include <config-mgr.hpp>
 
-#include <http/http-client.hpp>
-#include <html/parser.hpp>
-#include <web-response.hpp>
+//#include <http/http-client.hpp>
+//#include <html/parser.hpp>
+//#include <web-response.hpp>
 
 /*WebResponse* getWebResponse(std::string url) {
     HttpClient *httpClient = new HttpClient(url);

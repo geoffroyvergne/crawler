@@ -1,8 +1,5 @@
 #include <iostream>
-#include <boost/asio.hpp>
-//#include <boost/algorithm/string.hpp>
-//#include <curl/curl.h>
-//#include <map>
+#include <curl/curl.h>
 
 #include <http/web-page.hpp>
 #include <http/web-url.hpp>
@@ -10,6 +7,7 @@
 #ifndef HTTP_CLIENT
 #define HTTP_CLIENT
 
+//#pragma once
 class HttpClient {
     public:
         //HttpClient();
@@ -23,11 +21,10 @@ class HttpClient {
         void getResults();
     private:        
         std::string url;
+        static void fail(CURLU *curlu);
         static size_t writefunc(void *ptr, size_t size, size_t nmemb, std::string *s);        
         WebUrl* webUrl;
         WebPage* webPage;
-        std::string make_string(boost::asio::streambuf& streambuf);
-        std::vector<std::string> extractHeader(std::string header);
 };
 
 #endif

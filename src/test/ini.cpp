@@ -1,9 +1,9 @@
-#include "gtest/gtest.h"
-#include <iostream>
+#include <boost/test/unit_test.hpp>
 
-TEST(ini, base) {
-    //std::cout << "module_name2 test_name2" << std::endl;
-    // Google Test will also provide macros for assertions.
-    ASSERT_EQ(1+1, 2);
+BOOST_AUTO_TEST_SUITE( ini )
+
+BOOST_AUTO_TEST_CASE(base) {
+    BOOST_CHECK(2+2 == 4);
 }
 
+BOOST_AUTO_TEST_SUITE_END()

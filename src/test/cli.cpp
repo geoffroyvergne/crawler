@@ -1,21 +1,13 @@
-#include "gtest/gtest.h"
-#include <iostream>
-//#include <app.h>
-//#include <cli.hpp>
+#include <boost/test/unit_test.hpp>
 
-TEST(cli, base) {
-    //std::cout << "module_name1 test_name1" << std::endl;
-    // Google Test will also provide macros for assertions.
-    ASSERT_EQ(1+1, 2);
+BOOST_AUTO_TEST_SUITE( cli )
+
+BOOST_AUTO_TEST_CASE(base) {
+    BOOST_CHECK(2+2 == 4);
 }
 
-
-TEST(cli, version) {
-    /*int argc = 2;
-    char* array[] = {"crawler", "--version"};
-    char** argv = array;
-    
-    Cli *cli = new Cli(argc, argv);*/
-
-    //Cli *cli = new Cli();
+BOOST_AUTO_TEST_CASE(version) {
+    BOOST_CHECK(true);
 }
+
+BOOST_AUTO_TEST_SUITE_END()

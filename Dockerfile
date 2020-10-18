@@ -19,8 +19,8 @@ COPY . .
 # -Wno-c++11-narrowing to avoid error with restinio
 # -static to be used with minimalist docker image
 # -DCMAKE_EXE_LINKER_FLAGS=
-RUN cmake -DCMAKE_CXX_FLAGS="-pthread -Wno-c++11-narrowing" . -B build/
-#RUN cmake -DCMAKE_CXX_FLAGS="-static" . -B build/
+#RUN cmake -DCMAKE_CXX_FLAGS="-pthread -Wno-c++11-narrowing" . -B build/
+RUN cmake -DCMAKE_CXX_FLAGS="-pthread -static" . -B build/
 #RUN cmake . -B build/
 RUN cmake --build build/
 
@@ -29,7 +29,7 @@ RUN cmake --build build/
 FROM alpine
 #FROM scratch
 
-RUN apk update && apk add --no-cache musl-dev
+#RUN apk update && apk add --no-cache musl-dev
 
 COPY --from=build /home/conan/build/src/bin/crawler_rest /usr/local/bin
 COPY --from=build /home/conan/build/src/bin/crawler_cli /usr/local/bin

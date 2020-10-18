@@ -67,19 +67,19 @@ curl localhost:3000/version
 ### Docker cli mode
 
 ```
-rawler % docker run -ti --rm crawler crawler_cli --help
+docker run -ti --rm crawler crawler_cli --help
 ```
 
 ## Unit Tests
 
 ```
-./build/bin/crawler_test
+./build/src/bin/crawler_test --log_level=all
 ```
 
 ## Run
 
 ```
-./build/bin/crawler_cli --help
+./build/src/bin/crawler_cli --help
 crawler Cli mode
 crawler : 1.0
 Allowed options:
