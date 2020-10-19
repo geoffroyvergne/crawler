@@ -1,5 +1,5 @@
 #include <iostream>
-#include <boost/asio.hpp>
+//#include <boost/asio.hpp>
 
 #include <http/web-page.hpp>
 #include <http/web-url.hpp>
@@ -23,8 +23,8 @@ class HttpClient {
         static size_t writefunc(void *ptr, size_t size, size_t nmemb, std::string *s);        
         WebUrl* webUrl;
         WebPage* webPage;
-        std::string make_string(boost::asio::streambuf& streambuf);
-        std::vector<std::string> extractHeader(std::string header);
+        //std::string make_string(boost::asio::streambuf& streambuf);
+        //std::vector<std::string> extractHeader(std::string header);
 };
 
 #endif

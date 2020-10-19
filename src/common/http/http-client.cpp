@@ -6,12 +6,18 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/log/trivial.hpp>
 
-std::string HttpClient::make_string(boost::asio::streambuf& streambuf) {
+#include <boost/beast/core.hpp>
+#include <boost/beast/http.hpp>
+#include <boost/beast/version.hpp>
+#include <boost/asio/connect.hpp>
+#include <boost/asio/ip/tcp.hpp>
+
+/*std::string HttpClient::make_string(boost::asio::streambuf& streambuf) {
     return {
         boost::asio::buffers_begin(streambuf.data()), 
         boost::asio::buffers_end(streambuf.data())
     };
-}
+}*/
 
 WebUrl* HttpClient::getWebUrl() {
     return this->webUrl;
@@ -57,6 +63,9 @@ WebUrl* HttpClient::parseUrl() {
 
         if(!port.empty()) {
             webUrl->port        = std::stoi(port.c_str());
+        } else {
+            if(webUrl->sheme == "http") webUrl->port = 80;
+            if(webUrl->sheme == "https") webUrl->port = 443;
         }
 
         webUrl->path        = std::string(what[4].first, what[4].second);
@@ -69,7 +78,7 @@ WebUrl* HttpClient::parseUrl() {
     return webUrl;
 }
 
-std::vector<std::string> HttpClient::extractHeader(std::string header) {
+/*std::vector<std::string> HttpClient::extractHeader(std::string header) {
     std::vector<std::string> results;
     boost::split(results, header, boost::is_any_of(":"));
     
@@ -80,105 +89,71 @@ std::vector<std::string> HttpClient::extractHeader(std::string header) {
     boost::algorithm::to_lower(results.at(1));
 
     return results;
-}
+}*/
 
 WebPage* HttpClient::httpGet() {
     WebPage* webPage = new WebPage();
     webPage->url = this->url;
 
+    int version = 10;
+
     try {
-        std::string httpVersion;
-        std::string content;
-        int statusCode;
+        // The io_context is required for all I/O
+        boost::asio::io_context ioc;
 
-        boost::asio::io_service io_service;
+        // These objects perform our I/O
+        boost::asio::ip::tcp::resolver resolver(ioc);
+        boost::beast::tcp_stream stream(ioc);
 
-        // Get a list of endpoints corresponding to the server name.
-        boost::asio::ip::tcp::resolver resolver(io_service);
-        boost::asio::ip::tcp::resolver::query query(this->webUrl->host, this->webUrl->sheme);
-        boost::asio::ip::tcp::resolver::iterator endpoint_iterator = resolver.resolve(query);
+        // Look up the domain name
+        auto const results = resolver.resolve(this->webUrl->host, std::to_string(this->webUrl->port));
 
-        // Try each endpoint until we successfully establish a connection.
-        boost::asio::ip::tcp::socket socket(io_service);
-        boost::asio::connect(socket, endpoint_iterator);
+        // Make the connection on the IP address we get from a lookup
+        stream.connect(results);
 
-        // Form the request. We specify the "Connection: close" header so that the
-        // server will close the socket after transmitting the response. This will
-        // allow us to treat all data up until the EOF as the content.
-        boost::asio::streambuf request;
-        std::ostream request_stream(&request);
-        request_stream << "GET " << this->webUrl->path << " HTTP/1.0\r\n";
-        
-        //request_stream << "Host: " << this->webUrl->host << "\r\n";
-        request_stream << "Host: " + this->webUrl->host + "\r\n\r\n";
+        // Set up an HTTP GET request message
+        boost::beast::http::request<boost::beast::http::string_body> req{boost::beast::http::verb::get, this->webUrl->path, version};
+        req.set(boost::beast::http::field::host, this->webUrl->host);
+        req.set(boost::beast::http::field::user_agent, BOOST_BEAST_VERSION_STRING);
 
-        request_stream << "Accept: */*\r\n";
-        request_stream << "Connection: close\r\n\r\n";
+        // Send the HTTP request to the remote host
+        boost::beast::http::write(stream, req);
 
-        // Send the request.
-        boost::asio::write(socket, request);
+        // This buffer is used for reading and must be persisted
+        boost::beast::flat_buffer buffer;
 
-        // Read the response status line. The response streambuf will automatically
-        // grow to accommodate the entire line. The growth may be limited by passing
-        // a maximum size to the streambuf constructor.
-        boost::asio::streambuf response;
-        boost::asio::read_until(socket, response, "\r\n");
+        // Declare a container to hold the response
+        boost::beast::http::response<boost::beast::http::dynamic_body> res;
 
-        // Check that response is OK.
-        std::istream response_stream(&response);
+        // Receive the HTTP response
+        boost::beast::http::read(stream, buffer, res);
 
-        response_stream >> httpVersion;
-        
-        response_stream >> statusCode;
+        // Write the message to standard out
+        //std::cout << res << std::endl;
 
-        webPage->httpCode = statusCode;
+        //std::cout << res.result_int() << std::endl;
+        //std::cout << res.result() << std::endl;
+        //std::cout << res.reason() << std::endl;
 
-        std::string status_message;
-        std::getline(response_stream, status_message);
+        //std::cout << boost::beast::buffers_to_string(res.body().data()) << std::endl;
 
-        if (!response_stream || httpVersion.substr(0, 5) != "HTTP/") {
-            BOOST_LOG_TRIVIAL(error) << "Invalid response";
-            return webPage;
-        }     
+        webPage->httpCode = res.result_int();
+        webPage->content = boost::beast::buffers_to_string(res.body().data());
 
-        // Read the response headers, which are terminated by a blank line.
-        boost::asio::read_until(socket, response, "\r\n\r\n");
-
-        // Process the response headers.
-        
-        std::map<std::string, std::string> headerMap;
-        std::string header;
-        while (std::getline(response_stream, header) && header != "\r") {
-            //std::cout << header << "\n";
-            //headerList.push_back(header);
-
-            std::vector<std::string> results = this->extractHeader(header);
-            headerMap[results.at(0)] = results.at(1);
-        }   
-
-        webPage->contentType = headerMap.at("content-type");
-
-        // Write whatever content we already have to output.
-        if (response.size() > 0) {            
-            content.append(this->make_string(response));
+        for (auto& h : res.base()) {
+            std::cout << "name: " << h.name() << ", name_string: " << h.name_string() << ", value: " << h.value() << "\n";
         }
 
-        // Read until EOF, writing data to output as we go.
-        boost::system::error_code error;
-        while (boost::asio::read(socket, response, boost::asio::transfer_at_least(1), error)) {            
-            content.append(this->make_string(response));
+        // Gracefully close the socket
+        boost::beast::error_code ec;
+        stream.socket().shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
+
+        if(ec && ec != boost::beast::errc::not_connected) {
+            throw boost::beast::system_error{ec};
         }
 
-        if (error != boost::asio::error::eof) {
-            throw boost::system::system_error(error);
-        }
-
-        //std::cout << "content : " << content << std::endl;
-
-        webPage->content = content;
-
-    } catch (std::exception& e) {        
-        BOOST_LOG_TRIVIAL(error) << "Exception: " << e.what();
+    } catch(std::exception const& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
         return webPage;
     }
 
