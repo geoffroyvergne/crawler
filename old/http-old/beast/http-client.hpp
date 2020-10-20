@@ -1,5 +1,4 @@
 #include <iostream>
-#include <curl/curl.h>
 
 #include <http/web-page.hpp>
 #include <http/web-url.hpp>
@@ -7,7 +6,6 @@
 #ifndef HTTP_CLIENT
 #define HTTP_CLIENT
 
-//#pragma once
 class HttpClient {
     public:
         //HttpClient();
@@ -21,10 +19,9 @@ class HttpClient {
         void getResults();
     private:        
         std::string url;
-        static void fail(CURLU *curlu);
         static size_t writefunc(void *ptr, size_t size, size_t nmemb, std::string *s);        
         WebUrl* webUrl;
-        WebPage* webPage;
+        WebPage* webPage;        
 };
 
 #endif

@@ -45,18 +45,18 @@ restinio::request_handling_status_t Rest::handleIndex(restinio::request_handle_t
 }
 
 restinio::request_handling_status_t Rest::handleVersion(restinio::request_handle_t& req, restinio::router::route_params_t& params) {    
-    std::stringstream resultJson;
+    //std::stringstream resultJson;
     boost::property_tree::ptree root;
     
     root.put("app", APP_NAME);
     root.put("version", std::to_string(VERSION_MAJOR) + "." + std::to_string(VERSION_MINOR));
 
-    boost::property_tree::write_json(resultJson, root); 
+    //boost::property_tree::write_json(resultJson, root); 
 
     BOOST_LOG_TRIVIAL(info) << "/version " << std::to_string(VERSION_MAJOR) << "." << std::to_string(VERSION_MINOR);
 
     return req->create_response(restinio::status_ok())
-        .set_body(resultJson.str())
+        .set_body(Rest::jsonToString(root))
         .append_header(restinio::http_field::content_type, "application/json")
         .done();
 }
