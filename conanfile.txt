@@ -1,7 +1,9 @@
 [requires]
-boost/1.72.0
-restinio/0.6.10
+#boost/1.72.0
+#boost/1.73.0
+boost/1.74.0
 gumbo-parser/0.10.1
+libcurl/7.72.0
 
 [generators]
 cmake

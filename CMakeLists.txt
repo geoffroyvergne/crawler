@@ -3,14 +3,14 @@ project(crawler VERSION 1.0)
 
 set(APP_NAME crawler)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 #SET(CMAKE_EXE_LINKER_FLAGS "-static")
 
 #-Wc++11-narrowing
 #add_definitions("-Wc++11-narrowing")
-add_definitions("-std=c++11")
+#add_definitions("-std=c++11")
 
 # group common lib file list to compile
 file(GLOB_RECURSE SOURCES_COMMON LIST_DIRECTORIES true src/common/*.cpp)
@@ -37,8 +37,8 @@ include_directories("${PROJECT_BINARY_DIR}/include")
 configure_file(include/app.h.in include/app.h)
 
 # Add conan dependencies
-include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-conan_basic_setup()
+#include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+#conan_basic_setup()
 
 include_directories(include)
 
