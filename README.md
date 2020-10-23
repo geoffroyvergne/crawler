@@ -130,4 +130,5 @@ docker run -d  --rm -p 80:80 --name web-server-test web-server-test
 - [ ] Add A title rel and IMG width height il post body url endpoint
 - [ ] Use with docker minimal image (static build)
 - [ ] Add end slash on url if path is empty
+- [ ] Add Memory Leak checker -Valgrind
 - [ ] 
