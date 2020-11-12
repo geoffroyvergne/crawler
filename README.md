@@ -61,6 +61,8 @@ docker run -ti --rm conanio/clang9-x86 bash
 
 ```
 docker run -p 3000:3000 --name crawler --rm crawler crawler_rest
+docker run -p 3000:3000 --name crawler --rm crawler
+
 curl localhost:3000/version
 ```
 
@@ -68,6 +70,7 @@ curl localhost:3000/version
 
 ```
 docker run -ti --rm crawler crawler_cli --help
+docker run --rm --name crawler crawler crawler_cli --help
 ```
 
 ## Unit Tests
@@ -119,9 +122,9 @@ docker run -d  --rm -p 80:80 --name web-server-test web-server-test
 
 ## TODO
 
-- [ ] Escape json content
-- [ ] Test ini conf file
-- [ ] Add option for json pretty print
+- [ X ] Escape json content
+- [ X ] Test ini conf file
+- [ X ] Add option for json pretty print
 - [ ] Add more unit tests
 - [ ] Filter html fields to parse
 - [ ] Add tag filter in cli and ini
@@ -131,4 +134,6 @@ docker run -d  --rm -p 80:80 --name web-server-test web-server-test
 - [ ] Use with docker minimal image (static build)
 - [ ] Add end slash on url if path is empty
 - [ ] Add Memory Leak checker -Valgrind
+- [ X ] Docker no log because of multi thread
+- [ X ] Docker can't kill ctrl + c
 - [ ] 

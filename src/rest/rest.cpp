@@ -18,10 +18,14 @@
 #include <html/parser.hpp>
 #include <web-response.hpp>
 
+#include <signal.h>
+
 namespace beast = boost::beast;         // from <boost/beast.hpp>
 namespace http = beast::http;           // from <boost/beast/http.hpp>
 namespace net = boost::asio;            // from <boost/asio.hpp>
 using tcp = boost::asio::ip::tcp;       // from <boost/asio/ip/tcp.hpp>
+
+void sig_handler(int signo);
 
 template<class Body, class Allocator, class Send>
 void handle_request(beast::string_view doc_root, http::request<Body, http::basic_fields<Allocator>>&& req, Send&& send) {   
@@ -175,6 +179,10 @@ std::string Rest::jsonToString(boost::property_tree::ptree json) {
 }
 
 int Rest::connect(std::string address, int port) {
+    if (signal(SIGINT, sig_handler) == SIG_ERR) {
+        std::cout << "can't catch SIGINT" << std::endl;
+    } 
+
     try {        
         auto ipAddress = net::ip::make_address(address);
         auto ipPort = static_cast<unsigned short>(port);
@@ -205,4 +213,18 @@ int Rest::connect(std::string address, int port) {
     }
 
     return EXIT_SUCCESS;
+}
+
+void sig_handler(int signo) {
+  if (signo == SIGINT) {
+    //printf("received SIGINT\n");
+    std::cout << "received SIGINT" << std::endl;
+
+    //shutdown(socket_desc, 2);
+    //shutdown(new_socket, 2);
+    //pthread_exit(NULL);
+
+    exit(0);
+    //abort();
+  }
 }

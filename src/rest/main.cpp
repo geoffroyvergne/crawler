@@ -9,6 +9,8 @@
 #include <config-mgr.hpp>
 
 int main(int argc, char** argv) {
+    setbuf(stdout, NULL);  
+
     BOOST_LOG_TRIVIAL(info) << "Starting " << APP_NAME;
 
     // Get command line arguments
