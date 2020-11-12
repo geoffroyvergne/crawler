@@ -42,7 +42,7 @@ configure_file(include/app.h.in include/app.h)
 #conan_basic_setup()
 
 # CURL
-set(CURL_LIBRARY "-lcurl") 
+#set(CURL_LIBRARY "-lcurl") 
 find_package(CURL REQUIRED)
 
 
