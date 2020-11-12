@@ -10,6 +10,6 @@ add_library(common STATIC ${SOURCES_COMMON})
 
 target_include_directories( common INTERFACE ${CMAKE_CURRENT_SOURCE_DIR} )
 
-target_link_libraries(common ${CONAN_LIBS} ${LIB_COMMON})
+target_link_libraries(common ${CONAN_LIBS} ${LIB_COMMON} ${CURL_LIBRARIES} gumbo ${Boost_LIBRARIES})
 
 install(TARGETS common DESTINATION lib)

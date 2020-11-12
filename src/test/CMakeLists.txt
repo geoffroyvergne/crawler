@@ -8,7 +8,7 @@ conan_basic_setup()
 add_executable(${BINARY} ${SOURCES_TEST})
 #add_library(${LIB} STATIC ${SOURCES})
 
-target_link_libraries(${BINARY} ${CONAN_LIBS} ${LIB_COMMON})
+target_link_libraries(${BINARY} ${CONAN_LIBS} ${LIB_COMMON} ${Boost_LIBRARIES})
 
 # Copy binary to build/test
 add_custom_command(TARGET ${BINARY} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${BINARY}> ../bin/${BINARY})

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <gumbo.h>
+#include <gumbo/gumbo.h>
 #include <html/tag.hpp>
 
 #ifndef HTML_PARSER

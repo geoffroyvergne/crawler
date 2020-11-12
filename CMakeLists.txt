@@ -40,7 +40,37 @@ configure_file(include/app.h.in include/app.h)
 #include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 #conan_basic_setup()
 
-include_directories(include)
+# CURL
+set(CURL_LIBRARY "-lcurl") 
+find_package(CURL REQUIRED)
+
+include_directories(${CURL_INCLUDE_DIR} include)
+
+# BOOST
+#set(Boost_USE_STATIC_LIBS OFF) 
+#set(Boost_USE_MULTITHREADED ON)  
+#set(Boost_USE_STATIC_RUNTIME OFF) 
+#find_package(Boost 1.72.0 REQUIRED)
+
+
+#link_directories(${Boost_LIBRARY_DIR})
+# ${Boost_LIBRARIES}
+
+#Gumbo
+include(FetchContent)
+
+set(FETCHCONTENT_QUIET off)
+get_filename_component(fc_base "../fc_base" REALPATH BASE_DIR "${CMAKE_BINARY_DIR}")
+set(FETCHCONTENT_BASE_DIR ${fc_base})
+
+FetchContent_Declare(
+        gumbo
+        GIT_REPOSITORY "https://github.com/geoffroyvergne/gumbo-parser"
+        GIT_TAG "v0.11.0-cmake"
+        #GIT_BRANCH "master"
+)
+
+FetchContent_MakeAvailable(gumbo)
 
 # add common folder as lib
 add_subdirectory(src/common)
