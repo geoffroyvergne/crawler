@@ -22,8 +22,8 @@ COPY . .
 # -static to be used with minimalist docker image
 # -DCMAKE_EXE_LINKER_FLAGS=
 #RUN cmake -DCMAKE_CXX_FLAGS="-pthread -Wno-c++11-narrowing" . -B build/
-#RUN cmake -DCMAKE_CXX_FLAGS="-pthread -static" . -B build/
-RUN cmake . -B build/
+RUN cmake -DCMAKE_CXX_FLAGS="-pthread -static" . -B build/
+#RUN cmake . -B build/
 RUN cmake --build build/
 
 FROM conanio/clang9
@@ -39,7 +39,7 @@ COPY --from=build /home/conan/build/src/bin/crawler_cli /usr/local/bin
 #COPY etc/conf.ini /etc/http-server/conf.ini
 COPY entrypoint.sh /usr/local/bin
 
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh", "/usr/local/bin/crawler_rest"]
+#ENTRYPOINT ["/usr/local/bin/entrypoint.sh", "/usr/local/bin/crawler_rest"]
 #CMD ["-t", "/var/www", "--host", "0.0.0.0"]
 
 #ENTRYPOINT ["/usr/local/bin/crawler_rest"]

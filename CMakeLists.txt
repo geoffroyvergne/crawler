@@ -43,6 +43,7 @@ configure_file(include/app.h.in include/app.h)
 
 # CURL
 #set(CURL_LIBRARY "-lcurl") 
+set(CURL_STATICLIB   ON)
 find_package(CURL REQUIRED)
 
 
