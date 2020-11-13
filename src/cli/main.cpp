@@ -1,5 +1,5 @@
 #include <iostream>
-#include <boost/log/trivial.hpp>
+//#include <boost/log/trivial.hpp>
 #include <boost/program_options.hpp>
 
 #include <app.h>

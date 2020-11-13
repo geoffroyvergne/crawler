@@ -9,7 +9,7 @@
 #include <string>
 #include <thread>
 
-#include <boost/log/trivial.hpp>
+//#include <boost/log/trivial.hpp>
 
 #include <rest.hpp>
 #include <app.h>
@@ -61,7 +61,7 @@ void handle_request(beast::string_view doc_root, http::request<Body, http::basic
         std::string content = "/version " + std::to_string(VERSION_MAJOR) + "." + std::to_string(VERSION_MINOR);
         std::cout << content << std::endl;
 
-        BOOST_LOG_TRIVIAL(info) << content;
+        //BOOST_LOG_TRIVIAL(info) << content;
 
         std::stringstream resultJson;
         boost::property_tree::ptree root;
@@ -86,7 +86,8 @@ void handle_request(beast::string_view doc_root, http::request<Body, http::basic
 
         const std::string url = root.get<std::string>("url");
 
-        BOOST_LOG_TRIVIAL(info) << "/url " << url;
+        //BOOST_LOG_TRIVIAL(info) << "/url " << url;
+        std::cout << "/url " << url << std::endl;
 
         // HTTP GET on url
         HttpClient *httpClient = new HttpClient(url);
@@ -112,7 +113,8 @@ void handle_request(beast::string_view doc_root, http::request<Body, http::basic
 }
 
 void fail(beast::error_code ec, char const* what) {
-    BOOST_LOG_TRIVIAL(error) << ": " << ec.message();
+    //BOOST_LOG_TRIVIAL(error) << ": " << ec.message();
+    std::cerr << ": " << ec.message() << std::endl;
 }
 
 template<class Stream> struct send_lambda {
@@ -206,9 +208,9 @@ int Rest::connect(std::string address, int port) {
             }.detach();
         }
     } catch (const std::exception& e) {
-        //std::cerr << "Error: " << e.what() << std::endl;
+        std::cerr << "Error: " << e.what() << std::endl;
         
-        BOOST_LOG_TRIVIAL(error) << "Error: " << e.what();
+        //BOOST_LOG_TRIVIAL(error) << "Error: " << e.what();
         return EXIT_FAILURE;
     }
 

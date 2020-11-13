@@ -1,6 +1,6 @@
 #include <iostream>
 #include <boost/program_options.hpp>
-#include <boost/log/trivial.hpp>
+//#include <boost/log/trivial.hpp>
 
 #include <app.h>
 #include <cli.hpp>
@@ -30,7 +30,8 @@ Cli::Cli(int argc, char** argv) {
         }
 
         if (variableMap.count("version")) {
-            BOOST_LOG_TRIVIAL(info) << this->getVersion();
+            //BOOST_LOG_TRIVIAL(info) << this->getVersion();
+            std::cout << this->getVersion() << std::endl;
             
             exit(EXIT_SUCCESS);
         }
@@ -39,7 +40,8 @@ Cli::Cli(int argc, char** argv) {
         std::cerr << "error: " << e.what() << std::endl;
         exit(EXIT_FAILURE);
     } catch(...) {
-        BOOST_LOG_TRIVIAL(error) << "Exception of unknown type!";
+       //BOOST_LOG_TRIVIAL(error) << "Exception of unknown type!";
+       std::cout << "Exception of unknown type!" << std::endl;
         exit(EXIT_FAILURE);
     }
 
