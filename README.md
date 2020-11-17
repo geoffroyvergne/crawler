@@ -7,21 +7,21 @@ C++ web crawler
 ```
 boost 
 libcurl
+gumbo-parser
 ```
 
 ### FetchContent
 gumbo-parser
 
-### find_package( CURL )
+### find_package
+boost
 libcurl
-
 
 ## Dependencies build
 
 ```
 cmake
-clang
-conan
+clang++
 ```
 
 ## Build
@@ -44,16 +44,18 @@ cmake --build build/
 ```
 docker build . -t crawler
 docker build -f Dockerfile -t crawler .
-docker run crawler crawler_cli --help
 
 run -ti --rm crawler sh
-docker run -ti --rm conanio/clang9-x86 bash
+
+docker run -ti --rm crawler sh
+docker run -ti --rm crawler bash
+
+docker run --rm crawler crawler_cli --help
 ```
 
 ### Docker server mode
 
 ```
-docker run -p 3000:3000 --name crawler --rm crawler crawler_rest
 docker run -p 3000:3000 --name crawler --rm crawler
 
 curl localhost:3000/version
@@ -62,7 +64,6 @@ curl localhost:3000/version
 ### Docker cli mode
 
 ```
-docker run -ti --rm crawler crawler_cli --help
 docker run --rm --name crawler crawler crawler_cli --help
 ```
 

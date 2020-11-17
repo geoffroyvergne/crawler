@@ -43,16 +43,17 @@ configure_file(include/app.h.in include/app.h)
 
 # CURL
 #set(CURL_LIBRARY "-lcurl") 
-set(CURL_STATICLIB   ON)
 find_package(CURL REQUIRED)
 
 
 
 # BOOST
-#set(Boost_USE_STATIC_LIBS OFF) 
-#set(Boost_USE_MULTITHREADED ON)  
-#set(Boost_USE_STATIC_RUNTIME OFF) 
+set(Boost_USE_STATIC_LIBS ON) 
+set(Boost_USE_MULTITHREADED ON)  
+set(Boost_USE_STATIC_RUNTIME ON) 
 set(Boost_USE_STATIC_LIBS   ON)
+
+# found components: program_options log date_time log_setup system filesystem thread regex chrono atomic
 find_package(Boost REQUIRED COMPONENTS program_options log)
 #include_directories(${Boost_INCLUDE_DIRS}) 
 
