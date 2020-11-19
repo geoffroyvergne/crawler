@@ -1,8 +1,30 @@
 #include <iostream>
-#include <curl/curl.h>
 #include <string>
+
+#include <boost/regex.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/log/trivial.hpp>
+
+#include <boost/beast/core.hpp>
+#include <boost/beast/http.hpp>
+#include <boost/beast/version.hpp>
+#include <boost/asio/connect.hpp>
+#include <boost/asio/ip/tcp.hpp>
+//#include <boost/asio.hpp>
+
+#include <boost/beast/ssl.hpp>
+#include <boost/asio/ssl/error.hpp>
+#include <boost/asio/ssl/stream.hpp>
+#include <boost/asio/ssl.hpp>
+
 #include <http/http-client.hpp>
-//#include <curl/curl.h>
+
+/*std::string HttpClient::make_string(boost::asio::streambuf& streambuf) {
+    return {
+        boost::asio::buffers_begin(streambuf.data()), 
+        boost::asio::buffers_end(streambuf.data())
+    };
+}*/
 
 WebUrl* HttpClient::getWebUrl() {
     return this->webUrl;
@@ -24,8 +46,6 @@ HttpClient::HttpClient(std::string url) {
 }
 
 void HttpClient::getResults() {
-    
-
     //std::cout << webUrl->toString() << std::endl;
     //std::cout << webPage->toString() << std::endl;
 
@@ -37,107 +57,129 @@ WebUrl* HttpClient::parseUrl() {
     WebUrl* webUrl = new WebUrl();
     webUrl->url = this->url;
 
-    CURLU *curlu;
-    CURLUcode ucode;
+    const std::string regex = "(http|https)://([^/ :]+):?([^/ ]*)(/?[^ #?]*)\\x3f?([^ #]*)#?([^ ]*)";
 
-    char *host;
-    //std::string host;
-    char *path;
+    boost::regex ex(regex);
+    boost::cmatch what;
 
-    curlu = curl_url();
-    if(!curlu) return webUrl;
+    if(regex_match(url.c_str(), what, ex)) {
+        webUrl->sheme       = std::string(what[1].first, what[1].second);
+        webUrl->host        = std::string(what[2].first, what[2].second);
+        
+        std::string port = std::string(what[3].first, what[3].second);
 
-    ucode = curl_url_set(curlu, CURLUPART_URL, this->url.c_str(), 0);
+        if(!port.empty()) {
+            webUrl->port        = std::stoi(port.c_str());
+        } else {
+            if(webUrl->sheme == "http") webUrl->port = 80;
+            if(webUrl->sheme == "https") webUrl->port = 443;
+        }
 
-    ucode = curl_url_get(curlu, CURLUPART_HOST, &host, 0);
-    if(!ucode) {
-        //printf("Host name : %s \n", host);
-        //std::cout << "Hostname : " << host << std::endl;
-        webUrl->host = host;
-        curl_free(host);
-    }
+        webUrl->path        = std::string(what[4].first, what[4].second);
+        webUrl->query       = std::string(what[5].first, what[5].second);
+        webUrl->fragment    = std::string(what[6].first, what[6].second);
 
-    ucode = curl_url_get(curlu, CURLUPART_PATH, &path, 0);
-    if(!ucode) {
-        //printf("Path : %s \n", path);
-        //std::cout << "Path : " << path << std::endl;
-        webUrl->path = path;
-        curl_free(path);
-    }
-
-    //CURLUPART_PORT
-    //CURLUPART_QUERY
-    //CURLUPART_SCHEME
-    //CURLUPART_FRAGMENT
-    //CURLUPART_URL
-    //CURLUPART_OPTIONS
+        if(webUrl->path.empty()) webUrl->path = "/";
+    }    
 
     return webUrl;
+}
+
+/*std::vector<std::string> HttpClient::extractHeader(std::string header) {
+    std::vector<std::string> results;
+    boost::split(results, header, boost::is_any_of(":"));
+    
+    boost::trim(results.at(0));
+    boost::algorithm::to_lower(results.at(0));
+    
+    boost::trim(results.at(1));
+    boost::algorithm::to_lower(results.at(1));
+
+    return results;
+}*/
+
+WebPage* HttpClient::httpSslGet() {
+    WebPage* webPage = new WebPage();
+    webPage->url = this->url;
+
+    int version = 11;
+
+    try {
+
+
+    } catch(std::exception const& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return webPage;
+    }
+
+    return webPage;
 }
 
 WebPage* HttpClient::httpGet() {
     WebPage* webPage = new WebPage();
     webPage->url = this->url;
 
-    CURL *curl = curl_easy_init();
+    int version = 10;
 
-    if(curl) {        
-        curl_easy_setopt(curl, CURLOPT_URL, this->url.c_str());
-        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
-        //curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
-        //curl_easy_setopt(curl, CURLOPT_USERAGENT, "curl/7.42.0");
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, HttpClient::writefunc);
-        
-        std::string content;        
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &content);
+    try {
+        // The io_context is required for all I/O
+        boost::asio::io_context ioc;
 
-        std::string headerString;        
-        curl_easy_setopt(curl, CURLOPT_HEADERDATA, &headerString);
+        // These objects perform our I/O
+        boost::asio::ip::tcp::resolver resolver(ioc);
+        boost::beast::tcp_stream stream(ioc);
 
-        CURLcode res = curl_easy_perform(curl);
+        // Look up the domain name
+        auto const results = resolver.resolve(this->webUrl->host, std::to_string(this->webUrl->port));
 
-        //std::cout << "content : " << content.length() << std::endl;
-        //std::cout << "header : " << headerString.length() << std::endl;
-        webPage->content = content;
-        webPage->header = headerString;
+        // Make the connection on the IP address we get from a lookup
+        stream.connect(results);
 
-        //std::string *contentType;
-        char *contentType;
-        curl_easy_getinfo(curl, CURLINFO_CONTENT_TYPE, &contentType);
-        //std::cout << "Content type : " << contentType << std::endl;        
-        webPage->contentType = contentType;
+        // Set up an HTTP GET request message
+        boost::beast::http::request<boost::beast::http::string_body> req{boost::beast::http::verb::get, this->webUrl->path, version};
+        req.set(boost::beast::http::field::host, this->webUrl->host);
+        req.set(boost::beast::http::field::user_agent, BOOST_BEAST_VERSION_STRING);
 
-        int httpCode = 0;
-        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &httpCode);
-        //std::cout << "HTTP result : " << httpCode << std::endl;
-        webPage->httpCode = httpCode;
+        // Send the HTTP request to the remote host
+        boost::beast::http::write(stream, req);
 
-        double elapsed;
-        curl_easy_getinfo(curl, CURLINFO_TOTAL_TIME, &elapsed);
-        //std::cout << "elapsed : " << elapsed << std::endl;
-        webPage->elapsed = elapsed;
+        // This buffer is used for reading and must be persisted
+        boost::beast::flat_buffer buffer;
 
-        char* effectiveUrl;
-        curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &effectiveUrl);
-        //std::cout << "url : " << url << std::endl;
-        webPage->url = effectiveUrl;
+        // Declare a container to hold the response
+        boost::beast::http::response<boost::beast::http::dynamic_body> res;
 
-        //CURLINFO_HTTP_VERSION
-        //CURLINFO_SCHEME
-        //CURLINFO_TOTAL_TIME
-        
-        curl_easy_cleanup(curl);
-        
+        // Receive the HTTP response
+        boost::beast::http::read(stream, buffer, res);
+
+        // Write the message to standard out
+        //std::cout << res << std::endl;
+
+        //std::cout << res.result_int() << std::endl;
+        //std::cout << res.result() << std::endl;
+        //std::cout << res.reason() << std::endl;
+
+        //std::cout << boost::beast::buffers_to_string(res.body().data()) << std::endl;
+
+        webPage->httpCode = res.result_int();
+        webPage->content = boost::beast::buffers_to_string(res.body().data());
+
+        for (auto& h : res.base()) {
+            std::cout << "name: " << h.name() << ", name_string: " << h.name_string() << ", value: " << h.value() << "\n";
+        }
+
+        // Gracefully close the socket
+        boost::beast::error_code ec;
+        stream.socket().shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
+
+        if(ec && ec != boost::beast::errc::not_connected) {
+            throw boost::beast::system_error{ec};
+        }
+
+    } catch(std::exception const& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return webPage;
     }
+
     return webPage;
-}
-
-void HttpClient::fail(CURLU *curlu) {
-    curl_url_cleanup(curlu); /* free url handle */
-    EXIT_FAILURE;
-}
-
-size_t HttpClient::writefunc(void *ptr, size_t size, size_t nmemb, std::string *s) {
-  s->append(static_cast<char *>(ptr), size*nmemb);
-  return size*nmemb;
 }

@@ -32,5 +32,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 echo "MacOs detected"
 export CC=/usr/bin/clang
 export CXX=/usr/bin/clang++
+
+export OPENSSL_CRYPTO_LIBRARY="/usr/local/lib/libcrypto.dylib"
+export OPENSSL_SSL_LIBRARY="/usr/local/lib/libssl.dylib"
 fi
 

@@ -41,11 +41,19 @@ configure_file(include/app.h.in include/app.h)
 #include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 #conan_basic_setup()
 
+# OpenSSL
+
+#MAC
+#ln -sn ../Cellar/openssl@1.1/1.1.1h/lib/libcrypto.1.1.dylib libcrypto.dylib
+#ln -sn ../Cellar/openssl@1.1/1.1.1h/lib/libssl.1.1.dylib libssl.dylib
+
+#set(OPENSSL_USE_STATIC_LIBS ON) 
+#set(OPENSSL_CRYPTO_LIBRARY /usr/local/Cellar/openssl@1.1/1.1.1h)
+find_package(OpenSSL REQUIRED)
+
 # CURL
 #set(CURL_LIBRARY "-lcurl") 
-find_package(CURL REQUIRED)
-
-
+#find_package(CURL REQUIRED)
 
 # BOOST
 set(Boost_USE_STATIC_LIBS ON) 
@@ -54,7 +62,7 @@ set(Boost_USE_MULTITHREADED ON)
 #set(Boost_USE_STATIC_LIBS   ON)
 
 # found components: program_options log date_time log_setup system filesystem thread regex chrono atomic
-find_package(Boost COMPONENTS program_options REQUIRED)
+find_package(Boost COMPONENTS program_options regex REQUIRED)
 #include_directories(${Boost_INCLUDE_DIRS}) 
 
 #link_directories(${Boost_LIBRARY_DIR})
@@ -76,7 +84,7 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(gumbo)
 
-include_directories(${CURL_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} include)
+include_directories(${CURL_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${OpenSSL_INCLUDE_DIRS} include)
 
 # add common folder as lib
 add_subdirectory(src/common)
