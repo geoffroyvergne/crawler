@@ -29,7 +29,6 @@ export CXX=/usr/pkg/bin/clang++
 fi
 
 # MacOs
-#if ["$(uname -s)" == "Darwin" ]; then
 if [ "$(uname)" == "Darwin" ]; then
 echo "MacOs detected"
 export CC=/usr/bin/clang

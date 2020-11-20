@@ -52,10 +52,10 @@ COPY . .
 # -DCMAKE_EXE_LINKER_FLAGS=
 #RUN cmake -DCMAKE_CXX_FLAGS="-pthread -Wno-c++11-narrowing" . -B build/
 #RUN cmake -DCMAKE_CXX_FLAGS="-std=c++11 -pthread" . -B build/
-#RUN cmake -DCMAKE_CXX_FLAGS="-pthread" . -B build/
-#RUN cmake . -B build/
+RUN cmake -DCMAKE_CXX_FLAGS="-pthread" . -B build/
+#RUN cmake -DCMAKE_C_COMPILER="/usr/bin/clang" -DCMAKE_CXX_COMPILER="/usr/bin/clang++" -DCMAKE_CXX_FLAGS="-pthread" . -B build/
 #RUN cmake --build build/
-RUN ./clean-build.sh
+#RUN ./clean-build.sh
 
 #FROM conanio/clang9
 FROM ubuntu
