@@ -42,8 +42,8 @@ RUN apt-get update -y && apt install -y libboost-all-dev libssl-dev
 
 COPY . .
 
-RUN export CC=/usr/bin/clang-9
-RUN export CXX=/usr/bin/clang++-9
+#RUN export CC=/usr/bin/clang-9
+#RUN export CXX=/usr/bin/clang++-9
 #ENV CMAKE_CXX_FLAGS="-lstdc++ -std=c++11 -pthread"
 
 # Compile with cmake
@@ -53,8 +53,9 @@ RUN export CXX=/usr/bin/clang++-9
 #RUN cmake -DCMAKE_CXX_FLAGS="-pthread -Wno-c++11-narrowing" . -B build/
 #RUN cmake -DCMAKE_CXX_FLAGS="-std=c++11 -pthread" . -B build/
 #RUN cmake -DCMAKE_CXX_FLAGS="-pthread" . -B build/
-RUN cmake . -B build/
-RUN cmake --build build/
+#RUN cmake . -B build/
+#RUN cmake --build build/
+RUN ./clean-build.sh
 
 #FROM conanio/clang9
 FROM ubuntu
