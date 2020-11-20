@@ -37,3 +37,4 @@ export OPENSSL_CRYPTO_LIBRARY="/usr/local/lib/libcrypto.dylib"
 export OPENSSL_SSL_LIBRARY="/usr/local/lib/libssl.dylib"
 fi
 
+cmake . -B build/
