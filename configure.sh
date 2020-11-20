@@ -8,7 +8,7 @@ export CXX=/usr/bin/clang++-9
 fi
 
 # Freebsd
-if [ "$(uname)" == "freeBSD" ]; 
+if [ "$(uname)" == "FreeBSD" ]; 
 then echo "FreeBsd detected" fi
 export CC=/usr/local/bin/clang90
 export CXX=/usr/local/bin/clang++90
