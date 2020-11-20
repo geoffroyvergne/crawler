@@ -130,4 +130,5 @@ docker run -d  --rm -p 80:80 --name web-server-test web-server-test
 - [ ] Add Memory Leak checker -Valgrind
 - [ X ] Docker no log because of multi thread
 - [ X ] Docker can't kill ctrl + c
+- [ ] Add ssl to the API rest part
 - [ ] 
