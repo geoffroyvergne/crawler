@@ -42,8 +42,8 @@ RUN apt-get update -y && apt install -y libboost-all-dev libssl-dev
 
 COPY . .
 
-#ENV CC=/usr/bin/clang-9
-#ENV CXX=/usr/bin/clang++-9
+RUN export CC=/usr/bin/clang-9
+RUN export CXX=/usr/bin/clang++-9
 #ENV CMAKE_CXX_FLAGS="-lstdc++ -std=c++11 -pthread"
 
 # Compile with cmake
@@ -61,11 +61,9 @@ FROM ubuntu
 #FROM alpine
 #FROM scratch
 
-RUN pwd
-
 #RUN apk update && apk add --no-cache musl-dev
 #RUN apt-get update -y && apt-get install -y curl
-RUN apt-get update -y && apt-get install -y openssl
+#RUN apt-get update -y && apt-get install -y openssl ca-certificates
 
 COPY --from=build /build/src/bin/crawler_rest /usr/local/bin
 COPY --from=build /build/src/bin/crawler_cli /usr/local/bin
