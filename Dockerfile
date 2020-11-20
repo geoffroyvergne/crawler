@@ -26,9 +26,10 @@ RUN apt-get install -y clang cmake git
 #RUN add-apt-repository ppa:mhier/libboost-latest
 
 #RUN sudo apt-get update -y && sudo apt-get install -y libcurl4-openssl-dev
-RUN apt-get update -y && apt install -y libboost-all-dev libcurl4-openssl-dev
-#libboost-all-dev
-#libssl-dev
+RUN apt-get update -y && apt install -y libboost-all-dev libssl-dev
+# libboost-all-dev
+# libssl-dev
+# libcurl4-openssl-dev
 
 #RUN cd /home && wget https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.tar.gz \
 #  && tar xfz boost_1_74_0.tar.gz \
@@ -63,7 +64,8 @@ FROM ubuntu
 RUN pwd
 
 #RUN apk update && apk add --no-cache musl-dev
-RUN apt-get update -y && apt-get install -y curl
+#RUN apt-get update -y && apt-get install -y curl
+RUN apt-get update -y && apt-get install -y openssl
 
 COPY --from=build /build/src/bin/crawler_rest /usr/local/bin
 COPY --from=build /build/src/bin/crawler_cli /usr/local/bin
@@ -71,7 +73,7 @@ COPY --from=build /build/src/bin/crawler_cli /usr/local/bin
 #COPY etc/conf.ini /etc/http-server/conf.ini
 COPY entrypoint.sh /usr/local/bin
 
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh", "/usr/local/bin/crawler_rest"]
+#ENTRYPOINT ["/usr/local/bin/entrypoint.sh", "/usr/local/bin/crawler_rest"]
 
 #CMD ["-t", "/var/www", "--host", "0.0.0.0"]
 #ENTRYPOINT ["/usr/local/bin/crawler_rest"]

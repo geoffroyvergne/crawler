@@ -51,11 +51,11 @@ configure_file(include/app.h.in include/app.h)
 
 #set(OPENSSL_USE_STATIC_LIBS ON) 
 #set(OPENSSL_CRYPTO_LIBRARY /usr/local/Cellar/openssl@1.1/1.1.1h)
-#find_package(OpenSSL REQUIRED)
+find_package(OpenSSL REQUIRED)
 
 # CURL
 #set(CURL_LIBRARY "-lcurl") 
-find_package(CURL REQUIRED)
+#find_package(CURL REQUIRED)
 
 # BOOST
 set(Boost_USE_STATIC_LIBS ON) 
@@ -86,7 +86,7 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(gumbo)
 
-include_directories(${CURL_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} include)
+include_directories(${CURL_INCLUDE_DIR} ${Boost_INCLUDE_DIRS} ${OpenSSL_INCLUDE_DIRS} include)
 # ${OpenSSL_INCLUDE_DIRS} 
 
 # add common folder as lib
