@@ -13,6 +13,7 @@ struct memoryStruct {
   size_t size;
 };
  
+// https://curl.se/libcurl/c/getinmemory.html
 static size_t writeMemoryCallback(void *contents, size_t size, size_t nmemb, void *userp) {
   size_t realsize = size * nmemb;
   struct memoryStruct *mem = (struct memoryStruct *)userp;
@@ -36,61 +37,56 @@ web_url* parseUrl(char* url) {
 
     //web_url webUrl;
     web_url* webUrl = malloc(sizeof(web_url));
-    webUrl->url = url;
-    webUrl->host = "";
-    webUrl->path = "/";
+    webUrl->url = malloc(sizeof(char*));;
+    webUrl->host = malloc(sizeof(char*));;
+    webUrl->path = malloc(sizeof(char*));;
     webUrl->port = 80;
-    webUrl->sheme = "http";
+    webUrl->sheme = malloc(sizeof(char*));;
 
     CURLU *curlu;
     CURLUcode ucode;
 
-    char *host;
+    //char *host;
     //std::string host;
-    char *path;
+    //char *path;
 
     curlu = curl_url();
     if(!curlu) return NULL;
 
     ucode = curl_url_set(curlu, CURLUPART_URL, url, 0);
 
-    ucode = curl_url_get(curlu, CURLUPART_HOST, &host, 0);
-    if(!ucode) {
+    ucode = curl_url_get(curlu, CURLUPART_HOST, &webUrl->host, 0);
+    //if(!ucode) {
         //printf("Host name : %s \n", host);
         //std::cout << "Hostname : " << host << std::endl;
-        webUrl->host = host;        
-        
-    }
+        //webUrl->host = host;      
+    //}
 
-    ucode = curl_url_get(curlu, CURLUPART_PATH, &path, 0);
-    if(!ucode) {
+    ucode = curl_url_get(curlu, CURLUPART_PATH, &webUrl->path, 0);
+    //if(!ucode) {
         //printf("Path : %s \n", path);
         //std::cout << "Path : " << path << std::endl;
         
-        webUrl->path = path;
-        
-    }
+        //webUrl->path = path;        
+    //}
 
-    
     //curl_free(path);
     //curl_free(host);
     
-
-
     return webUrl;
 }
 
 web_page* httpGet(char* url) {
 
     web_page* webPage = malloc(sizeof(web_page));
-    webPage->content = "";
-    webPage->contentType = "";
+    webPage->content =  malloc(sizeof(char) * 200000);
+    webPage->contentType =  malloc(sizeof(char) * 2000);
     webPage->elapsed = 0;
-    webPage->header = "";
+    webPage->header =  malloc(sizeof(char) * 2000);
     webPage->httpCode = 0;
     webPage->port = 80;
-    webPage->sheme = "http";
-    webPage->url = url;
+    webPage->sheme =  malloc(sizeof(char) * 2000);
+    webPage->url =  malloc(sizeof(char) * 2000);
 
     struct memoryStruct chunk;
     chunk.memory = malloc(1);  /* will be grown as needed by the realloc above */ 
@@ -100,7 +96,7 @@ web_page* httpGet(char* url) {
 
     if(curl) {        
         curl_easy_setopt(curl, CURLOPT_URL, url);
-        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+        //curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
         //curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
         //curl_easy_setopt(curl, CURLOPT_USERAGENT, "curl/7.42.0");
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, writeMemoryCallback);
@@ -109,40 +105,47 @@ web_page* httpGet(char* url) {
         //curl_easy_setopt(curl, CURLOPT_WRITEDATA, &content);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&chunk);
 
+        //curl_easy_setopt(curl, CURLOPT_WRITEDATA, &webPage->content);
+
         CURLcode res = curl_easy_perform(curl);
 
-        char* headerString;        
-        curl_easy_setopt(curl, CURLOPT_HEADERDATA, &headerString);
+        //char* headerString;        
+        //curl_easy_setopt(curl, CURLOPT_HEADERDATA, &webPage->header);
 
         //std::cout << "content : " << content.length() << std::endl;
         //std::cout << "header : " << headerString.length() << std::endl;
         //webPage->content = content;
-        webPage->header = headerString;
+        //webPage->header = headerString;
+        //strcpy(webPage->header, headerString);
 
         //std::string *contentType;
-        char *contentType;
-        curl_easy_getinfo(curl, CURLINFO_CONTENT_TYPE, &contentType);
+        //char *contentType;
+        curl_easy_getinfo(curl, CURLINFO_CONTENT_TYPE, &webPage->contentType);
         //std::cout << "Content type : " << contentType << std::endl;        
-        webPage->contentType = contentType;
+        //webPage->contentType = contentType;
+        //strcpy(webPage->contentType, contentType);
+        //puts(webPage->contentType);
 
-        int httpCode = 0;
-        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &httpCode);
+        //int httpCode = 0;
+        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &webPage->httpCode);
         //std::cout << "HTTP result : " << httpCode << std::endl;
-        webPage->httpCode = httpCode;
+        //webPage->httpCode = httpCode;
 
-        double elapsed;
-        curl_easy_getinfo(curl, CURLINFO_TOTAL_TIME, &elapsed);
+        //double elapsed;
+        curl_easy_getinfo(curl, CURLINFO_TOTAL_TIME, &webPage->elapsed);
         //std::cout << "elapsed : " << elapsed << std::endl;
-        webPage->elapsed = elapsed;
+        //webPage->elapsed = elapsed;
 
-        char* effectiveUrl;
-        curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &effectiveUrl);
+        //char* effectiveUrl;
+        curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &webPage->url);
         //std::cout << "url : " << url << std::endl;
-        webPage->url = effectiveUrl;
+        //webPage->url = effectiveUrl;
+        puts(webPage->url);
 
         //printf("%lu bytes retrieved\n", (unsigned long)chunk.size);
-        webPage->content = (char *) malloc( sizeof(char) * 2000 );
+        //webPage->content = (char *) malloc( sizeof(char) * 2000 );
         strcpy(webPage->content, chunk.memory);
+        //strcpy(webPage->content, "");
         //webPage->content = chunk.memory;
 
         //puts(chunk.memory);
@@ -150,11 +153,11 @@ web_page* httpGet(char* url) {
         //CURLINFO_HTTP_VERSION
         //CURLINFO_SCHEME
         //CURLINFO_TOTAL_TIME
+
+        free(chunk.memory);
         
         /* cleanup curl stuff */ 
         curl_easy_cleanup(curl);
-        
-        free(chunk.memory);
         
         /* we're done with libcurl, so clean it up */ 
         curl_global_cleanup();

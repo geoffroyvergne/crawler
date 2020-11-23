@@ -22,7 +22,7 @@ static struct option long_options_cli[] = {
 static int version_flag;
 void print_usage();
 void print_version();
-config getOptions(int argc, char **argv);
+config cli_get_options(int argc, char **argv);
 
 #endif 
 

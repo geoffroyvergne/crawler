@@ -11,7 +11,7 @@ typedef struct {
     char* fragment; 
 } web_url;
 
-char* web_url_to_string(web_url* webUrl);
-char* web_url_to_json(web_url* webUrl);
+char* web_url_to_string(const web_url* webUrl);
+char* web_url_to_json(const web_url* webUrl);
 
 #endif

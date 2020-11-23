@@ -4,8 +4,8 @@
 #ifndef HTML_PARSER
 #define HTML_PARSER
 
-tag** parseString(char* content);
-tag** parse(GumboNode* node);
+int parser_get_get_tagI();
+tag** parser_string(char* content);
 char* getHtmlFromFile(char* fileName);
 char* getHtmlFromString(char* content);
 //char* getTagList();

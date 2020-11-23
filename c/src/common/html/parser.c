@@ -1,25 +1,36 @@
 #include <stdio.h>
-#include <gumbo/gumbo.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <html/tag.h>
 #include <string.h>
+
+#include <gumbo/gumbo.h>
+
+#include <html/tag.h>
 #include <html/parser.h>
 
-tag** parseString(char* content) {
+tag** tag_array;
+tag** parse(GumboNode* node);
+int tagI;
+
+int parser_get_get_tagI() {
+    return tagI;
+}
+
+tag** parser_string(char* content) {
+    tagI = 0;
+    tag_array = malloc(sizeof(tag*));
     //puts(content);
     GumboOutput* output = gumbo_parse_with_options(&kGumboDefaultOptions, content, strlen(content));
     return parse(output->root);
 }
 
 tag** parse(GumboNode* node) {
-    tag** tag_array = malloc(1000 * sizeof(tag*));
-    int tagI = 0;
+    
     tag* currentTag = malloc(sizeof(tag));
-    currentTag->name = malloc(1000 * sizeof(char*));
-    currentTag->content = malloc(1000 * sizeof(char*));
-    currentTag->href = malloc(1000 * sizeof(char*));
-    currentTag->src = malloc(1000 * sizeof(char*));
+    currentTag->name = malloc(sizeof(char) * 2000);
+    currentTag->content = malloc(sizeof(char) * 20000);
+    currentTag->href = malloc(sizeof(char) * 2000);
+    currentTag->src = malloc(sizeof(char) * 2000);
 
     if(node->type == GUMBO_NODE_TEXT) {
         //std::string name = gumbo_normalized_tagname(node->parent->v.element.tag);
@@ -47,6 +58,8 @@ tag** parse(GumboNode* node) {
         //std::cout << currentTag.toString() << std::endl;
 
         //this->tagList.push_back(currentTag);
+        //puts(tag_to_string(currentTag));
+        //printf("tag %d %s\n", tagI, currentTag->name);
         tag_array[tagI] = currentTag;
         tagI ++;
 
@@ -82,6 +95,8 @@ tag** parse(GumboNode* node) {
         //currentTag->src = src;
 
         //this->tagList.push_back(currentTag);
+        //puts(tag_to_string(currentTag));
+        //printf("tag %d %s\n", tagI, currentTag->name);
         tag_array[tagI] = currentTag;
         tagI ++;
 

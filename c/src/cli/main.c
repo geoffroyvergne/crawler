@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
 #include <cli.h>
 #include <config.h>
 #include <http/http-client.h>
@@ -10,17 +12,10 @@ void printConfig(config conf) {
     printf("Config : url=%s\n", conf.url);
 }
 
-/*int getSize (tag** t) {
-    int size = 0;
-    while ( *t++ ) ++size;
-
-    return size;
-}*/
-
 int main(int argc, char **argv) {
     setbuf(stdout, NULL); 
 
-    config conf = getOptions(argc, argv);
+    config conf = cli_get_options(argc, argv);
 
     printf("Crawler CLI : %s\n", conf.url);
 
@@ -29,12 +24,11 @@ int main(int argc, char **argv) {
 
     puts(web_url_to_string(webUrl));
     puts(web_page_to_string(webPage));
-
-    //puts(webPage->content);
-
-    tag** tag_array = parseString(webPage->content);
-    //int tag_array_size = getSize(tag_array);
-    //printf("%d\n", tag_array_size);
+    
+    tag** tag_array = parser_string(webPage->content);
+    for(int i=0; i<parser_get_get_tagI(); i++) {
+        puts(tag_to_string(tag_array[i]));
+    }
 
     return EXIT_SUCCESS;
 }

@@ -3,9 +3,9 @@
 #include <unistd.h>
 #include <http/web-url.h>
 
-char* web_url_to_string(web_url* webUrl) {
-    char *result = (char *) malloc( sizeof(char) * 2000 );
-    char* template = "url : %s host : %s path : %s \n";
+char* web_url_to_string(const web_url* webUrl) {
+    char *result =  malloc(sizeof(char) * 2000);
+    char* template = "WebUrl => url : %s host : %s path : %s";
 
     sprintf(result, template, 
         webUrl->url,
@@ -16,7 +16,7 @@ char* web_url_to_string(web_url* webUrl) {
     return result;
 }
 
-char* web_url_to_json(web_url* webUrl) {
+char* web_url_to_json(const web_url* webUrl) {
     return NULL;
 }
 

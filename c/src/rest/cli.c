@@ -4,7 +4,7 @@
 #include <cli.h>
 #include <config.h>
 
-config getOptions(int argc, char **argv) {
+config cli_get_options(int argc, char **argv) {
     int opt;
     int option_index = 0;
 

@@ -12,7 +12,7 @@ typedef struct {
     double elapsed;
 } web_page;
 
-char* web_page_to_string(web_page* webPage);
-char* web_page_to_json(web_page* webPage);
+char* web_page_to_string(const web_page* webPage);
+char* web_page_to_json(const web_page* webPage);
 
 #endif

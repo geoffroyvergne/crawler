@@ -10,7 +10,7 @@ void printConfig(config conf) {
 int main(int argc, char **argv) {
     setbuf(stdout, NULL); 
 
-    config conf = getOptions(argc, argv);
+    config conf = cli_get_options(argc, argv);
 
     //printf("Crawler REST\n");
     printConfig(conf);
