@@ -6,12 +6,12 @@
 #include <html/tag.h>
 #include <json/cJSON.h>
 
-char* tag_to_string(tag** tag_array, int tagNum) {
-    char *result = malloc(sizeof(char) * 500000);
+char* tag_to_string(const tag** tag_array, int tagNum) {
+    char *result = malloc(sizeof(char) * 5000000);
     char* template = "Tag => name : %s src : %s href : %d content : %d\n";
 
     for(int i=0; i<tagNum; i++) {
-        char *tmpResult = malloc(sizeof(char) * 40000);
+        char *tmpResult = malloc(sizeof(char) * 500000);
         sprintf(tmpResult, template, 
             tag_array[i]->name,
             tag_array[i]->src,
@@ -25,8 +25,8 @@ char* tag_to_string(tag** tag_array, int tagNum) {
     return result;
 }
 
-char* tag_to_json(tag** tag_array, int tagNum) {
-    char *result = malloc(sizeof(char) * 500000);
+char* tag_to_json(const tag** tag_array, int tagNum) {
+    char *result = malloc(sizeof(char) * 5000000);
 
     cJSON *resultJson = cJSON_CreateObject();
     cJSON *tags = cJSON_CreateArray();
@@ -43,7 +43,8 @@ char* tag_to_json(tag** tag_array, int tagNum) {
     //cJSON_Delete(tags);
 
     //result = cJSON_Print(resultJson);
-    result = cJSON_PrintUnformatted(resultJson);
+    //result = cJSON_PrintUnformatted(resultJson);
+    strcat(result, cJSON_PrintUnformatted(resultJson));
     cJSON_Delete(resultJson);
 
     return result;

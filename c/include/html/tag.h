@@ -10,7 +10,7 @@ typedef struct {
     char* content;
 } tag;
 
-char* tag_to_string(tag** tag_array, int tagNum);
-char* tag_to_json(tag** tag_array, int tagNum);
+char* tag_to_string(const tag** tag_array, int tagNum);
+char* tag_to_json(const tag** tag_array, int tagNum);
 
 #endif

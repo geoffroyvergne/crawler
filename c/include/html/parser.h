@@ -5,11 +5,11 @@
 #define HTML_PARSER
 
 int parser_get_get_tagI();
-tag** parser_string(char* content);
+const tag** parser_string(char* content);
 char* getHtmlFromFile(char* fileName);
 char* getHtmlFromString(char* content);
 //char* getTagList();
-static int tempTest();
+//static int tempTest();
 char* cleanString(char* value);
 
 #endif

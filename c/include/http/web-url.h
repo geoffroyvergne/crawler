@@ -3,7 +3,7 @@
 
 typedef struct {
     char* url; 
-    int port;
+    int* port;
     char* host;
     char* path;
     char* query;

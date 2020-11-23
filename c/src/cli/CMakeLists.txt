@@ -1,6 +1,8 @@
 set(BINARY ${CMAKE_PROJECT_NAME}_cli)
 set(LIB_COMMON common)
 
+add_compile_options(-Wall -Wextra -pedantic -Werror)
+
 # Add specific compilation options
 #-fvisibility=default
 add_compile_options(-fvisibility=hidden)

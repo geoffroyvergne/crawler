@@ -1,4 +1,5 @@
-add_compile_options(-fvisibility=hidden)
+#add_compile_options(-fvisibility=hidden)
+add_compile_options(-fvisibility=hidden -Wall -Wextra -pedantic -Werror)
 
 # [STATIC | SHARED | MODULE]
 add_library(common STATIC ${SOURCES_COMMON})

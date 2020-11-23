@@ -8,15 +8,15 @@
 #include <html/tag.h>
 #include <html/parser.h>
 
-tag** tag_array;
-tag** parse(GumboNode* node);
+const tag** tag_array;
+const tag** parse(GumboNode* node);
 int tagI;
 
 int parser_get_get_tagI() {
     return tagI;
 }
 
-tag** parser_string(char* content) {
+const tag** parser_string(char* content) {
     tagI = 0;
     tag_array = malloc(sizeof(tag*));
     //puts(content);
@@ -24,7 +24,7 @@ tag** parser_string(char* content) {
     return parse(output->root);
 }
 
-tag** parse(GumboNode* node) {
+const tag** parse(GumboNode* node) {
     
     tag* currentTag = malloc(sizeof(tag));
     currentTag->name = malloc(sizeof(char) * 2000);
@@ -143,9 +143,9 @@ char* getHtmlFromString(char* content) {
     return content;
 }
 
-static int tempTest() {
+/*static int tempTest() {
     return 1+1;
-}
+}*/
 
 char* cleanString(char* value) {
     return value;

@@ -37,11 +37,11 @@ web_url* parseUrl(char* url) {
 
     //web_url webUrl;
     web_url* webUrl = malloc(sizeof(web_url));
-    webUrl->url = malloc(sizeof(char*));
-    webUrl->host = malloc(sizeof(char*));
-    webUrl->path = malloc(sizeof(char*));
-    webUrl->port = 80;
-    webUrl->sheme = malloc(sizeof(char*));
+    webUrl->url = malloc(sizeof(char) * 2000);
+    webUrl->host = malloc(sizeof(char) * 2000);
+    webUrl->path = malloc(sizeof(char) * 2000);
+    webUrl->port = malloc(sizeof(int*));
+    webUrl->sheme = malloc(sizeof(char) * 2000);
 
     CURLU *curlu;
     CURLUcode ucode;
@@ -107,7 +107,8 @@ web_page* httpGet(char* url) {
 
         //curl_easy_setopt(curl, CURLOPT_WRITEDATA, &webPage->content);
 
-        CURLcode res = curl_easy_perform(curl);
+        //CURLcode res = curl_easy_perform(curl);
+        curl_easy_perform(curl);
 
         //char* headerString;        
         //curl_easy_setopt(curl, CURLOPT_HEADERDATA, &webPage->header);
@@ -140,7 +141,7 @@ web_page* httpGet(char* url) {
         curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &webPage->url);
         //std::cout << "url : " << url << std::endl;
         //webPage->url = effectiveUrl;
-        puts(webPage->url);
+        //puts(webPage->url);
 
         //printf("%lu bytes retrieved\n", (unsigned long)chunk.size);
         //webPage->content = (char *) malloc( sizeof(char) * 2000 );

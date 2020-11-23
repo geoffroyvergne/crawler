@@ -3,6 +3,10 @@ project(crawler VERSION 1.0)
 
 set(C_STANDARD 11)
 
+#-Wall -Wextra -Werror --std=c99
+#add_compile_options(-Wall -Wextra -Werror)
+#add_compile_options(-Wall -Wextra -pedantic -Werror)
+
 # group common lib file list to compile
 file(GLOB_RECURSE SOURCES_COMMON LIST_DIRECTORIES true src/common/*.c)
 set(SOURCES_COMMON ${SOURCES_COMMON})
