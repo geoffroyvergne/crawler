@@ -37,11 +37,11 @@ web_url* parseUrl(char* url) {
 
     //web_url webUrl;
     web_url* webUrl = malloc(sizeof(web_url));
-    webUrl->url = malloc(sizeof(char*));;
-    webUrl->host = malloc(sizeof(char*));;
-    webUrl->path = malloc(sizeof(char*));;
+    webUrl->url = malloc(sizeof(char*));
+    webUrl->host = malloc(sizeof(char*));
+    webUrl->path = malloc(sizeof(char*));
     webUrl->port = 80;
-    webUrl->sheme = malloc(sizeof(char*));;
+    webUrl->sheme = malloc(sizeof(char*));
 
     CURLU *curlu;
     CURLUcode ucode;

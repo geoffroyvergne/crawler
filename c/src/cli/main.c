@@ -23,12 +23,15 @@ int main(int argc, char **argv) {
     web_page* webPage = httpGet(conf.url);
 
     puts(web_url_to_string(webUrl));
+    puts(web_url_to_json(webUrl));
+
     puts(web_page_to_string(webPage));
+    puts(web_page_to_json(webPage));
     
     tag** tag_array = parser_string(webPage->content);
-    for(int i=0; i<parser_get_get_tagI(); i++) {
-        puts(tag_to_string(tag_array[i]));
-    }
+    
+    puts(tag_to_string(tag_array, parser_get_get_tagI()));
+    puts(tag_to_json(tag_array, parser_get_get_tagI()));
 
     return EXIT_SUCCESS;
 }

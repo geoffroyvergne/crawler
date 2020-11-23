@@ -9,6 +9,7 @@ inih
 CuTest
 libcurl
 gumbo-parser
+cJSON
 ```
 
 ### FetchContent
