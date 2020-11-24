@@ -2,7 +2,7 @@
 #define WEB_URL
 
 typedef struct {
-    char* url; 
+    //char* url; 
     int* port;
     char* host;
     char* path;

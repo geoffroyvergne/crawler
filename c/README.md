@@ -29,3 +29,11 @@ clang
 
 ## Build
 
+./build.sh && ./build/src/bin/crawler_cli --url http://localhost/test.html
+
+## debug
+
+lldb -- ./build/src/bin/crawler_cli --url http://localhost/test.html
+r
+bt
+

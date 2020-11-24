@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(crawler VERSION 1.0)
 
 set(C_STANDARD 11)
+set(CMAKE_BUILD_TYPE Debug)
 
 #-Wall -Wextra -Werror --std=c99
 #add_compile_options(-Wall -Wextra -Werror)

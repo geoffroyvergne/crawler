@@ -18,21 +18,21 @@ int parser_get_get_tagI() {
 
 const tag** parser_string(char* content) {
     tagI = 0;
-    tag_array = malloc(sizeof(tag*));
+    tag_array = malloc(sizeof(tag**));
     //puts(content);
     GumboOutput* output = gumbo_parse_with_options(&kGumboDefaultOptions, content, strlen(content));
     return parse(output->root);
 }
 
 const tag** parse(GumboNode* node) {
-    
-    tag* currentTag = malloc(sizeof(tag));
-    currentTag->name = malloc(sizeof(char) * 2000);
-    currentTag->content = malloc(sizeof(char) * 20000);
-    currentTag->href = malloc(sizeof(char) * 2000);
-    currentTag->src = malloc(sizeof(char) * 2000);
-
+   
     if(node->type == GUMBO_NODE_TEXT) {
+        tag* currentTag = malloc(sizeof(tag));
+        currentTag->name = malloc(sizeof(char*) * 500000);
+        currentTag->content = malloc(sizeof(char*) * 50000);
+        currentTag->href = malloc(sizeof(char*) * 20000);
+        currentTag->src = malloc(sizeof(char*) * 20000);
+
         //std::string name = gumbo_normalized_tagname(node->parent->v.element.tag);
         //std::string content = node->v.text.text;        
 
@@ -40,9 +40,9 @@ const tag** parse(GumboNode* node) {
         
 
         //currentTag->name = gumbo_normalized_tagname(node->parent->v.element.tag);
-        strcpy(currentTag->name, gumbo_normalized_tagname(node->parent->v.element.tag));
+        strncpy(currentTag->name, gumbo_normalized_tagname(node->parent->v.element.tag), strlen(gumbo_normalized_tagname(node->parent->v.element.tag)));
         //currentTag->content = node->v.text.text;
-        strcpy(currentTag->content, node->v.text.text);
+        strncpy(currentTag->content, node->v.text.text, strlen(node->v.text.text));
         
         // A Href
         if(node->parent->v.element.tag == GUMBO_TAG_A) {
@@ -50,7 +50,7 @@ const tag** parse(GumboNode* node) {
             GumboAttribute* gumboAttributeHref;
             if((gumboAttributeHref = gumbo_get_attribute(&node->parent->v.element.attributes, "href"))) {
                 //currentTag->href = gumboAttributeHref->value;
-                strcpy(currentTag->href, gumboAttributeHref->value);
+                strncpy(currentTag->href, gumboAttributeHref->value, strlen(gumboAttributeHref->value));
             }
         }
 
@@ -72,18 +72,24 @@ const tag** parse(GumboNode* node) {
 
     // IMG tag
     if (node->type == GUMBO_NODE_ELEMENT && node->v.element.tag == GUMBO_TAG_IMG) {
+        tag* currentTag = malloc(sizeof(tag));
+        currentTag->name = malloc(sizeof(char*) * 500000);
+        currentTag->content = malloc(sizeof(char*) * 50000);
+        currentTag->href = malloc(sizeof(char*) * 20000);
+        currentTag->src = malloc(sizeof(char*) * 20000);
+
         //tag* currentTag = malloc(sizeof(tag));
 
         //currentTag->name = gumbo_normalized_tagname(node->v.element.tag);
         //strcpy(currentTag->name, gumbo_normalized_tagname(node->v.element.tag));
         
         //name = gumbo_normalized_tagname(node->v.element.tag);
-        strcpy(currentTag->name, gumbo_normalized_tagname(node->v.element.tag));
+        strncpy(currentTag->name, gumbo_normalized_tagname(node->v.element.tag), strlen(gumbo_normalized_tagname(node->v.element.tag)));
         
         GumboAttribute* gumboAttributeSrc;
         if((gumboAttributeSrc = gumbo_get_attribute(&node->v.element.attributes, "src"))) {
             //currentTag->src = gumboAttributeSrc->value;
-            strcpy(currentTag->src, gumboAttributeSrc->value);
+            strncpy(currentTag->src, gumboAttributeSrc->value, strlen(gumboAttributeSrc->value));
         }
 
         //std::cout << "Tag : " << name << " => src : " << src << std::endl;

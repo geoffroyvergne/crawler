@@ -37,11 +37,11 @@ web_url* parseUrl(char* url) {
 
     //web_url webUrl;
     web_url* webUrl = malloc(sizeof(web_url));
-    webUrl->url = malloc(sizeof(char) * 2000);
-    webUrl->host = malloc(sizeof(char) * 2000);
-    webUrl->path = malloc(sizeof(char) * 2000);
+    //webUrl->url = malloc(sizeof(char*) * 20000);
+    webUrl->host = malloc(sizeof(char*) * 20000);
+    webUrl->path = malloc(sizeof(char*) * 20000);
     webUrl->port = malloc(sizeof(int*));
-    webUrl->sheme = malloc(sizeof(char) * 2000);
+    webUrl->sheme = malloc(sizeof(char*) * 2000);
 
     CURLU *curlu;
     CURLUcode ucode;
@@ -79,14 +79,14 @@ web_url* parseUrl(char* url) {
 web_page* httpGet(char* url) {
 
     web_page* webPage = malloc(sizeof(web_page));
-    webPage->content =  malloc(sizeof(char) * 200000);
-    webPage->contentType =  malloc(sizeof(char) * 2000);
-    webPage->elapsed = 0;
-    webPage->header =  malloc(sizeof(char) * 2000);
-    webPage->httpCode = 0;
-    webPage->port = 80;
-    webPage->sheme =  malloc(sizeof(char) * 2000);
-    webPage->url =  malloc(sizeof(char) * 2000);
+    webPage->content =  malloc(sizeof(char*) * 5000005);
+    webPage->contentType =  malloc(sizeof(char*) * 20000);
+    webPage->elapsed = malloc(sizeof(int*));
+    webPage->header =  malloc(sizeof(char*) * 2000);
+    //webPage->httpCode = malloc(sizeof(int*));
+    webPage->port = malloc(sizeof(int*));
+    webPage->sheme =  malloc(sizeof(char*) * 2000);
+    //webPage->url =  malloc(sizeof(char*) * 2000);
 
     struct memoryStruct chunk;
     chunk.memory = malloc(1);  /* will be grown as needed by the realloc above */ 
@@ -120,32 +120,33 @@ web_page* httpGet(char* url) {
         //strcpy(webPage->header, headerString);
 
         //std::string *contentType;
-        //char *contentType;
-        curl_easy_getinfo(curl, CURLINFO_CONTENT_TYPE, &webPage->contentType);
+        char *contentType;
+        curl_easy_getinfo(curl, CURLINFO_CONTENT_TYPE, &contentType);
         //std::cout << "Content type : " << contentType << std::endl;        
         //webPage->contentType = contentType;
-        //strcpy(webPage->contentType, contentType);
+        strcpy(webPage->contentType, contentType);
         //puts(webPage->contentType);
 
-        //int httpCode = 0;
-        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &webPage->httpCode);
+        int httpCode = 0;
+        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &httpCode);
         //std::cout << "HTTP result : " << httpCode << std::endl;
-        //webPage->httpCode = httpCode;
+        webPage->httpCode = httpCode;
 
         //double elapsed;
-        curl_easy_getinfo(curl, CURLINFO_TOTAL_TIME, &webPage->elapsed);
+        //curl_easy_getinfo(curl, CURLINFO_TOTAL_TIME, &elapsed);
         //std::cout << "elapsed : " << elapsed << std::endl;
         //webPage->elapsed = elapsed;
 
         //char* effectiveUrl;
-        curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &webPage->url);
+        //curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &effectiveUrl);
         //std::cout << "url : " << url << std::endl;
         //webPage->url = effectiveUrl;
         //puts(webPage->url);
+        //strcpy(webPage->url, effectiveUrl);
 
         //printf("%lu bytes retrieved\n", (unsigned long)chunk.size);
         //webPage->content = (char *) malloc( sizeof(char) * 2000 );
-        strcpy(webPage->content, chunk.memory);
+        strncpy(webPage->content, chunk.memory, chunk.size);
         //strcpy(webPage->content, "");
         //webPage->content = chunk.memory;
 
