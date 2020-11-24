@@ -1,66 +1,63 @@
 #include <iostream>
-#include <boost/program_options.hpp>
-//#include <boost/log/trivial.hpp>
-
-#include <app.h>
+#include <getopt.h>
 #include <cli.hpp>
 #include <config.hpp>
 
-Cli::Cli(int argc, char** argv) {
-    boost::program_options::variables_map variableMap;
-    boost::program_options::options_description optionsDescription("Allowed options");
+config cli_get_options(int argc, char **argv) {
+    int opt;
+    int option_index = 0;
 
-    try {
-        optionsDescription.add_options()
-            ("help", "Produce help message")
-            ("version,v", "Get version")             
-            ("url,u", boost::program_options::value<std::string>()->required(), "URL to parse")
-        ;
+    config conf;    
 
-        boost::program_options::store(boost::program_options::parse_command_line(argc, argv, optionsDescription), variableMap);
-        boost::program_options::notify(variableMap);
+    //conf.url = "";    
 
-    } catch (const boost::program_options::required_option & e) {
-        if (variableMap.count("help")) {
-            std::cout << this->getVersion() << std::endl;
-            this->getHelp(&optionsDescription);
-
-            exit(EXIT_SUCCESS);
-        } else if (variableMap.count("version")) {
-            std::cout << this->getVersion() << std::endl;
-
-            exit(EXIT_SUCCESS);
-        } else {
-            std::cerr << "error: " << e.what() << std::endl;
-            exit(EXIT_FAILURE);
+    while ((opt = getopt_long(argc, argv, "vhu:", long_options_cli, &option_index)) != -1) {
+        switch(opt) {
+            case 0:
+                break;
+            case 'v':
+                print_version();
+                exit(EXIT_SUCCESS);
+                break;
+            case 'h':
+                print_version();
+                print_usage();
+                exit(EXIT_SUCCESS);
+                break;
+            case 'u':                
+                conf.url = optarg;                
+                break;            
+            case '?':
+                break;
+                exit(EXIT_FAILURE);
+            default: print_usage(); 
+                exit(EXIT_FAILURE);
         }
-    } catch(std::exception& e) {
-        std::cerr << "error: " << e.what() << std::endl;
-        exit(EXIT_FAILURE);
-    } catch(...) {
-        std::cerr << "Exception of unknown type!";
+    }
+
+    if(optind < argc) {
+        //printf("non-option ARGV-elements:");
+        std::cout << "non-option ARGV-elements:" << std::endl;
+        while(optind < argc) {
+            //printf("%s", argv[optind++]);
+            std::cout << argv[optind++] << std::endl;
+        }
+        //putchar('\n');
+        //std::endl;
+
         exit(EXIT_FAILURE);
     }
 
-    this->variableMap = variableMap;
+    return conf;
 }
 
-std::string Cli::getVersion() {
-    std::string version;
-
-    version.append(APP_NAME);
-    version.append(" : ");
-    version.append(std::to_string(VERSION_MAJOR));
-    version.append(".");
-    version.append(std::to_string(VERSION_MINOR));
-
-    return version;
+void print_usage() {
+    //printf("Usage: tcp-server\n");
+    std::cout << "Usage: crawler" << std::endl;
+    
 }
 
-void Cli::getHelp(boost::program_options::options_description *optionsDescription) {
-    std::cout << *optionsDescription << std::endl;
-}
-
-boost::program_options::variables_map Cli::getVariableMap() {
-    return this->variableMap;;
+void print_version() {
+    //printf("version 1.0 \n");
+    std::cout << "version 1.0" << std::endl;
 }

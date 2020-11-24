@@ -1,8 +1,5 @@
 #include <iostream>
 
-//#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
-
 #ifndef TAG
 #define TAG
 
@@ -17,7 +14,7 @@ class HtmlTag {
         std::string src;
         std::string href;
         std::string toString();
-        boost::property_tree::ptree toJson();
+        //boost::property_tree::ptree toJson();
 };
 
 #endif 

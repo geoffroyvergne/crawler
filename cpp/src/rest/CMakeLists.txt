@@ -12,7 +12,7 @@ add_compile_options(-fvisibility=hidden -fvisibility-inlines-hidden)
 add_executable(${BINARY} ${SOURCES_REST})
 #add_library(${LIB} STATIC ${SOURCES_REST})
 
-target_link_libraries(${BINARY} ${Boost_LIBRARIES} ${LIB_COMMON} ${OPENSSL_LIBRARIES})
+target_link_libraries(${BINARY} ${LIB_COMMON})
 # ${OPENSSL_LIBRARIES}
 
 # Copy binary to build/bin

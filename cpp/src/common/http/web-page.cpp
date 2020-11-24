@@ -12,7 +12,7 @@ std::string WebPage::toString() {
     return result;
 }
 
-boost::property_tree::ptree WebPage::toJson() {
+/*boost::property_tree::ptree WebPage::toJson() {
     boost::property_tree::ptree result;
 
     result.put("content", std::to_string(WebPage::content.length()));
@@ -21,4 +21,4 @@ boost::property_tree::ptree WebPage::toJson() {
     result.put("contentType", WebPage::contentType);
 
     return result;
-}
+}*/

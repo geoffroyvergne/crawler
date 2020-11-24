@@ -5,7 +5,7 @@
 
 #include <gumbo/gumbo.h>
 #include <html/parser.hpp>
-#include <boost/algorithm/string.hpp>
+//#include <boost/algorithm/string.hpp>
 
 int HtmlParser::tempTest() {
     return 1+1;
@@ -18,9 +18,9 @@ HtmlParser::HtmlParser(std::string htmlContent) {
 
 std::string HtmlParser::cleanString(std::string* value) {
     //boost::algorithm::replace_all(*value, " ", "");
-    boost::algorithm::replace_all(*value, "\r\n", " ");
-    boost::algorithm::replace_all(*value, "\r", " ");
-    boost::algorithm::replace_all(*value, "\n", " ");
+    //boost::algorithm::replace_all(*value, "\r\n", " ");
+    //boost::algorithm::replace_all(*value, "\r", " ");
+    //boost::algorithm::replace_all(*value, "\n", " ");
 
     return *value;
 }

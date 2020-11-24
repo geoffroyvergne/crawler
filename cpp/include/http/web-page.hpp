@@ -1,7 +1,7 @@
 #include <iostream>
 
 //#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
+//#include <boost/property_tree/json_parser.hpp>
 
 #ifndef WEB_PAGE
 #define WEB_PAGE
@@ -19,7 +19,7 @@ class WebPage {
         int httpCode;
         double elapsed;
         std::string toString();
-        boost::property_tree::ptree toJson();
+        //boost::property_tree::ptree toJson();
 };
 
 #endif 

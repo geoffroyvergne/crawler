@@ -27,7 +27,7 @@ std::string WebResponse::toString() {
     return result;
 }
 
-boost::property_tree::ptree WebResponse::toJson() {
+/*boost::property_tree::ptree WebResponse::toJson() {
     boost::property_tree::ptree result;
     
     result.add_child("weburl", this->webUrl->toJson());
@@ -41,4 +41,5 @@ boost::property_tree::ptree WebResponse::toJson() {
     result.add_child("tags", jsonTagList);
 
     return result;
-}
+}*/
+

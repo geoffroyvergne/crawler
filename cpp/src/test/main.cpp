@@ -1,4 +1,7 @@
-#define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE Main Test Suite
-//#include <boost/test/unit_test.hpp>
-#include <boost/test/included/unit_test.hpp>
+#include <iostream>
+
+int main(int argc, char** argv) {
+    std::cout << "Crawler Test" << std::endl;
+
+    return EXIT_SUCCESS;
+}

@@ -12,7 +12,7 @@ std::string HtmlTag::toString() {
     return result;
 }
 
-boost::property_tree::ptree HtmlTag::toJson() {    
+/*boost::property_tree::ptree HtmlTag::toJson() {    
     boost::property_tree::ptree result;
 
     if(!HtmlTag::name.empty()) result.put("name", HtmlTag::name);
@@ -21,4 +21,4 @@ boost::property_tree::ptree HtmlTag::toJson() {
     if(!HtmlTag::href.empty()) result.put("href", HtmlTag::href);
 
     return result;
-}
+}*/

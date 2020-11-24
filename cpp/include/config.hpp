@@ -3,12 +3,12 @@
 #ifndef CONFIG
 #define CONFIG
 
-//#pragma once
-class Config {
-    public:
-        std::string file;
-        std::string host;
-        int port;
-};
+typedef struct {
+    std::string url; 
+    /*int port;
+    char* host;
+    char* target;
+    char* file;*/
+} config;
 
 #endif

@@ -1,20 +1,29 @@
-#include <boost/program_options.hpp>
+#include <getopt.h>
+#include <config.hpp>
 
 #ifndef CLI
 #define CLI
 
-//#pragma once
-class Cli {
-    public:
-        //Cli();
-        Cli(int argc, char** argv);
-        boost::program_options::variables_map getVariableMap();
-        std::string getVersion();
-        
-    private:
-        boost::program_options::variables_map variableMap;
-        
-        void getHelp(boost::program_options::options_description *optionsDescription);
+static struct option long_options_rest[] = {
+    {"version", no_argument, 0, 'v'},
+    {"help", no_argument, 0, 'h'},
+    {"port", required_argument, 0, 'p'},
+    {"host", required_argument, 0, 'o'},
+    {"target", required_argument, 0, 't'},
+    {"config", required_argument, 0, 'c'}
 };
 
-#endif
+static struct option long_options_cli[] = {
+    {"version", no_argument, 0, 'v'},
+    {"help", no_argument, 0, 'h'},
+    {"url", required_argument, 0, 'u'}
+};
+
+static int version_flag;
+void print_usage();
+void print_version();
+config cli_get_options(int argc, char **argv);
+
+#endif 
+
+

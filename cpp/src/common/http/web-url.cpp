@@ -12,7 +12,7 @@ std::string WebUrl::toString() {
     return result;
 }
 
-boost::property_tree::ptree WebUrl::toJson() {    
+/*boost::property_tree::ptree WebUrl::toJson() {    
     boost::property_tree::ptree result;
 
     result.put("url", WebUrl::url);
@@ -21,4 +21,4 @@ boost::property_tree::ptree WebUrl::toJson() {
     result.put("path", WebUrl::path);
 
     return result;
-}
+}*/
