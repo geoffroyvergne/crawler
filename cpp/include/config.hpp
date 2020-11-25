@@ -5,10 +5,9 @@
 
 typedef struct {
     std::string url; 
-    /*int port;
-    char* host;
-    char* target;
-    char* file;*/
+    int port;
+    std::string host;    
+    std::string file;
 } config;
 
 #endif

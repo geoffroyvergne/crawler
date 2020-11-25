@@ -1,4 +1,5 @@
 #include <iostream>
+#include <json/json.hpp>
 #include <http/web-url.hpp>
 
 std::string WebUrl::toString() {
@@ -6,10 +7,21 @@ std::string WebUrl::toString() {
 
     result.append("url : " + WebUrl::url + " => ");
     result.append("host : " + WebUrl::host + " => ");
-    result.append("pprt : " + std::to_string(WebUrl::port) + " => ");
+    result.append("port : " + std::to_string(WebUrl::port) + " => ");
     result.append("path : " + WebUrl::path);
 
     return result;
+}
+
+std::string WebUrl::toJson() {
+    nlohmann::json j = {
+        {"url", WebUrl::url },
+        {"host", WebUrl::host },
+        {"port", std::to_string(WebUrl::port) },
+        {"path", WebUrl::path }
+    };
+
+    return j.dump();
 }
 
 /*boost::property_tree::ptree WebUrl::toJson() {    

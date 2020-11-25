@@ -19,6 +19,7 @@ class WebPage {
         int httpCode;
         double elapsed;
         std::string toString();
+        std::string toJson();
         //boost::property_tree::ptree toJson();
 };
 

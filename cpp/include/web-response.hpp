@@ -15,12 +15,14 @@
 class WebResponse {
     public: 
         WebResponse();
+        WebResponse(std::string url);
         WebResponse(WebUrl* webUrl, WebPage* webPage, std::vector<HtmlTag*> tagList);
         WebUrl* webUrl;
         WebPage* webPage;
         std::vector<HtmlTag*> tagList;
         void printString();
         std::string toString();
+        std::string toJson();
         //boost::property_tree::ptree toJson();
 };
 

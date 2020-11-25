@@ -19,6 +19,7 @@ class WebUrl {
         std::string fragment;
         std::string toString();
         //boost::property_tree::ptree toJson();
+        std::string toJson();
 };
 
 #endif

@@ -1,4 +1,6 @@
 #include <iostream>
+#include <json/json.hpp>
+
 #include <http/web-page.hpp>
 
 std::string WebPage::toString() {
@@ -10,6 +12,17 @@ std::string WebPage::toString() {
     result.append("ContentType : " + WebPage::contentType);
 
     return result;
+}
+
+std::string WebPage::toJson() {
+        nlohmann::json j = {
+        {"content", std::to_string(WebPage::content.length()) },
+        {"header", std::to_string(WebPage::header.length()) },
+        {"httpCode", std::to_string(WebPage::httpCode) },
+        {"contentType", WebPage::contentType }
+    };
+
+    return j.dump();
 }
 
 /*boost::property_tree::ptree WebPage::toJson() {

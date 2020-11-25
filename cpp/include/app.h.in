@@ -1,0 +1,4 @@
+#define VERSION_MAJOR @crawler_VERSION_MAJOR@
+#define VERSION_MINOR @crawler_VERSION_MINOR@
+
+#define APP_NAME "${APP_NAME}"

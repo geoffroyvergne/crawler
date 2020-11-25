@@ -21,13 +21,14 @@ WebResponse* getWebResponse(std::string url) {
 
 int main(int argc, char** argv) {
     config conf = cli_get_options(argc, argv);
-    if(url.empty()) return EXIT_FAILURE;
+    if(conf.url.empty()) return EXIT_FAILURE;
 
     std::cout << "Crawler CLI url : " << conf.url << std::endl;
     std::string url = conf.url;
 
     WebResponse *webResponse = getWebResponse(url);
-    std::cout << webResponse->toString(); 
+    std::cout << webResponse->toString() << std::endl;
+    std::cout << webResponse->toJson() << std::endl;
 
     free(webResponse);
 

@@ -1,4 +1,6 @@
 #include <iostream>
+#include <json/json.hpp>
+
 #include <html/tag.hpp>
 
 std::string HtmlTag::toString() {
@@ -10,6 +12,17 @@ std::string HtmlTag::toString() {
     !HtmlTag::href.empty() ? result.append(" => 'Href' : " + HtmlTag::href + " ") : result.append("");
 
     return result;
+}
+
+std::string HtmlTag::toJson() {
+    nlohmann::json j = {
+        {"name", HtmlTag::name },
+        {"content", HtmlTag::content },
+        {"src", HtmlTag::src },
+        {"href", HtmlTag::href }
+    };
+
+    return j.dump();
 }
 
 /*boost::property_tree::ptree HtmlTag::toJson() {    

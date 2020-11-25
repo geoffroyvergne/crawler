@@ -24,6 +24,14 @@ set(SOURCES_SRC ${SOURCES_REST})
 file(GLOB_RECURSE SOURCES_TEST LIST_DIRECTORIES true src/test/*.cpp)
 set(SOURCES_TEST ${SOURCES_TEST})
 
+# Add include config.h
+#target_include_directories(${CMAKE_PROJECT_NAME} PUBLIC "${BINARY}")
+configure_file ("${PROJECT_SOURCE_DIR}/include/app.h.in" "${PROJECT_BINARY_DIR}/include/app.h")
+include_directories("${PROJECT_BINARY_DIR}/include")
+
+# Configure a header file to pass some of the CMake settings
+configure_file(include/app.h.in include/app.h)
+
 # CURL
 #set(CURL_LIBRARY "-lcurl") 
 find_package(CURL REQUIRED)

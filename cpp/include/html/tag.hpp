@@ -14,6 +14,7 @@ class HtmlTag {
         std::string src;
         std::string href;
         std::string toString();
+        std::string toJson();
         //boost::property_tree::ptree toJson();
 };
 

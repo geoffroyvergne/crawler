@@ -104,17 +104,6 @@ curl -X POST \
 localhost:3000/url
 
 ```
-## Web server test
-
-```
-cd var
-docker build . -t web-server-test
-docker run -d  --rm -p 80:80 --name web-server-test web-server-test
-
-./build/bin/crawler -u http://localhost/test.html
-./build/bin/crawler -u http://localhost/simple-test.html
-```
-
 ## TODO
 
 - [ X ] Escape json content
@@ -131,5 +120,4 @@ docker run -d  --rm -p 80:80 --name web-server-test web-server-test
 - [ ] Add Memory Leak checker -Valgrind
 - [ X ] Docker no log because of multi thread
 - [ X ] Docker can't kill ctrl + c
-- [ ] Add ssl to the API rest part
 - [ ] 
