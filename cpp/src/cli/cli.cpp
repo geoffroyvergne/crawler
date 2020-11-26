@@ -2,6 +2,7 @@
 #include <getopt.h>
 #include <cli.hpp>
 #include <config.hpp>
+#include <app.h>
 
 config cli_get_options(int argc, char **argv) {
     int opt;
@@ -59,5 +60,7 @@ void print_usage() {
 
 void print_version() {
     //printf("version 1.0 \n");
-    std::cout << "version 1.0" << std::endl;
+    //std::cout << "version 1.0" << std::endl;
+    std::string version = std::to_string(VERSION_MAJOR) + "." + std::to_string(VERSION_MINOR);
+    std::cout << APP_NAME << " " << version << std::endl;
 }

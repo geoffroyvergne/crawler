@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 #include <rest/rest-server.hpp>
 #include <rest/httplib.h>
 #include <json/json.hpp>
@@ -6,25 +7,18 @@
 
 #include <web-response.hpp>
 
-/*WebResponse* getWebResponse(std::string url) {
-    HttpClient *httpClient = new HttpClient(url);
-    HtmlParser *htmlParser = new HtmlParser(httpClient->getWebPage()->content);
-
-    WebResponse *webResponse = new WebResponse(
-        httpClient->getWebUrl(),
-        httpClient->getWebPage(),
-        htmlParser->getTagList()
-    );
-
-    return webResponse;
-}*/
+void sig_handler(int signo);
 
 RestServer::RestServer(std::string host, int port) {
     this->host = host;
     this->port = port;
 }
 
-void RestServer::connect() {    
+void RestServer::connect() {
+    if (signal(SIGINT, sig_handler) == SIG_ERR) {
+        std::cout << "can't catch SIGINT" << std::endl;
+    } 
+
     this->svr.Get("/ping", [](const httplib::Request &, httplib::Response &res) {
         std::cout << "/ping" << std::endl;
 
@@ -48,12 +42,12 @@ void RestServer::connect() {
     });
 
     this->svr.Get("/version", [](const httplib::Request &, httplib::Response &res) {
-        std::string content = "/version " + std::to_string(VERSION_MAJOR) + "." + std::to_string(VERSION_MINOR);
-        std::cout << APP_NAME << " " << content << std::endl;
+        std::string version = std::to_string(VERSION_MAJOR) + "." + std::to_string(VERSION_MINOR);
+        std::cout << "/version " << APP_NAME << " " << version << std::endl;
 
         nlohmann::json j = {
             {"name", APP_NAME },
-            {"version", content }
+            {"version", version }
         };
 
         res.set_content(j.dump(), "application/json");
@@ -73,4 +67,18 @@ void RestServer::connect() {
     });
 
     this->svr.listen(this->host.c_str(), this->port);
+}
+
+void sig_handler(int signo) {
+  if (signo == SIGINT) {
+    //printf("received SIGINT\n");
+    std::cout << "received SIGINT" << std::endl;
+
+    //shutdown(socket_desc, 2);
+    //shutdown(new_socket, 2);
+    //pthread_exit(NULL);
+
+    exit(0);
+    //abort();
+  }
 }

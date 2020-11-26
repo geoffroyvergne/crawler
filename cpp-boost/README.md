@@ -104,6 +104,14 @@ curl -X POST \
 localhost:3000/url
 
 ```
+
+## debug
+
+lldb -- ./build/src/bin/crawler_cli --url http://localhost/test.html
+r
+bt
+
+
 ## TODO
 
 - [ X ] Escape json content

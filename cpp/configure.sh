@@ -3,8 +3,8 @@
 # Linux
 if [ "$(uname)" = "Linux" ]; then
 echo "Linux detected"
-export CC=/usr/bin/clang-9
-export CXX=/usr/bin/clang++-9
+export CC=/usr/bin/clang
+export CXX=/usr/bin/clang++
 fi
 
 # Freebsd

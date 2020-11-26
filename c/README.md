@@ -37,3 +37,7 @@ lldb -- ./build/src/bin/crawler_cli --url http://localhost/test.html
 r
 bt
 
+## TODO
+
+- [  ] Docker service do not stops ctrl+c
+- [  ] 
