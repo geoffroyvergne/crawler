@@ -8,30 +8,30 @@
 #include <html/tag.h>
 #include <html/parser.h>
 
-const tag** tag_array;
-const tag** parse(GumboNode* node);
+tag** tag_array;
+tag** parse(GumboNode* node);
 int tagI;
 
 int parser_get_get_tagI() {
     return tagI;
 }
 
-const tag** parser_string(char* content) {
+tag** parser_string(char* content) {
     tagI = 0;
-    tag_array = malloc(sizeof(tag**));
+    tag_array = (tag**) malloc(sizeof(tag));
     //puts(content);
     GumboOutput* output = gumbo_parse_with_options(&kGumboDefaultOptions, content, strlen(content));
     return parse(output->root);
 }
 
-const tag** parse(GumboNode* node) {
+tag** parse(GumboNode* node) {
    
     if(node->type == GUMBO_NODE_TEXT) {
-        tag* currentTag = malloc(sizeof(tag));
-        currentTag->name = malloc(sizeof(char*) * 500000);
-        currentTag->content = malloc(sizeof(char*) * 50000);
-        currentTag->href = malloc(sizeof(char*) * 20000);
-        currentTag->src = malloc(sizeof(char*) * 20000);
+        tag* currentTag = (tag*) malloc(sizeof(tag));
+        currentTag->name = (char*) malloc(sizeof(char) * 500000);
+        currentTag->content = (char*) malloc(sizeof(char) * 50000);
+        currentTag->href = (char*) malloc(sizeof(char) * 20000);
+        currentTag->src = (char*) malloc(sizeof(char) * 20000);
 
         //std::string name = gumbo_normalized_tagname(node->parent->v.element.tag);
         //std::string content = node->v.text.text;        
@@ -73,10 +73,10 @@ const tag** parse(GumboNode* node) {
     // IMG tag
     if (node->type == GUMBO_NODE_ELEMENT && node->v.element.tag == GUMBO_TAG_IMG) {
         tag* currentTag = malloc(sizeof(tag));
-        currentTag->name = malloc(sizeof(char*) * 500000);
-        currentTag->content = malloc(sizeof(char*) * 50000);
-        currentTag->href = malloc(sizeof(char*) * 20000);
-        currentTag->src = malloc(sizeof(char*) * 20000);
+        currentTag->name = (char*) malloc(sizeof(char) * 500000);
+        currentTag->content = (char*) malloc(sizeof(char) * 50000);
+        currentTag->href = (char*) malloc(sizeof(char) * 20000);
+        currentTag->src = (char*) malloc(sizeof(char) * 20000);
 
         //tag* currentTag = malloc(sizeof(tag));
 

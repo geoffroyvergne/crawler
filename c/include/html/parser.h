@@ -5,7 +5,7 @@
 #define HTML_PARSER
 
 int parser_get_get_tagI();
-const tag** parser_string(char* content);
+tag** parser_string(char* content);
 char* getHtmlFromFile(char* fileName);
 char* getHtmlFromString(char* content);
 //char* getTagList();

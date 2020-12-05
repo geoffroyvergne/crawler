@@ -28,10 +28,11 @@ int main(int argc, char **argv) {
     puts(web_page_to_string(webPage));
     puts(web_page_to_json(webPage));
 
-    const tag** tag_array = parser_string(webPage->content);
+    tag** tag_array = parser_string(webPage->content);
 
     puts(tag_to_string(tag_array, parser_get_get_tagI()));
     puts(tag_to_json(tag_array, parser_get_get_tagI()));
+    
     //tag_to_json(tag_array, parser_get_get_tagI());
 
     //free(tag_array);

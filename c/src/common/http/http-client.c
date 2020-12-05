@@ -37,11 +37,11 @@ web_url* parseUrl(char* url) {
 
     //web_url webUrl;
     web_url* webUrl = malloc(sizeof(web_url));
-    //webUrl->url = malloc(sizeof(char*) * 20000);
-    webUrl->host = malloc(sizeof(char*) * 20000);
-    webUrl->path = malloc(sizeof(char*) * 20000);
-    webUrl->port = malloc(sizeof(int*));
-    webUrl->sheme = malloc(sizeof(char*) * 2000);
+    //webUrl->url = (char*) malloc(sizeof(char) * 20000);
+    webUrl->host = (char*) malloc(sizeof(char) * 20000);
+    webUrl->path = (char*)malloc(sizeof(char) * 20000);
+    webUrl->port = (int*) malloc(sizeof(int));
+    webUrl->sheme = (char*) malloc(sizeof(char) * 2000);
 
     CURLU *curlu;
     CURLUcode ucode;
@@ -79,13 +79,13 @@ web_url* parseUrl(char* url) {
 web_page* httpGet(char* url) {
 
     web_page* webPage = malloc(sizeof(web_page));
-    webPage->content =  malloc(sizeof(char*) * 5000005);
-    webPage->contentType =  malloc(sizeof(char*) * 20000);
-    webPage->elapsed = malloc(sizeof(int*));
-    webPage->header =  malloc(sizeof(char*) * 2000);
+    webPage->content = (char*) malloc(sizeof(char) * 5000005);
+    webPage->contentType = (char*) malloc(sizeof(char) * 20000);
+    webPage->elapsed =  (double*) malloc(sizeof(double));
+    webPage->header =  (char*) malloc(sizeof(char) * 2000);
     //webPage->httpCode = malloc(sizeof(int*));
-    webPage->port = malloc(sizeof(int*));
-    webPage->sheme =  malloc(sizeof(char*) * 2000);
+    webPage->port = (int*) malloc(sizeof(int));
+    webPage->sheme = (char*) malloc(sizeof(char) * 2000);
     //webPage->url =  malloc(sizeof(char*) * 2000);
 
     struct memoryStruct chunk;

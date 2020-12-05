@@ -5,8 +5,8 @@
 #include <json/cJSON.h>
 #include <http/web-page.h>
 
-char* web_page_to_string(const web_page* webPage) {
-    char *result = malloc(sizeof(char) * 400000);
+char* web_page_to_string(web_page* webPage) {
+    char *result = (char*) malloc(sizeof(char) * 400000);
     
     //char* template = "WebPage => url : %s httpCode : %d content type : %s content : %d";
     //char* template = "WebPage => httpCode : %d content type : %s content : %d";
@@ -23,8 +23,8 @@ char* web_page_to_string(const web_page* webPage) {
     return result;
 }
 
-char* web_page_to_json(const web_page* webPage) {
-    char *result =  malloc(sizeof(char) * 400000);
+char* web_page_to_json(web_page* webPage) {
+    char *result = (char*) malloc(sizeof(char) * 400000);
 
     cJSON *resultJson = cJSON_CreateObject();
     //cJSON_AddStringToObject(resultJson, "url", webPage->url);

@@ -1,0 +1,689 @@
+==63403== Memcheck, a memory error detector
+==63403== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==63403== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==63403== Command: ./build/src/bin/crawler_cli --url https://www.google.fr
+==63403== 
+==63403== Conditional jump or move depends on uninitialised value(s)
+==63403==    at 0x4CAE501: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CAE88F: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CBDC8F: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CBE127: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CE8E9A: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CF76BD: gnutls_x509_ext_import_subject_alt_names (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CEC609: gnutls_x509_crt_import (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CECA93: gnutls_x509_crt_list_import (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CECD5F: gnutls_x509_crt_list_import2 (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CF62F9: gnutls_x509_trust_list_add_trust_mem (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CF67B1: gnutls_x509_trust_list_add_trust_file (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CF6A84: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==  Uninitialised value was created by a stack allocation
+==63403==    at 0x4CAE31E: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403== 
+==63403== Conditional jump or move depends on uninitialised value(s)
+==63403==    at 0x4CAE501: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CAE88F: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CBDC8F: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CBE0E1: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CF457C: gnutls_x509_trust_list_add_cas (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CF631A: gnutls_x509_trust_list_add_trust_mem (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CF67B1: gnutls_x509_trust_list_add_trust_file (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CF6A84: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CF6ACE: gnutls_x509_trust_list_add_trust_dir (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4C7526D: gnutls_certificate_set_x509_trust_dir (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x48C9F94: ??? (in /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4.6.0)
+==63403==    by 0x48CBFBE: ??? (in /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4.6.0)
+==63403==  Uninitialised value was created by a stack allocation
+==63403==    at 0x4CAE31E: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403== 
+==63403== Conditional jump or move depends on uninitialised value(s)
+==63403==    at 0x4CAE501: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CAE88F: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CBE7CE: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4CE78AA: gnutls_x509_crt_get_dn_by_oid (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x48C8DC6: ??? (in /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4.6.0)
+==63403==    by 0x48CA589: ??? (in /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4.6.0)
+==63403==    by 0x48CBFBE: ??? (in /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4.6.0)
+==63403==    by 0x48783A5: ??? (in /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4.6.0)
+==63403==    by 0x489A5EC: ??? (in /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4.6.0)
+==63403==    by 0x489B728: curl_multi_perform (in /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4.6.0)
+==63403==    by 0x4891D22: curl_easy_perform (in /usr/lib/x86_64-linux-gnu/libcurl-gnutls.so.4.6.0)
+==63403==    by 0x402FB5: httpGet (src/common/http/http-client.c:111)
+==63403==  Uninitialised value was created by a stack allocation
+==63403==    at 0x4CAE31E: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403== 
+==63403== Conditional jump or move depends on uninitialised value(s)
+==63403==    at 0x483EF58: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402739: parser_string (src/common/html/parser.c:23)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403==  Uninitialised value was created by a heap allocation
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402ED3: httpGet (src/common/http/http-client.c:82)
+==63403==    by 0x40262A: main (src/cli/main.c:23)
+==63403== 
+==63403== Invalid write of size 8
+==63403==    at 0x4028FD: parse (src/common/html/parser.c:63)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402760: parser_string (src/common/html/parser.c:24)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403==  Address 0x5c078b8 is 0 bytes after a block of size 8 alloc'd
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402720: parser_string (src/common/html/parser.c:21)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== Invalid write of size 8
+==63403==    at 0x402A54: parse (src/common/html/parser.c:106)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402760: parser_string (src/common/html/parser.c:24)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403==  Address 0x5c079a0 is 8 bytes after a block of size 152 alloc'd
+==63403==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x553B61B: ??? (in /usr/lib/x86_64-linux-gnu/libtasn1.so.6.6.0)
+==63403==    by 0x553CDEB: asn1_array2tree (in /usr/lib/x86_64-linux-gnu/libtasn1.so.6.6.0)
+==63403==    by 0x4C67818: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4C3B564: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4011B89: call_init.part.0 (dl-init.c:72)
+==63403==    by 0x4011C90: call_init (dl-init.c:30)
+==63403==    by 0x4011C90: _dl_init (dl-init.c:119)
+==63403==    by 0x4001139: ??? (in /usr/lib/x86_64-linux-gnu/ld-2.31.so)
+==63403==    by 0x2: ???
+==63403==    by 0x1FFF0002D2: ???
+==63403==    by 0x1FFF0002EE: ???
+==63403==    by 0x1FFF0002F4: ???
+==63403== 
+==63403== Conditional jump or move depends on uninitialised value(s)
+==63403==    at 0x483EF58: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x496DE94: __vfprintf_internal (vfprintf-internal.c:1688)
+==63403==    by 0x497A278: __vsprintf_internal (iovsprintf.c:95)
+==63403==    by 0x4957047: sprintf (sprintf.c:30)
+==63403==    by 0x402C69: tag_to_string (src/common/html/tag.c:15)
+==63403==    by 0x4026A9: main (src/cli/main.c:33)
+==63403==  Uninitialised value was created by a heap allocation
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x4027A3: parse (src/common/html/parser.c:31)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402760: parser_string (src/common/html/parser.c:24)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== Conditional jump or move depends on uninitialised value(s)
+==63403==    at 0x483EF49: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x496DE94: __vfprintf_internal (vfprintf-internal.c:1688)
+==63403==    by 0x497A278: __vsprintf_internal (iovsprintf.c:95)
+==63403==    by 0x4957047: sprintf (sprintf.c:30)
+==63403==    by 0x402C69: tag_to_string (src/common/html/tag.c:15)
+==63403==    by 0x4026A9: main (src/cli/main.c:33)
+==63403==  Uninitialised value was created by a heap allocation
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x4027D8: parse (src/common/html/parser.c:34)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402760: parser_string (src/common/html/parser.c:24)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== Conditional jump or move depends on uninitialised value(s)
+==63403==    at 0x483EC2D: strcat (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402C79: tag_to_string (src/common/html/tag.c:21)
+==63403==    by 0x4026A9: main (src/cli/main.c:33)
+==63403==  Uninitialised value was created by a heap allocation
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402BE8: tag_to_string (src/common/html/tag.c:10)
+==63403==    by 0x4026A9: main (src/cli/main.c:33)
+==63403== 
+==63403== Invalid read of size 8
+==63403==    at 0x402C2C: tag_to_string (src/common/html/tag.c:16)
+==63403==    by 0x4026A9: main (src/cli/main.c:33)
+==63403==  Address 0x5c078b8 is 0 bytes after a block of size 8 alloc'd
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402720: parser_string (src/common/html/parser.c:21)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== Invalid read of size 8
+==63403==    at 0x402C3B: tag_to_string (src/common/html/tag.c:17)
+==63403==    by 0x4026A9: main (src/cli/main.c:33)
+==63403==  Address 0x5c078b8 is 0 bytes after a block of size 8 alloc'd
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402720: parser_string (src/common/html/parser.c:21)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== Invalid read of size 8
+==63403==    at 0x402C4B: tag_to_string (src/common/html/tag.c:18)
+==63403==    by 0x4026A9: main (src/cli/main.c:33)
+==63403==  Address 0x5c078b8 is 0 bytes after a block of size 8 alloc'd
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402720: parser_string (src/common/html/parser.c:21)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== Invalid read of size 8
+==63403==    at 0x402C5B: tag_to_string (src/common/html/tag.c:19)
+==63403==    by 0x4026A9: main (src/cli/main.c:33)
+==63403==  Address 0x5c078b8 is 0 bytes after a block of size 8 alloc'd
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402720: parser_string (src/common/html/parser.c:21)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== Conditional jump or move depends on uninitialised value(s)
+==63403==    at 0x483EF58: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x403830: cJSON_strdup (src/common/json/cJSON.c:194)
+==63403==    by 0x4053F7: cJSON_CreateString (src/common/json/cJSON.c:2450)
+==63403==    by 0x40535C: cJSON_AddStringToObject (src/common/json/cJSON.c:2135)
+==63403==    by 0x402D15: tag_to_json (src/common/html/tag.c:37)
+==63403==    by 0x4026CE: main (src/cli/main.c:34)
+==63403==  Uninitialised value was created by a heap allocation
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x4027A3: parse (src/common/html/parser.c:31)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402760: parser_string (src/common/html/parser.c:24)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== Conditional jump or move depends on uninitialised value(s)
+==63403==    at 0x483EF49: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x403830: cJSON_strdup (src/common/json/cJSON.c:194)
+==63403==    by 0x4053F7: cJSON_CreateString (src/common/json/cJSON.c:2450)
+==63403==    by 0x40535C: cJSON_AddStringToObject (src/common/json/cJSON.c:2135)
+==63403==    by 0x402D3C: tag_to_json (src/common/html/tag.c:38)
+==63403==    by 0x4026CE: main (src/cli/main.c:34)
+==63403==  Uninitialised value was created by a heap allocation
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x4027D8: parse (src/common/html/parser.c:34)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402760: parser_string (src/common/html/parser.c:24)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== Invalid read of size 8
+==63403==    at 0x402D00: tag_to_json (src/common/html/tag.c:37)
+==63403==    by 0x4026CE: main (src/cli/main.c:34)
+==63403==  Address 0x5c078b8 is 0 bytes after a block of size 8 alloc'd
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402720: parser_string (src/common/html/parser.c:21)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== Invalid read of size 8
+==63403==    at 0x402D22: tag_to_json (src/common/html/tag.c:38)
+==63403==    by 0x4026CE: main (src/cli/main.c:34)
+==63403==  Address 0x5c078b8 is 0 bytes after a block of size 8 alloc'd
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402720: parser_string (src/common/html/parser.c:21)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== Invalid read of size 8
+==63403==    at 0x402D49: tag_to_json (src/common/html/tag.c:40)
+==63403==    by 0x4026CE: main (src/cli/main.c:34)
+==63403==  Address 0x5c078b8 is 0 bytes after a block of size 8 alloc'd
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402720: parser_string (src/common/html/parser.c:21)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== Invalid read of size 8
+==63403==    at 0x402D70: tag_to_json (src/common/html/tag.c:41)
+==63403==    by 0x4026CE: main (src/cli/main.c:34)
+==63403==  Address 0x5c078b8 is 0 bytes after a block of size 8 alloc'd
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402720: parser_string (src/common/html/parser.c:21)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== Conditional jump or move depends on uninitialised value(s)
+==63403==    at 0x408D9C: print_string_ptr (src/common/json/cJSON.c:924)
+==63403==    by 0x408690: print_string (src/common/json/cJSON.c:1020)
+==63403==    by 0x4046AB: print_value (src/common/json/cJSON.c:1421)
+==63403==    by 0x408AF1: print_object (src/common/json/cJSON.c:1773)
+==63403==    by 0x4046D5: print_value (src/common/json/cJSON.c:1427)
+==63403==    by 0x408750: print_array (src/common/json/cJSON.c:1558)
+==63403==    by 0x4046C0: print_value (src/common/json/cJSON.c:1424)
+==63403==    by 0x408AF1: print_object (src/common/json/cJSON.c:1773)
+==63403==    by 0x4046D5: print_value (src/common/json/cJSON.c:1427)
+==63403==    by 0x4041F7: print (src/common/json/cJSON.c:1200)
+==63403==    by 0x404370: cJSON_PrintUnformatted (src/common/json/cJSON.c:1253)
+==63403==    by 0x402DB2: tag_to_json (src/common/html/tag.c:55)
+==63403==  Uninitialised value was created by a heap allocation
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x4027A3: parse (src/common/html/parser.c:31)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402760: parser_string (src/common/html/parser.c:24)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== Conditional jump or move depends on uninitialised value(s)
+==63403==    at 0x408F00: print_string_ptr (src/common/json/cJSON.c:969)
+==63403==    by 0x408690: print_string (src/common/json/cJSON.c:1020)
+==63403==    by 0x4046AB: print_value (src/common/json/cJSON.c:1421)
+==63403==    by 0x408AF1: print_object (src/common/json/cJSON.c:1773)
+==63403==    by 0x4046D5: print_value (src/common/json/cJSON.c:1427)
+==63403==    by 0x408750: print_array (src/common/json/cJSON.c:1558)
+==63403==    by 0x4046C0: print_value (src/common/json/cJSON.c:1424)
+==63403==    by 0x408AF1: print_object (src/common/json/cJSON.c:1773)
+==63403==    by 0x4046D5: print_value (src/common/json/cJSON.c:1427)
+==63403==    by 0x4041F7: print (src/common/json/cJSON.c:1200)
+==63403==    by 0x404370: cJSON_PrintUnformatted (src/common/json/cJSON.c:1253)
+==63403==    by 0x402DB2: tag_to_json (src/common/html/tag.c:55)
+==63403==  Uninitialised value was created by a heap allocation
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x4027B4: parse (src/common/html/parser.c:32)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402760: parser_string (src/common/html/parser.c:24)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== Conditional jump or move depends on uninitialised value(s)
+==63403==    at 0x553CC47: ??? (in /usr/lib/x86_64-linux-gnu/libtasn1.so.6.6.0)
+==63403==    by 0x4C67593: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4011F5A: _dl_fini (dl-fini.c:138)
+==63403==    by 0x493BA26: __run_exit_handlers (exit.c:108)
+==63403==    by 0x493BBDF: exit (exit.c:139)
+==63403==    by 0x49190B9: (below main) (libc-start.c:342)
+==63403==  Uninitialised value was created by a heap allocation
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x4027A3: parse (src/common/html/parser.c:31)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403== 
+==63403== Conditional jump or move depends on uninitialised value(s)
+==63403==    at 0x553B5F8: ??? (in /usr/lib/x86_64-linux-gnu/libtasn1.so.6.6.0)
+==63403==    by 0x553CC80: ??? (in /usr/lib/x86_64-linux-gnu/libtasn1.so.6.6.0)
+==63403==    by 0x4C67593: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4011F5A: _dl_fini (dl-fini.c:138)
+==63403==    by 0x493BA26: __run_exit_handlers (exit.c:108)
+==63403==    by 0x493BBDF: exit (exit.c:139)
+==63403==    by 0x49190B9: (below main) (libc-start.c:342)
+==63403==  Uninitialised value was created by a heap allocation
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x4027A3: parse (src/common/html/parser.c:31)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403== 
+==63403== Conditional jump or move depends on uninitialised value(s)
+==63403==    at 0x553CC87: ??? (in /usr/lib/x86_64-linux-gnu/libtasn1.so.6.6.0)
+==63403==    by 0x4C67593: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4011F5A: _dl_fini (dl-fini.c:138)
+==63403==    by 0x493BA26: __run_exit_handlers (exit.c:108)
+==63403==    by 0x493BBDF: exit (exit.c:139)
+==63403==    by 0x49190B9: (below main) (libc-start.c:342)
+==63403==  Uninitialised value was created by a heap allocation
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x4027A3: parse (src/common/html/parser.c:31)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403== 
+==63403== Conditional jump or move depends on uninitialised value(s)
+==63403==    at 0x553BCE9: ??? (in /usr/lib/x86_64-linux-gnu/libtasn1.so.6.6.0)
+==63403==    by 0x553CCB3: ??? (in /usr/lib/x86_64-linux-gnu/libtasn1.so.6.6.0)
+==63403==    by 0x4C67593: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4011F5A: _dl_fini (dl-fini.c:138)
+==63403==    by 0x493BA26: __run_exit_handlers (exit.c:108)
+==63403==    by 0x493BBDF: exit (exit.c:139)
+==63403==    by 0x49190B9: (below main) (libc-start.c:342)
+==63403==  Uninitialised value was created by a heap allocation
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x4027A3: parse (src/common/html/parser.c:31)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403== 
+==63403== Conditional jump or move depends on uninitialised value(s)
+==63403==    at 0x553CC4F: ??? (in /usr/lib/x86_64-linux-gnu/libtasn1.so.6.6.0)
+==63403==    by 0x4C67593: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4011F5A: _dl_fini (dl-fini.c:138)
+==63403==    by 0x493BA26: __run_exit_handlers (exit.c:108)
+==63403==    by 0x493BBDF: exit (exit.c:139)
+==63403==    by 0x49190B9: (below main) (libc-start.c:342)
+==63403==  Uninitialised value was created by a heap allocation
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x4027A3: parse (src/common/html/parser.c:31)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403== 
+==63403== 
+==63403== HEAP SUMMARY:
+==63403==     in use at exit: 251,295,544 bytes in 2,809 blocks
+==63403==   total heap usage: 91,564 allocs, 88,755 frees, 298,405,604 bytes allocated
+==63403== 
+==63403== 36 bytes in 1 blocks are definitely lost in loss record 39 of 192
+==63403==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x404239: print (src/common/json/cJSON.c:1209)
+==63403==    by 0x404370: cJSON_PrintUnformatted (src/common/json/cJSON.c:1253)
+==63403==    by 0x4032C9: web_url_to_json (src/common/http/web-url.c:30)
+==63403==    by 0x40264B: main (src/cli/main.c:26)
+==63403== 
+==63403== 48 bytes in 1 blocks are definitely lost in loss record 42 of 192
+==63403==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x404239: print (src/common/json/cJSON.c:1209)
+==63403==    by 0x404370: cJSON_PrintUnformatted (src/common/json/cJSON.c:1253)
+==63403==    by 0x4031DA: web_page_to_json (src/common/http/web-page.c:36)
+==63403==    by 0x402673: main (src/cli/main.c:29)
+==63403== 
+==63403== 126 (104 direct, 22 indirect) bytes in 1 blocks are definitely lost in loss record 53 of 192
+==63403==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402E25: parseUrl (src/common/http/http-client.c:53)
+==63403==    by 0x40261D: main (src/cli/main.c:22)
+==63403== 
+==63403== 333 (64 direct, 269 indirect) bytes in 1 blocks are definitely lost in loss record 92 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x403B56: cJSON_New_Item (src/common/json/cJSON.c:239)
+==63403==    by 0x4053CA: cJSON_CreateString (src/common/json/cJSON.c:2446)
+==63403==    by 0x40535C: cJSON_AddStringToObject (src/common/json/cJSON.c:2135)
+==63403==    by 0x402D8A: tag_to_json (src/common/html/tag.c:41)
+==63403==    by 0x4026CE: main (src/cli/main.c:34)
+==63403== 
+==63403== 1,752 (32 direct, 1,720 indirect) bytes in 1 blocks are definitely lost in loss record 111 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x409828: malloc_wrapper (gumbo-src/src/parser.c:58)
+==63403==    by 0x4092AA: gumbo_parser_allocate (gumbo-src/src/util.c:35)
+==63403==    by 0x40A779: output_init (gumbo-src/src/parser.c:469)
+==63403==    by 0x40A2F7: gumbo_parse_with_options (gumbo-src/src/parser.c:4075)
+==63403==    by 0x40274F: parser_string (src/common/html/parser.c:23)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== 16,072 (48 direct, 16,024 indirect) bytes in 1 blocks are definitely lost in loss record 126 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402DD5: parseUrl (src/common/http/http-client.c:39)
+==63403==    by 0x40261D: main (src/cli/main.c:22)
+==63403== 
+==63403== 45,278 bytes in 1 blocks are definitely lost in loss record 130 of 192
+==63403==    at 0x483DFAF: realloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x404239: print (src/common/json/cJSON.c:1209)
+==63403==    by 0x404370: cJSON_PrintUnformatted (src/common/json/cJSON.c:1253)
+==63403==    by 0x402DB2: tag_to_json (src/common/html/tag.c:55)
+==63403==    by 0x4026CE: main (src/cli/main.c:34)
+==63403== 
+==63403== 57,154 (64 direct, 57,090 indirect) bytes in 1 blocks are definitely lost in loss record 131 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x403B56: cJSON_New_Item (src/common/json/cJSON.c:239)
+==63403==    by 0x4055C6: cJSON_CreateObject (src/common/json/cJSON.c:2524)
+==63403==    by 0x402CB3: tag_to_json (src/common/html/tag.c:31)
+==63403==    by 0x4026CE: main (src/cli/main.c:34)
+==63403== 
+==63403== 160,000 bytes in 1 blocks are definitely lost in loss record 142 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402DE3: parseUrl (src/common/http/http-client.c:41)
+==63403==    by 0x40261D: main (src/cli/main.c:22)
+==63403== 
+==63403== 160,000 bytes in 1 blocks are definitely lost in loss record 143 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402DF5: parseUrl (src/common/http/http-client.c:42)
+==63403==    by 0x40261D: main (src/cli/main.c:22)
+==63403== 
+==63403== 192,072 (56 direct, 192,016 indirect) bytes in 1 blocks are definitely lost in loss record 144 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402EC5: httpGet (src/common/http/http-client.c:81)
+==63403==    by 0x40262A: main (src/cli/main.c:23)
+==63403== 
+==63403== 400,000 bytes in 1 blocks are definitely lost in loss record 151 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x403145: web_page_to_string (src/common/http/web-page.c:9)
+==63403==    by 0x40265F: main (src/cli/main.c:28)
+==63403== 
+==63403== 400,000 bytes in 1 blocks are definitely lost in loss record 152 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x4031A5: web_page_to_json (src/common/http/web-page.c:27)
+==63403==    by 0x402673: main (src/cli/main.c:29)
+==63403== 
+==63403== 500,000 bytes in 1 blocks are definitely lost in loss record 153 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x403215: web_url_to_string (src/common/http/web-url.c:8)
+==63403==    by 0x402637: main (src/cli/main.c:25)
+==63403== 
+==63403== 500,000 bytes in 1 blocks are definitely lost in loss record 154 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x403275: web_url_to_json (src/common/http/web-url.c:22)
+==63403==    by 0x40264B: main (src/cli/main.c:26)
+==63403== 
+==63403== 720,032 (32 direct, 720,000 indirect) bytes in 1 blocks are definitely lost in loss record 155 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402795: parse (src/common/html/parser.c:30)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402760: parser_string (src/common/html/parser.c:24)
+==63403== 
+==63403== 800,000 bytes in 2 blocks are possibly lost in loss record 156 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x4027B4: parse (src/common/html/parser.c:32)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402760: parser_string (src/common/html/parser.c:24)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== 800,000 bytes in 2 blocks are possibly lost in loss record 157 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x4027B4: parse (src/common/html/parser.c:32)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403== 
+==63403== 4,000,000 bytes in 1 blocks are possibly lost in loss record 171 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x4027A3: parse (src/common/html/parser.c:31)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402760: parser_string (src/common/html/parser.c:24)
+==63403== 
+==63403== 4,720,032 (32 direct, 4,720,000 indirect) bytes in 1 blocks are definitely lost in loss record 174 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402936: parse (src/common/html/parser.c:75)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402760: parser_string (src/common/html/parser.c:24)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== 4,720,032 (32 direct, 4,720,000 indirect) bytes in 1 blocks are definitely lost in loss record 175 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402795: parse (src/common/html/parser.c:30)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402760: parser_string (src/common/html/parser.c:24)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== 4,827,638 (8 direct, 4,827,630 indirect) bytes in 1 blocks are definitely lost in loss record 176 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x409828: malloc_wrapper (gumbo-src/src/parser.c:58)
+==63403==    by 0x4092AA: gumbo_parser_allocate (gumbo-src/src/util.c:35)
+==63403==    by 0x417FE8: gumbo_vector_init (gumbo-src/src/vector.c:36)
+==63403==    by 0x41434C: create_element_from_token (gumbo-src/src/parser.c:1023)
+==63403==    by 0x41424E: insert_element_from_token (gumbo-src/src/parser.c:1069)
+==63403==    by 0x41464F: run_generic_parsing_algorithm (gumbo-src/src/parser.c:1134)
+==63403==    by 0x40D4E4: handle_in_head (gumbo-src/src/parser.c:2193)
+==63403==    by 0x40C65D: handle_html_content (gumbo-src/src/parser.c:3816)
+==63403==    by 0x40AD94: handle_token (gumbo-src/src/parser.c:4000)
+==63403==    by 0x40A51D: gumbo_parse_with_options (gumbo-src/src/parser.c:4129)
+==63403==    by 0x40274F: parser_string (src/common/html/parser.c:23)
+==63403== 
+==63403== 5,000,000 bytes in 1 blocks are definitely lost in loss record 177 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402BE8: tag_to_string (src/common/html/tag.c:10)
+==63403==    by 0x4026A9: main (src/cli/main.c:33)
+==63403== 
+==63403== 8,000,000 bytes in 2 blocks are possibly lost in loss record 178 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x4027A3: parse (src/common/html/parser.c:31)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402760: parser_string (src/common/html/parser.c:24)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== 9,440,064 (64 direct, 9,440,000 indirect) bytes in 2 blocks are definitely lost in loss record 181 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402795: parse (src/common/html/parser.c:30)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402760: parser_string (src/common/html/parser.c:24)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== 10,480,128 (128 direct, 10,480,000 indirect) bytes in 4 blocks are definitely lost in loss record 182 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402795: parse (src/common/html/parser.c:30)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403== 
+==63403== 14,160,096 (96 direct, 14,160,000 indirect) bytes in 3 blocks are definitely lost in loss record 183 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402795: parse (src/common/html/parser.c:30)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402760: parser_string (src/common/html/parser.c:24)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== 19,520,192 (192 direct, 19,520,000 indirect) bytes in 6 blocks are definitely lost in loss record 185 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402795: parse (src/common/html/parser.c:30)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402760: parser_string (src/common/html/parser.c:24)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== 23,600,160 (160 direct, 23,600,000 indirect) bytes in 5 blocks are definitely lost in loss record 188 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402795: parse (src/common/html/parser.c:30)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402760: parser_string (src/common/html/parser.c:24)
+==63403==    by 0x40268B: main (src/cli/main.c:31)
+==63403== 
+==63403== 36,000,000 bytes in 9 blocks are possibly lost in loss record 189 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x4027A3: parse (src/common/html/parser.c:31)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403==    by 0x402AB2: parse (src/common/html/parser.c:115)
+==63403== 
+==63403== 40,000,040 bytes in 1 blocks are possibly lost in loss record 190 of 192
+==63403==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x402ED3: httpGet (src/common/http/http-client.c:82)
+==63403==    by 0x40262A: main (src/cli/main.c:23)
+==63403== 
+==63403== 57,354,219 (152 direct, 57,354,067 indirect) bytes in 1 blocks are definitely lost in loss record 192 of 192
+==63403==    at 0x483DD99: calloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==63403==    by 0x553B61B: ??? (in /usr/lib/x86_64-linux-gnu/libtasn1.so.6.6.0)
+==63403==    by 0x553CDEB: asn1_array2tree (in /usr/lib/x86_64-linux-gnu/libtasn1.so.6.6.0)
+==63403==    by 0x4C67818: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4C3B564: ??? (in /usr/lib/x86_64-linux-gnu/libgnutls.so.30.27.0)
+==63403==    by 0x4011B89: call_init.part.0 (dl-init.c:72)
+==63403==    by 0x4011C90: call_init (dl-init.c:30)
+==63403==    by 0x4011C90: _dl_init (dl-init.c:119)
+==63403==    by 0x4001139: ??? (in /usr/lib/x86_64-linux-gnu/ld-2.31.so)
+==63403==    by 0x2: ???
+==63403==    by 0x1FFF0002D2: ???
+==63403==    by 0x1FFF0002EE: ???
+==63403==    by 0x1FFF0002F4: ???
+==63403== 
+==63403== LEAK SUMMARY:
+==63403==    definitely lost: 7,166,626 bytes in 41 blocks
+==63403==    indirectly lost: 149,808,838 bytes in 2,745 blocks
+==63403==      possibly lost: 89,600,040 bytes in 17 blocks
+==63403==    still reachable: 4,720,040 bytes in 6 blocks
+==63403==         suppressed: 0 bytes in 0 blocks
+==63403== Reachable blocks (those to which a pointer was found) are not shown.
+==63403== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==63403== 
+==63403== For lists of detected and suppressed errors, rerun with: -s
+==63403== ERROR SUMMARY: 790 errors from 58 contexts (suppressed: 0 from 0)
