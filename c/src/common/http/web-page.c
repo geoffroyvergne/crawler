@@ -8,17 +8,20 @@
 char* web_page_to_string(web_page* webPage) {
     char *result = (char*) malloc(sizeof(char) * 400000);
     
-    //char* template = "WebPage => url : %s httpCode : %d content type : %s content : %d";
-    //char* template = "WebPage => httpCode : %d content type : %s content : %d";
-    char* template = "WebPage => httpCode : %d contentType : '%s' content : %d";
+    char* template = "WebPage => httpCode : '%ld' contentType : '%s' elapsed : '%f' content : %d";
+    //char* template = "WebPage => httpCode : '%ld' contentType : '%s' content : %d";
 
     sprintf(result, template, 
         //webPage->url,
-        webPage->httpCode, 
+        *webPage->httpCode, 
         webPage->contentType,
+        //*webPage->elapsed,
+        0,
         strlen(webPage->content)
         //webPage->content
     );
+
+    //printf("httpCode : %ld \n", *webPage->httpCode);
 
     return result;
 }
@@ -28,7 +31,9 @@ char* web_page_to_json(web_page* webPage) {
 
     cJSON *resultJson = cJSON_CreateObject();
     //cJSON_AddStringToObject(resultJson, "url", webPage->url);
-    //cJSON_AddNumberToObject(resultJson, "httpCode", webPage->httpCode);
+    cJSON_AddNumberToObject(resultJson, "httpCode", (int) *webPage->httpCode);
+    //cJSON_AddNumberToObject(resultJson, "elapsed", (double) *webPage->elapsed);
+    cJSON_AddNumberToObject(resultJson, "elapsed", 0);
     cJSON_AddStringToObject(resultJson, "contentType", webPage->contentType);
     cJSON_AddNumberToObject(resultJson, "content", strlen(webPage->content));
 

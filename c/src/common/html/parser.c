@@ -8,9 +8,11 @@
 #include <html/tag.h>
 #include <html/parser.h>
 
-tag** tag_array;
 tag** parse(GumboNode* node);
+
+tag** tag_array;
 int tagI;
+int maxtagArraySize = 100;
 
 int parser_get_get_tagI() {
     return tagI;
@@ -18,7 +20,8 @@ int parser_get_get_tagI() {
 
 tag** parser_string(char* content) {
     tagI = 0;
-    tag_array = (tag**) malloc(sizeof(tag));
+    //tag_array = (tag**) malloc(sizeof(tag));
+    tag_array = (tag**) calloc(maxtagArraySize, sizeof(tag));
     //puts(content);
     GumboOutput* output = gumbo_parse_with_options(&kGumboDefaultOptions, content, strlen(content));
     return parse(output->root);

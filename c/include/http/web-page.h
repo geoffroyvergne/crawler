@@ -8,7 +8,7 @@ typedef struct {
     char* content;
     char* header; 
     char* contentType; 
-    int httpCode;
+    long* httpCode;
     double* elapsed;
 } web_page;
 

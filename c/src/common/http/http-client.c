@@ -37,7 +37,7 @@ web_url* parseUrl(char* url) {
 
     //web_url webUrl;
     web_url* webUrl = malloc(sizeof(web_url));
-    //webUrl->url = (char*) malloc(sizeof(char) * 20000);
+    webUrl->url = (char*) malloc(sizeof(char) * 20000);
     webUrl->host = (char*) malloc(sizeof(char) * 20000);
     webUrl->path = (char*)malloc(sizeof(char) * 20000);
     webUrl->port = (int*) malloc(sizeof(int));
@@ -45,10 +45,6 @@ web_url* parseUrl(char* url) {
 
     CURLU *curlu;
     CURLUcode ucode;
-
-    //char *host;
-    //std::string host;
-    //char *path;
 
     curlu = curl_url();
     if(!curlu) return NULL;
@@ -70,6 +66,10 @@ web_url* parseUrl(char* url) {
         //webUrl->path = path;        
     //}
 
+    ucode = curl_url_get(curlu, CURLUPART_URL, &webUrl->url, 0);
+
+    ucode = curl_url_get(curlu, CURLUPART_SCHEME, &webUrl->sheme, 0);
+
     //curl_free(path);
     //curl_free(host);
     
@@ -83,7 +83,7 @@ web_page* httpGet(char* url) {
     webPage->contentType = (char*) malloc(sizeof(char) * 20000);
     webPage->elapsed =  (double*) malloc(sizeof(double));
     webPage->header =  (char*) malloc(sizeof(char) * 2000);
-    //webPage->httpCode = malloc(sizeof(int*));
+    webPage->httpCode = malloc(sizeof(int));
     webPage->port = (int*) malloc(sizeof(int));
     webPage->sheme = (char*) malloc(sizeof(char) * 2000);
     //webPage->url =  malloc(sizeof(char*) * 2000);
@@ -107,8 +107,13 @@ web_page* httpGet(char* url) {
 
         //curl_easy_setopt(curl, CURLOPT_WRITEDATA, &webPage->content);
 
-        //CURLcode res = curl_easy_perform(curl);
-        curl_easy_perform(curl);
+        
+        //curl_easy_perform(curl);
+
+        CURLcode res = curl_easy_perform(curl);
+        if(res == CURLE_OK) {
+
+        }
 
         //char* headerString;        
         //curl_easy_setopt(curl, CURLOPT_HEADERDATA, &webPage->header);
@@ -127,15 +132,17 @@ web_page* httpGet(char* url) {
         strcpy(webPage->contentType, contentType);
         //puts(webPage->contentType);
 
-        int httpCode = 0;
-        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &httpCode);
+        long httpCode = 0;
+        curl_easy_getinfo(curl, CURLINFO_HTTP_CODE, &httpCode);
         //std::cout << "HTTP result : " << httpCode << std::endl;
-        webPage->httpCode = httpCode;
+        *webPage->httpCode = httpCode;
 
-        //double elapsed;
-        //curl_easy_getinfo(curl, CURLINFO_TOTAL_TIME, &elapsed);
+        //printf("httpCode : %ld \n", *webPage->httpCode);
+
+        double elapsed = 0;
+        curl_easy_getinfo(curl, CURLINFO_TOTAL_TIME, &elapsed);
         //std::cout << "elapsed : " << elapsed << std::endl;
-        //webPage->elapsed = elapsed;
+        *webPage->elapsed = elapsed;
 
         //char* effectiveUrl;
         //curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &effectiveUrl);
@@ -155,6 +162,7 @@ web_page* httpGet(char* url) {
         //CURLINFO_HTTP_VERSION
         //CURLINFO_SCHEME
         //CURLINFO_TOTAL_TIME
+        //CURLINFO_HTTP_CODE
 
         free(chunk.memory);
         

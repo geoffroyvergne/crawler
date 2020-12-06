@@ -25,10 +25,7 @@ char* tag_to_string(tag** tag_array, int tagNum) {
     return result;
 }
 
-char* tag_to_json(tag** tag_array, int tagNum) {
-    //char *result = malloc(sizeof(char) * 50000000);
-    printf("%d %s\n", tagNum, tag_array[0]->name);
-
+char* tag_to_json(tag** tag_array, int tagNum) {    
     cJSON *resultJson = cJSON_CreateObject();
     cJSON *tags = cJSON_CreateArray();
     cJSON_AddItemToObject(resultJson, "tags", tags);
@@ -45,18 +42,5 @@ char* tag_to_json(tag** tag_array, int tagNum) {
         //cJSON_Delete(tag);
     }
     
-
-    //result = cJSON_Print(resultJson);
-    //result = cJSON_PrintUnformatted(resultJson);
-    //strcpy(result, (char*) cJSON_PrintUnformatted(resultJson));
-    //cJSON_Delete(resultJson);
-    //cJSON_Delete(tags);
-
-    //return result;
-
-    //puts(cJSON_PrintUnformatted(resultJson));
-   
-    return cJSON_PrintUnformatted(resultJson);
-    
-    //return "";
+    return cJSON_PrintUnformatted(resultJson);    
 }

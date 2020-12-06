@@ -32,13 +32,11 @@ int main(int argc, char **argv) {
 
     puts(tag_to_string(tag_array, parser_get_get_tagI()));
     puts(tag_to_json(tag_array, parser_get_get_tagI()));
-    
-    //tag_to_json(tag_array, parser_get_get_tagI());
 
-    //free(tag_array);
+    free(tag_array);
 
-    //free(webUrl);
-    //free(webPage);
+    free(webUrl);
+    free(webPage);
 
     return EXIT_SUCCESS;
 }
