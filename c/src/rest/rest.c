@@ -5,11 +5,25 @@
 #include <httpserver.h>
 
 #include <json/cJSON.h>
+#include <web-response.h>
 
 //#define RESPONSE "Hello, World!"
 struct http_server_s* server;
 
 void sig_handler(int signo);
+
+char* parseRequestUrl(const char* json) {
+    char* url = (char *) malloc(sizeof(char) * 5000);
+    cJSON *UrlJson = cJSON_Parse(json);
+    if (json != NULL) {
+        url = cJSON_GetObjectItemCaseSensitive(UrlJson, "url")->valuestring;
+    }
+
+    free(UrlJson);
+    //free(json);
+
+    return url;
+}
 
 int request_target_is(struct http_request_s* request, char const * target) {
   http_string_t url = http_request_target(request);
@@ -29,7 +43,7 @@ void handle_request(struct http_request_s* request) {
 
     struct http_response_s* response = http_response_init();
 
-    char *bodyResponse = (char *) malloc(sizeof(char) * 50000);
+    char *bodyResponse = (char *) malloc(sizeof(char) * 5000000);
 
     http_response_status(response, 200);
     http_response_header(response, "Content-Type", "text/plain");
@@ -47,19 +61,20 @@ void handle_request(struct http_request_s* request) {
         bodyResponse = getStatus(200, "version");
 
     } else if(request_target_is(request, "/url")) {
-        puts("/url");
-
         http_string_t method = http_request_method(request);
         
-        if(strstr(method.buf, "POST") != NULL) {
-            puts("POST sent");
+        if(strstr(method.buf, "POST") != NULL) {            
+            http_string_t body = http_request_body(request);
+            char* url = parseRequestUrl(body.buf);
+
+            printf("/url : %s", url);
+
+            web_response* webResponse = getWebResponse(url);
+            bodyResponse = web_response_to_json(webResponse);
+        } else {
+            http_response_status(response, 405);
+            bodyResponse = getStatus(405, "METHOD NOT ALLOWED");
         }
-
-        http_string_t body = http_request_body(request);
-        puts(body.buf);
-
-        bodyResponse = getStatus(200, "url");
-
     } else {
         http_response_status(response, 404);
         bodyResponse = getStatus(404, "NOT FOUND");
@@ -81,7 +96,6 @@ void rest_server_connect(char* host, int port) {
 void sig_handler(int signo) {
   if (signo == SIGINT) {
     printf("received SIGINT\n");
-
     free(server);
 
     exit(0);
