@@ -1,0 +1,9 @@
+[package]
+name = "crawler"
+version = "0.1.0"
+authors = ["gv"]
+edition = "2018"
+
+[dependencies]
+getopts = "0.2"
+actix-web = "3"
