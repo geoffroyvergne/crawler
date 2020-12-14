@@ -1,4 +1,4 @@
-# Crawler C C++ C++ Boost
+# Crawler C C++ C++ Boost Rust
 
 ## Web server test
 

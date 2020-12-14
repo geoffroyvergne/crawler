@@ -5,3 +5,4 @@
 fc_base
 **/target/
 **/Cargo.lock
+**/.DS_Store
