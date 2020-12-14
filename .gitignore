@@ -1,6 +1,7 @@
-.vscode/*
+.vscode/
 **/bin/
 **/build/
 **/app/
 fc_base
 **/target/
+**/Cargo.lock

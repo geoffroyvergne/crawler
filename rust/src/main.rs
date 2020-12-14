@@ -2,8 +2,7 @@ mod cli;
 mod rest;
 
 fn main() {
-    println!("Hello, world!");
+    println!("Crawler");
 
     cli::get_cli();
-    rest::get_rest();
 }
