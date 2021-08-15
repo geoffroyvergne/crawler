@@ -14,3 +14,4 @@ https://actix.rs/
 ```cargo run```
 
 ```cargo run -- -h```
+```cargo run -- --help```

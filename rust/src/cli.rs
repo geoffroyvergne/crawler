@@ -3,6 +3,8 @@ use getopts::Options;
 use std::env;
 
 use crate::rest;
+use crate::html;
+use crate::http;
 
 fn print_usage(program: &str, opts: Options) {
     let brief = format!("Usage: {} FILE [options]", program);
@@ -21,7 +23,8 @@ pub fn get_cli() {
 
     let matches = match opts.parse(&args[1..]) {
         Ok(m) => { m }
-        Err(f) => { panic!(f.to_string()) }
+        //Err(f) => { panic!(f.to_string()) }
+        Err(f) => { panic!("{}", f.to_string()) }   
     };
 
     if matches.opt_present("h") {
@@ -35,6 +38,18 @@ pub fn get_cli() {
 
     if matches.opt_present("u") {
         println!("URL");
+
+        match html::get_href() {
+            Err(e) => println!("{:?}", e),
+            _ => ()
+        }
+
+        //http::get_http();
+
+        match http::get_http() {
+            Err(e) => println!("{:?}", e),
+            _ => ()
+        }
     }
 }
 
