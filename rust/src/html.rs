@@ -1,7 +1,7 @@
 use html_parser::{Dom, Node, Result};
 
-pub fn get_href() -> Result<()> {
-    let html = include_str!("../html/test-href.html");
+pub fn get_href(html: &str) -> Result<Vec<String>> {
+    //let html = include_str!("../html/test-href.html");
     let dom = Dom::parse(html)?;
     let iter = dom.children.get(0).unwrap().into_iter();
 
@@ -17,12 +17,5 @@ pub fn get_href() -> Result<()> {
         _ => hrefs,
     });
 
-    println!("\nThe following links where found:");
-    for (index, href) in hrefs.iter().enumerate() {
-        println!("{}: {}", index + 1, href)
-    }
-
-    println!("\n\n");
-
-    Ok(())
+    Ok(hrefs)
 }

@@ -1,17 +1,12 @@
-use serde::{Deserialize, Serialize};
 use isahc::prelude::*;
+//use crate::model;
+use crate::model::HttpValues;
 
-#[derive(Serialize, Deserialize)]
-struct HttpValues {
-    //url: String,
-    status: u16,
-    //headers: std::collections::HashMap<String, String>,
-}
-
-pub fn get_http() -> Result<(), isahc::Error> {
+pub fn get_http(url: &str) -> Result<HttpValues, isahc::Error> {
     // Send a GET request and wait for the response headers.
     // Must be `mut` so we can read the response body.
-    let mut response = isahc::get("http://localhost/simple-test.html")?;
+    //let url = "http://localhost/simple-test.html";
+    let mut response = isahc::get(url)?;
 
     if !response.status().is_success() {
         panic!("failed to get a successful response status!");
@@ -21,25 +16,30 @@ pub fn get_http() -> Result<(), isahc::Error> {
     //println!("Status: {}", response.status());
     //println!("Headers: {:#?}", response.headers());
 
-    let httpValues = HttpValues {
-        status: response.status().as_u16(),
-    };
+    let mut headers = std::collections::HashMap::new();
 
     for key in response.headers().keys() {
-        println!("{:?} : {:?}", key, response.headers().get(key));
+        let value = response.headers().get(key);
+    
+        match value {
+            Some(v) => headers.insert(key.to_string(), v.to_str().unwrap().to_string()),
+            None    => headers.insert(key.to_string(), "".to_string()),
+        };
     }
 
-    /*let server = response.headers().get("server");
-    
-    match server {
-        Some(s) => println!("Header server: {}", s.to_str().unwrap()),
-        None    => println!("Header server empty"),
-    }*/
+    let http_values = HttpValues {
+        url: url.to_string(), 
+        status: response.status().as_u16(),
+        content: response.text()?,
+        headers: headers,
+    };
+
+    //return (Ok(()), http_values);
 
     // Read the response body as text into a string and print it.
-    print!("{}", response.text()?);
+    //print!("{}", response.text()?);
 
     //println!("HttpValues: {:#?}", httpValues);
 
-    Ok(())
+    Ok(http_values)
 }
