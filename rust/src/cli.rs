@@ -9,29 +9,10 @@ use crate::http;
 fn get_url(url: &str) {
     match http::get_http(url) {
         Err(e) => println!("{:?}", e),
-        //_ => ()
         Ok(http_results) => {
-            //println!("{}", http_results.content);
-
-            match html::get_href(&http_results.content) {
-                Err(e) => println!("{:?}", e),
-                //_ => ()
-                Ok(hrefs) => {
-                    println!("\nThe following links where found:");
-                    for (index, href) in hrefs.iter().enumerate() {
-                        println!("{}: {}", index + 1, href)
-                    }
-                    println!("\n\n");
-                }
-            }
+            html::get_html(&http_results.content);            
         },
-    };
-
-    /*let html = "<div><b>test</b><b>test2</b><h1>Hello, World!</h1><h1>Hello agein</h1></div>";
-    match html::get_href(html) {
-        Err(e) => println!("{:?}", e),
-        _ => ()
-    }*/
+    };    
 }
 
 fn print_usage(program: &str, opts: Options) {
@@ -51,7 +32,6 @@ pub fn get_cli() {
 
     let matches = match opts.parse(&args[1..]) {
         Ok(m) => { m }
-        //Err(f) => { panic!(f.to_string()) }
         Err(f) => { panic!("{}", f.to_string()) }   
     };
 
@@ -64,11 +44,7 @@ pub fn get_cli() {
         rest::get_rest();
     }
 
-    if matches.opt_present("u") {
-        //println!("URL");
-        //http::get_http();
-        //let url = "http://localhost/test.html";
-
+    if matches.opt_present("u") {        
         match matches.opt_str("u") {
             Some(u) => get_url(&u),
             None => panic!("{}", "Url mandatory !"),

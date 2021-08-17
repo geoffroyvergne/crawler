@@ -1,21 +1,12 @@
-use html_parser::{Dom, Node, Result};
+use scraper::{Html, Selector};
 
-pub fn get_href(html: &str) -> Result<Vec<String>> {
-    //let html = include_str!("../html/test-href.html");
-    let dom = Dom::parse(html)?;
-    let iter = dom.children.get(0).unwrap().into_iter();
+pub fn get_html(html: &str) {
+    let fragment = Html::parse_fragment(html);
+    let selector = Selector::parse("h1").unwrap();
 
-    let hrefs = iter.fold(Vec::new(), |mut hrefs, node| match node {
-        Node::Element(ref element) => {
-            if element.name == "a" {
-                hrefs.push(element.attributes["href"].clone().unwrap_or_default());
-                hrefs
-            } else {
-                hrefs
-            }
-        }
-        _ => hrefs,
-    });
+    let h1 = fragment.select(&selector).next().unwrap();
+    println!("h1 : {}", h1.inner_html());
 
-    Ok(hrefs)
+    let title = fragment.select(&selector).next().unwrap();
+    println!("title : {}", title.inner_html());
 }

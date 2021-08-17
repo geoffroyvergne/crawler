@@ -7,3 +7,9 @@ pub struct HttpValues {
     pub content: String,
     pub headers: std::collections::HashMap<String, String>,
 }
+
+#[derive(Serialize, Deserialize)]
+pub struct HtplValues {
+    pub title: String,
+    pub h1: String,
+}
