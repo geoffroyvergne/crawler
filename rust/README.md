@@ -15,3 +15,10 @@ https://actix.rs/
 
 ```cargo run -- -h```
 ```cargo run -- --help```
+
+## Test
+
+curl -X POST \
+-H 'Content-Type: application/json' \
+-d '{"url":"http://localhost/test.html"}' \
+localhost:3000/url
