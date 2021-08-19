@@ -16,6 +16,9 @@ https://actix.rs/
 ```cargo run -- -h```
 ```cargo run -- --help```
 
+## Enable logging
+```export RUST_LOG=info```
+
 ## Test
 
 curl -X POST \

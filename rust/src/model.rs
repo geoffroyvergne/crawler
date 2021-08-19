@@ -17,8 +17,8 @@ pub struct HtmlValues {
 
 #[derive(Debug, Serialize, Deserialize)]
 pub struct WebValues {
-    pub http_values: HttpValues,
-    pub html_values: HtmlValues
+    pub http_values: Option<HttpValues>,
+    pub html_values: Option<HtmlValues>
 }
 
 #[derive(Debug, Serialize, Deserialize)]

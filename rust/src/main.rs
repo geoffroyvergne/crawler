@@ -2,9 +2,8 @@ use log::{info};
 
 #[macro_use]
 extern crate lazy_static;
-use crate::configuration::CONFIGURATION;
 
-use crate::model::{WebValues};
+use crate::configuration::CONFIGURATION;
 
 mod cli;
 mod rest;
@@ -12,30 +11,7 @@ mod html;
 mod http;
 mod model;
 mod configuration;
-
-fn get_url(url: &str) {
-    //let mut web_values = WebValues::new();
-
-    match http::get_http(url) {
-        Ok(http_values) => {
-            let html_values = html::get_html(&http_values.content);
-
-            let web_values = WebValues {
-                http_values: http_values,
-                html_values: html_values
-            };
-
-            //web_values
-
-            let web_values_json = serde_json::to_string_pretty(&web_values).unwrap();
-            info!("{:?}", web_values_json);
-        },
-        Err(e) => println!("{:?}", e),
-        //Err(e) => web_values,
-    };    
-
-    //web_values
-}
+mod crawler;
 
 fn main() {
     env_logger::init();
@@ -45,11 +21,10 @@ fn main() {
 
     if matches.opt_present("u") {        
         match matches.opt_str("u") {
-            Some(u) => {
-                get_url(&u);
-                /*let web_values = get_url(&u);
+            Some(u) => {                                
+                let web_values = crawler::get_url(&u);
                 let web_values_json = serde_json::to_string_pretty(&web_values).unwrap();
-                info!("{:?}", web_values_json);*/
+                info!("{:?}", web_values_json);
             },
             None => panic!("{}", "Url mandatory !"),
         };
