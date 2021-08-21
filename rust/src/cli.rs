@@ -18,17 +18,19 @@ pub fn get_cli() -> Matches {
     opts.optflag("t", "test", "print test");
     opts.optflag("c", "config", "print configuration");
     opts.optflag("r", "rest", "run rest API");
-    opts.optopt("u", "url", "URL to query", "NAME");
+    opts.optopt("u", "url", "URL to query", "<URL>");
+    opts.optopt("s", "host", "Host to expose", "<HOST>");
+    opts.optopt("p", "port", "Port to expose", "<PORT>");
 
     let matches = match opts.parse(&args[1..]) {
         Ok(m) => { m }
         Err(f) => { panic!("{}", f.to_string()) }   
     };
 
-    if matches.opt_present("h") {
+    if matches.opt_present("help") {
         print_usage(&program, opts);
-        ()
-    }
+        ()       
+    }    
 
     matches
 }

@@ -2,7 +2,6 @@ use crate::model::{WebValues};
 use crate::http;
 use crate::html;
 
-
 pub fn get_url(url: &str) -> WebValues {
 
     let mut web_values = WebValues {

@@ -1,16 +1,16 @@
+use std::{sync::Mutex};
+use once_cell::sync::Lazy;
+
 #[derive(Debug)]
 pub struct Configuration {
-    pub host: &'static str,
+    pub host: String,
     pub port: u16
 }
 
-lazy_static! {
-    #[derive(Debug)]
-    pub static ref CONFIGURATION: Configuration = {
-        let configuration = Configuration {
-            host: "127.0.0.1",
-            port: 3000
-        };
-        configuration
+pub static CONFIGURATION: Lazy<Mutex<Configuration>> = Lazy::new(|| {
+    let configuration = Configuration {
+        host: "127.0.0.1".to_string(),
+        port: 3000
     };
-}
+    Mutex::new(configuration)
+});
