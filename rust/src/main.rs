@@ -62,3 +62,8 @@ fn main() {
         info!("Test");
     }
 }
+
+#[allow(dead_code)]
+fn test() -> String {
+    "test".to_string()
+}

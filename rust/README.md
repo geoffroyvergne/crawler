@@ -19,6 +19,10 @@ https://actix.rs/
 ## Enable logging
 ```export RUST_LOG=info```
 
+## Unit Test
+
+```cargo test```
+
 ## Test
 
 curl -X POST \
