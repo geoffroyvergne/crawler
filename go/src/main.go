@@ -2,22 +2,28 @@ package main
 
 import (
 	"fmt"
-	"os"
-
-	"github.com/pborman/getopt"
+	//"log"
 )
 
 func main() {
 	fmt.Println("Crawler")
+	cli := getCli()
 
-	optName := getopt.StringLong("name", 'n', "", "Your name")
-    optHelp := getopt.BoolLong("help", 0, "Help")
-    getopt.Parse()
+	if *cli.optRest {
+		fmt.Println("Rest API")
+	}
 
-	if *optHelp {
-        getopt.Usage()
-        os.Exit(0)
-    }
+	if len(*cli.optName) > 0 {
+		fmt.Println("Hello " + *cli.optName + "!")
+	}
 
-	fmt.Println("Hello " + *optName + "!")	
+	if len(*cli.optUrl) > 0 {
+		fmt.Println("url : " + *cli.optUrl)
+
+		body := getUrl(cli.optUrl).body
+
+		fmt.Println(body)
+
+		getHtml(&body)
+	}
 }

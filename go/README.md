@@ -4,7 +4,11 @@
 
 ```
 export GOROOT=/usr/local/opt/go/libexec
-export GOPATH=/Users/gv/dev/crawler
+export GOPATH=~/dev/crawler
+
+export GOROOT=/usr/local/opt/go/libexec
+export GOPATH=~/dev/github/crawler
+
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 ```
@@ -15,7 +19,7 @@ go mod init example.com/crawler
 
 go get .
 go get github.com/pborman/getopt
-go get github.com/pborman/getopt/v2
+
 
 ## Run
 ```go run main.go```
