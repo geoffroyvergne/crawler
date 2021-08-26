@@ -19,7 +19,7 @@ go mod init example.com/crawler
 
 go get .
 go get github.com/pborman/getopt
-
+go get golang.org/x/net
 
 ## Run
 ```go run main.go```

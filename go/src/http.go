@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io"
 	"net/http"
 )
@@ -11,7 +10,7 @@ type httpValues struct {
 	status int
 }
 
-func getUrl(url *string) *httpValues {
+func getUrl(url *string) httpValues {
 	httpValues := httpValues{}
 
 	resp, err := http.Get(*url)
@@ -22,17 +21,17 @@ func getUrl(url *string) *httpValues {
 
 	httpValues.status = resp.StatusCode
 
-	for k, v := range resp.Header {
+	/*for k, v := range resp.Header {
 		fmt.Printf("Header field %q, Value %q\n", k, v)
-	}
+	}*/
 
-	fmt.Printf("Accept : %q\n", resp.Header["Accept"])
-	fmt.Printf("Content-Type : %q\n", resp.Header["Content-Type"])
+	//fmt.Printf("Accept : %q\n", resp.Header["Accept"])
+	//fmt.Printf("Content-Type : %q\n", resp.Header["Content-Type"])
 
 	defer resp.Body.Close()
 	body, err := io.ReadAll(resp.Body)
 
 	httpValues.body = string(body)
 
-	return &httpValues
+	return httpValues
 }

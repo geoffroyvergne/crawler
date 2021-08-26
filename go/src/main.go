@@ -22,8 +22,7 @@ func main() {
 
 		body := getUrl(cli.optUrl).body
 
-		fmt.Println(body)
-
+		//fmt.Println(body)
 		getHtml(&body)
 	}
 }
